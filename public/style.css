@@ -1,0 +1,43 @@
+.alinhamento{
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    
+}
+.produtos{
+    overflow-x:scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    
+}
+
+.img-block{
+height: 400px;
+   
+    }
+.logo{
+    width: 8rem;
+   
+   
+}
+.container-img{
+    height: 30rem;
+    width:100%;
+   
+    
+}
+
+
+.imagem-login{
+    width: 15rem;
+   
+    
+}
+.formulario{
+    margin: 0 auto;
+    width:20%;
+}
+.formulario2{
+    margin: 0 auto;
+    width:25%;
+}
