@@ -31,7 +31,7 @@
       <a href="../index.php" class="navbar-brand">
           <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
       </a>  
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      <button class="navbar-toggler" type="button" data-tog   gle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
