@@ -28,8 +28,9 @@
   <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
     <div class="container">
 
-      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-      </a>
+      <a href="../index.php" class="navbar-brand">
+          <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
         <span class="navbar-toggler-icon"></span>
