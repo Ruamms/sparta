@@ -27,7 +27,7 @@
 <body style="height: 50rem;">
     <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
         <div class="container">
-            <a href="../index.php" class="navbar-brand">
+            <a href="../usuario/produtosWey.php" class="navbar-brand">
                 <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

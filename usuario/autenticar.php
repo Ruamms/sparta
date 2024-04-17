@@ -27,8 +27,8 @@
   <!-- menu-->
   <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
     <div class="container">
-      
-        <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
@@ -36,68 +36,64 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          
-          
 
         </ul>
       </div>
     </div>
   </nav>
   <div class="mx-auto">
+    <?php
+    session_start();
+    include 'conexao.php';
 
-  <?php
-session_start();
-include 'conexao.php';
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
-$email = $_POST['email'];
-$senha = $_POST['senha'];
+    // Use instruções preparadas para evitar injeção de SQL
+    $query = "SELECT nome, perfil FROM usuario WHERE email = ? AND senha = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ss', $email, $senha);
+    $stmt->execute();
+    $stmt->store_result();
 
-// Use instruções preparadas para evitar injeção de SQL
-$query = "SELECT nome, perfil FROM usuario WHERE email = ? AND senha = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param('ss', $email, $senha);
-$stmt->execute();
-$stmt->store_result();
+    if ($stmt->num_rows == 1) {
+      $stmt->bind_result($nome, $perfil);
+      $stmt->fetch();
 
-if ($stmt->num_rows == 1) {
-    $stmt->bind_result($nome, $perfil);
-    $stmt->fetch();
+      $_SESSION['nome'] = $nome; // Armazene o nome na sessão
+      $_SESSION['email'] = $email;
 
-    $_SESSION['nome'] = $nome; // Armazene o nome na sessão
-    $_SESSION['email'] = $email;
-
-    if ($perfil === 'cliente') {
+      if ($perfil === 'cliente') {
         $_SESSION['logged_in'] = true;
         header('Location: produtosWey.php'); // Substitua com a página do cliente
     
-    } else {
-         // Usuário não encontrado
-    echo '<div class="text-center container">';
-    echo '<div class="alert alert-danger text-center mt-5" role="alert">
+      } else {
+        // Usuário não encontrado
+        echo '<div class="text-center container">';
+        echo '<div class="alert alert-danger text-center mt-5" role="alert">
             <h3>Somente Clientes </h3>
           </div>';
-    echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
-    echo '</div>'; // Perfil desconhecido, adote o tratamento apropriado
-       
-    }
-} else {
-    // Usuário não encontrado
-    echo '<div class="text-center container">';
-    echo '<div class="alert alert-danger text-center mt-5" role="alert">
-            <h3>Nenhum Usuário encontrado.</h3>
+        echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+        echo '</div>'; // Perfil desconhecido, adote o tratamento apropriado
+    
+      }
+    } else {
+      // Usuário não encontrado
+      echo '<div class="text-center container">';
+      echo '<div class="alert alert-danger text-center mt-5" role="alert">
+            <h3>Usuário não encontrado.</h3>
           </div>';
-    echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
-    echo '</div>';
-}
+      echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+      echo '</div>';
+    }
 
-$stmt->close();
-$conn->close();
-?>
+    $stmt->close();
+    $conn->close();
+    ?>
 
 
   </div>
-    
+
 </body>
+
 </html>
-
-
