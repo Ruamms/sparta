@@ -47,12 +47,12 @@
             </div>
         </div>
     </nav>
-    <h1 class="text-center mt-5">Produtos cadastrados / ADM</h1>
+    <h3 class="text-center mt-5">Produtos </h3>
     <section class="container ">
 
-        <a class="btn btn-success mt-3" href="formulario.php">Adicionar Produtos </a>
-        <form class="mt-3"action="exibir_produtos_por_tipo.php" method="GET">
-            <label for="tipo">Escolha o tipo de produto:</label>
+        <a class="btn btn-success mt-3" href="formulario.php">+ Produtos</a>
+        <form class="mt-3 text-center"action="exibir_produtos_por_tipo.php" method="GET">
+            <label for="tipo">Filtrar:</label>
             <select name="tipo" id="tipo">
                 <option value="whey">Whey</option>
                 <option value="creatina">Creatina</option>
@@ -61,7 +61,7 @@
                 <option value="glutamina">Glutamina</option>
                 <option value="Kit">kit</option>
             </select>
-            <input class="btn btn-warning ml-3" type="submit" value="Mostrar Produtos">
+            <input class="btn btn-warning ml-3" type="submit" value="Visualizar">
         </form>
 
         <table class="table table-striped table-bordered mt-5">
@@ -98,7 +98,12 @@
                     echo '<td class="align-middle">' . $row["estoque"] . '</td>';
                     echo '<td class="align-middle">Tipo: ' . $row["tipo"] . '</td>';
                     echo '<td class=" align-middle">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</td>';
-                    echo '<td> <a class="mt-4 btn btn-success h-25   "href="editar_produto.php?id=' . $row["produto_id"] . '">Editar</a></td>';
+                    echo '<td class=" align-middle">';
+                    echo '<a class="m-1 btn btn-success"href="editar_produto.php?id=' . $row["produto_id"] . '">Editar</a>';
+                    echo '<a class="btn btn-danger m-1"href="deletar_produto.php?id='. $row["produto_id"].'" ?>Excluir</a>';
+                    echo '</td>';
+                   
+                    
                     echo '</tr>';
 
 

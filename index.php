@@ -74,7 +74,7 @@
                       echo '<p>' . $row["descricao"] . '</p>';
 
                       echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
-                      echo '<a class="btn btn-warning mt-3" href="./usuario/login.php"">Comprar</a>';
+                      echo '<a class="btn btn-warning mt-3" href="./usuario/login.php"">Ver Mais</a>';
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
@@ -105,7 +105,7 @@
           <p class="">Combo Definição</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3 ">R$210,00</h3>
-          <a href="./usuario/login.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="./usuario/login.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@
           <p class="">Melhore Seu Treino</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3 ">R$190,00</h3>
-          <a href="./usuario/login.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="./usuario/login.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@
           <p class="">Ganhe massa muscular</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3">R$270,00</h3>
-          <a href="./usuario/login.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="./usuario/login.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -216,18 +216,14 @@
           <ul class="list-unstyled">
             <li>
               <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.facebook.com/"
-                style="max-width: 140px">Facebook
-              </a> 
+                style="max-width: 140px">Facebook</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://x.com/" 
-                style="max-width: 140px">Twiter
-              </a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://twitter.com" style="max-width: 140px">Twiter</a>
             </li>
             <li>
               <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.instagram.com/"
-                style="max-width: 140px">Instagram
-              </a>
+                style="max-width: 140px">Instagram</a>
             </li>
           </ul>
         </div>

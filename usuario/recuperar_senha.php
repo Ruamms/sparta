@@ -27,9 +27,9 @@
     <!-- menu-->
     <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
         <div class="container">
-           
-                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-         
+
+            <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
@@ -50,15 +50,18 @@
 
 
 
-    <h2 style="margin-top:50px; text-align: center;">Recuperar senha</h2>
+    <h2 class="text-center mt-3">Recuperar senha</h2>
 
-    <form method="post" action="recuperar_senha.php">
-        <label for="cpf">CPF:</label><br>
-        <input type="text" id="cpf" name="cpf" required><br><br>
-        <label for="data_nascimento">Data de Nascimento:</label><br>
-        <input type="date" id="data_nascimento" name="data_nascimento" required><br><br>
-        <input type="submit" value="Recuperar Senha">
-    </form>
+    <div class="container form-container">
+        <form class="container text-center mt-3" style="max-width: 20rem;" method="post" action="recuperar_senha.php">
+            <div class="form-group">
+                <label for="cpf">Digite seu CPF :</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" required>
+            </div>
+
+            <button type="submit" class="btn btn-warning m-2">Recuperar Senha</button>
+        </form>
+    </div>
     <?php
 session_start();
 
@@ -75,17 +78,16 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Receber os dados do formulário
+    // Receber o CPF do formulário
     $cpf = $_POST['cpf'];
-    $data_nascimento = $_POST['data_nascimento'];
 
-    // Consultar o banco de dados para verificar se o CPF e a data de nascimento correspondem a um usuário
-    $sql = "SELECT data_nasc FROM cliente WHERE cpf = ? AND data_nasc = ?";
+    // Consultar o banco de dados para verificar se o CPF existe
+    $sql = "SELECT * FROM cliente WHERE cpf = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        // Vincular os parâmetros da consulta
-        $stmt->bind_param("ss", $cpf, $data_nascimento);
+        // Vincular o parâmetro da consulta
+        $stmt->bind_param("s", $cpf);
 
         // Executar a consulta
         $stmt->execute();
@@ -95,27 +97,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verificar se a consulta retornou algum resultado
         if ($result->num_rows > 0) {
-            // CPF e data de nascimento correspondem a um usuário
+            // CPF existe, mostrar as datas de aniversário para confirmação
             $row = $result->fetch_assoc();
             $data_nascimento_usuario = $row['data_nasc'];
+            $telefone1 = $row['telefone'];
+            $telefone2 = $row['telefone'];
+            $telefone3 = $row['telefone'];
+
+            // Modificando os últimos quatro dígitos dos telefones
+            $telefone1_modificado = substr($telefone1, 0, 4) . rand(1000, 9999);
+            $telefone2_modificado = substr($telefone2, 0, 11) .'';
+            $telefone3_modificado = substr($telefone3, 0, 4) . rand(1000, 9999);
 
             // Gerar três datas possíveis para o usuário escolher
             $datas_possiveis = array();
-            $datas_possiveis[] = date('Y-m-d', strtotime($data_nascimento_usuario . ' -1 day'));
+            $datas_possiveis[] = date('Y-m-d', strtotime($data_nascimento_usuario . ' -3 day'));
             $datas_possiveis[] = $data_nascimento_usuario;
-            $datas_possiveis[] = date('Y-m-d', strtotime($data_nascimento_usuario . ' +1 day'));
+            $datas_possiveis[] = date('Y-m-d', strtotime($data_nascimento_usuario . ' +2 day'));
 
             // Exibir as datas possíveis para o usuário escolher
+            echo "<form method='post' class='container text-center mt-2' action='confirmar_informacoes.php'>";
             echo "<p>Por favor, selecione sua data de nascimento correta:</p>";
-            echo "<form method='post' action='confirmar_data_nascimento.php'>";
             foreach ($datas_possiveis as $data) {
                 echo "<input type='radio' name='data_selecionada' value='$data'> $data<br>";
             }
-            echo "<input type='submit' value='Confirmar'>";
+            echo "<p class='mt-2'>Por favor, confirme um dos seus telefones:</p>";
+            echo "<input type='radio' name='telefone_selecionado' value='$telefone1'>$telefone1_modificado<br>";
+            echo "<input type='radio' name='telefone_selecionado' value='$telefone2'>$telefone2_modificado<br>";
+            echo "<input type='radio' name='telefone_selecionado' value='$telefone3'>$telefone3_modificado<br>";
+            echo "<input type='hidden' name='cpf' value='$cpf'>";
+            echo "<input class='btn btn-warning m-2'type='submit' value='Confirmar'>";
             echo "</form>";
         } else {
-            // CPF e/ou data de nascimento incorretos
-            echo "CPF e/ou data de nascimento incorretos. Por favor, tente novamente.";
+            // CPF não encontrado na tabela
+            echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+            echo "As informações fornecidas são inválidas.";
+            echo '</div>';
         }
 
         // Fechar a instrução
@@ -129,6 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-</body>
-</html>
 
+
+</body>
+
+</html>

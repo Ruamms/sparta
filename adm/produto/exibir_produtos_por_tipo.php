@@ -23,7 +23,7 @@
     <title>Produto Selecionado</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+<nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -80,7 +80,7 @@ if (isset($_GET['tipo'])) {
     $resultado = $conexao->query($sql);
 
     if ($resultado->num_rows > 0) {
-        echo "<h1 class='text-center mt-5'>ADM /Produtos do Tipo: $tipo</h1>";
+        echo "<h2 class='text-center mt-5'>Produtos do Tipo: $tipo</h2>";
         while ($row = $resultado->fetch_assoc()) {
             $produto_id = $row["produto_id"];
             $nome = $row["nome"];

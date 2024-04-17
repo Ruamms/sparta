@@ -25,12 +25,14 @@
 
 
   <!-- menu-->
-  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+  <div class="bg-warning text-center py-1">
+    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  </div>
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-2 box-shadow">
     <div class="container">
 
-      <a href="../index.php" class="navbar-brand">
-          <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-      </a>  
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
         <span class="navbar-toggler-icon"></span>
@@ -52,21 +54,22 @@
       </div>
     </div>
   </nav>
-  <h1 class="m-5 text-center">Bem vindo </h1>
+
 
 
   <!-- filtro e nome login-->
   <section class="container text-center ">
     <div>
-      <?php
+      <h2 class="mt-3 text-center">Bem vindo, </h2>
+      <?php include 'id_usuario.php';?>
 
-      include 'id_usuario.php';
-      ?>
     </div>
     <br>
     <div>
       <form action="exibir_produtos_por_tipo.php" method="GET">
-        <label for="tipo"><p class="font-weight-bold m-1">Escolha o produto:</p></label>
+        <label for="tipo">
+          <p class="font-weight-bold m-1">Escolha o produto:</p>
+        </label>
         <select class="font-weight-bold m-1 border-0" name="tipo" id="tipo">
           <option value="whey">Whey Protein </option>
           <option value="creatina">Creatina</option>
@@ -100,18 +103,18 @@
       while ($row = $resultado->fetch_assoc()) {
         echo '<div class="mt-3 m-3 " >';
         echo '<div class="card text-center align-items-center" style="width: 16rem;  height: 24rem;">';
-             echo '<div class="p-3">';
-                 echo '<img class="m-3 "style="height: 6rem;width: 6rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
-                   echo '<div class="card-body">';
-                   echo '<h3 >' . $row["nome"] . '</h3>';
-                   echo '<p>' . $row["descricao"] . '</p>';
+        echo '<div class="p-3">';
+        echo '<img class="m-3 "style="height: 6rem;width: 6rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
+        echo '<div class="card-body">';
+        echo '<h3 >' . $row["nome"] . '</h3>';
+        echo '<p>' . $row["descricao"] . '</p>';
 
-                   echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
-                   echo '<a class="btn btn-warning mt-3" href="../carrinho/index.php"">Comprar</a>';
-                 echo '</div>';
-             echo '</div>';
-         echo '</div>';
-     echo '</div>';
+        echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
+        echo '<a class="btn btn-warning mt-3" href="../carrinho/index.php"">Ver mais</a>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
       }
     } else {
       echo "Nenhum produto cadastrado.";
@@ -134,7 +137,7 @@
           <p class="">Combo Definição</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3 ">R$210,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -147,7 +150,7 @@
           <p class="">Melhore Seu Treino</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3 ">R$190,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -161,7 +164,7 @@
           <p class="">Ganhe massa muscular</p>
           <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3">R$270,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Comprar</a>
+          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -173,7 +176,7 @@
   <!--Duvidas-->
   <section class="container text-center">
     <div class="my-5">
-     
+
       <h2 class="display-4 text-warning">Perguntas Frequentes</h2>
     </div>
     <div class="row justify-content-center">
@@ -218,6 +221,7 @@
 
   </section>
   <!--Footer-->
+
   <footer class="bg-dark text-white ">
     <div class="container ">
       <div class="d-flex justify-content-center">
@@ -243,14 +247,15 @@
           <h4 class="h6">REDES SOCIAIS</h4>
           <ul class="list-unstyled">
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="#"
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.facebook.com/"
                 style="max-width: 140px">Facebook</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="#" style="max-width: 140px">Twiter</a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://twitter.com"
+                style="max-width: 140px">Twiter</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="#"
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.instagram.com/"
                 style="max-width: 140px">Instagram</a>
             </li>
           </ul>

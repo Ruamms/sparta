@@ -4,7 +4,7 @@ session_start();
 // Verifique se o usuário está logado
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     // O usuário está logado, então exiba uma mensagem de boas-vindas com o nome
-    echo '<h2>'  . $_SESSION['nome'] . '</h2>';
+    echo '<h3>'  . $_SESSION['nome'] . '</h3>';
     
     // Faça uma consulta para obter o ID do usuário com base no nome de usuário
     $nome_usuario = $_SESSION['nome'];

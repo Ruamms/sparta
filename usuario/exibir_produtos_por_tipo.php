@@ -25,7 +25,7 @@
 
 
      <!-- menu-->
-  <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+  <nav class="navbar navbar-expand-md navbar-light bg-dark py-2 box-shadow">
     <div class="container">
       <a href="../index.php" class="navbar-brand">
         <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -101,7 +101,7 @@
                     echo '<td class="align-middle">' . $row["estoque"] . '</td>';
                     echo '<td class="align-middle">Tipo: ' . $row["tipo"] . '</td>';
                     echo '<td class=" align-middle">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</td>';
-                    echo '<td> <a class="btn btn-success h-25 mt-3  "href="../carrinho/index.php">Comprar</a></td>';
+                    echo '<td> <a class="btn btn-success h-25 mt-3  "href="../carrinho/index.php">Ver mais</a></td>';
                     echo '</tr>';
                 }
             } else {

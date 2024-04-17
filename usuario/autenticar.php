@@ -69,12 +69,16 @@ if ($stmt->num_rows == 1) {
     if ($perfil === 'cliente') {
         $_SESSION['logged_in'] = true;
         header('Location: produtosWey.php'); // Substitua com a página do cliente
-    } elseif ($perfil === 'funcionario') {
-        $_SESSION['funcionario'] = true;
-        header('Location: ../adm/usuario_adm/usuarios.php'); // Substitua com a página do funcionário
+    
     } else {
-        // Perfil desconhecido, adote o tratamento apropriado
-        echo "Perfil desconhecido.";
+         // Usuário não encontrado
+    echo '<div class="text-center container">';
+    echo '<div class="alert alert-danger text-center mt-5" role="alert">
+            <h3>Somente Clientes </h3>
+          </div>';
+    echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+    echo '</div>'; // Perfil desconhecido, adote o tratamento apropriado
+       
     }
 } else {
     // Usuário não encontrado
