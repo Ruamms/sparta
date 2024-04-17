@@ -27,8 +27,8 @@
 
 
   <!-- menu-->
-  <div class="bg-warning text-center py-1">
-    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  <div class="bg-warning text-center py-1 ">
+    <p >FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
   </div>
   <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
     <div class="container">
@@ -43,34 +43,32 @@
         <ul class="navbar-nav ml-auto">
           <!-- relatorio de compra-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
-                  class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Minhas Compras"></i></a>
-            </h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
+                  class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
+                Minhas compras</a>
+            </p>
           </li>
           <!-- carrinho de compra-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">
-                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i>
-              </a></h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
+                Carrinho</a></p>
           </li>
           <!--Perfil-->
           <li class="nav-item mr-5">
-            <a class="nav-link text-warning" href="../usuario/perfil.php">
-              <h4>
-                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i>
-              </h4>
-              
-            </a>
-            
+
+            <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
+                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
+              Perfil</a></p>
+
           </li>
           <!-- sair-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../usuario/login.php">
-                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
-              </a></h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../usuario/login.php">
+                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                Sair</a></p>
           </li>
-          
+
         </ul>
       </div>
     </div>
@@ -145,58 +143,55 @@
 
   </section>
   <!-- Kits -->
-  <div class="dropdown-divider mt-5"></div>
-  <h1 class="text-center m-5"> Kit Ideal Para Você</h1>
+  <div class="dropdown-divider mt-3"></div>
+  <h2 class="text-center m-5"> Kit Ideal Para Você</h2>
   <div class="dropdown-divider"></div>
-  <section class=" container mt-5 d-sm-flex ">
+  <section class=" container mt-3 d-sm-flex ">
 
-    <div class="card col-sm-4 p-1 m-1">
+    <div class="card col-sm-4 m-1">
       <div class="container">
         <img class="card-img-top" src="../img/ki1.jpg" alt="Imagem de capa do card">
-        <div class="card-body text-center mt-3">
+        <div class="card-body text-center">
           <h2 class="card-title">Hipertofria</h2>
           <p class="">Combo Definição</p>
-          <p class="">Brinde Garrafa</p>
           <h3 class="card-text m-3 ">R$210,00</h3>
           <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
 
-    <div class="card col-sm-4 p-1 m-1">
+    <div class="card col-sm-4 m-1">
       <div class="container">
         <img class="card-img-top" src="../img/kit4.jpg" alt="Imagem de capa do card">
-        <div class="card-body text-center  mt-3">
+        <div class="card-body text-center  ">
           <h2 class="card-title">Power Treino</h2>
           <p class="">Melhore Seu Treino</p>
-          <p class="">Brinde Garrafa</p>
-          <h3 class="card-text m-3 ">R$190,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
+          <h3 class="card-text  ">R$190,00</h3>
+          <a href="../carrinho/index.php" class="btn btn-warning m-2">Ver mais</a>
         </div>
       </div>
     </div>
 
 
-    <div class="card col-sm-4 p-1 m-1">
+    <div class="card col-sm-4 m-1 ">
       <div class="container">
         <img class="card-img-top" src="../img/kit3.jpg" alt="Imagem de capa do card">
-        <div class="card-body text-center  mt-2">
+        <div class="card-body text-center ">
           <h2 class="card-title">Ganho de Massa</h2>
           <p class="">Ganhe massa muscular</p>
-          <p class="">Brinde Garrafa</p>
-          <h3 class="card-text m-3">R$270,00</h3>
+          <h3 class="card-text ">R$270,00</h3>
           <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="dropdown-divider mt-5 "></div>
+  <div class="dropdown-divider mt-3 "></div>
 
 
   <!--Duvidas-->
   <section class="container text-center">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2 class="display-4 text-warning">Perguntas Frequentes</h2>
     </div>
