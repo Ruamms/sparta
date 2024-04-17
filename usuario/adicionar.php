@@ -80,10 +80,11 @@
                         <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                             title="Digite o CPF no formato 999.999.999-99" required>
                     </div>
-                    <div class="form-group ">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
+                    <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Por favor, insira um endereço de e-mail válido" required>
+</div>
+
                     <div class="form-group ">
                         <label for="senha">Senha:</label>
                         <input type="password" class="form-control" id="senha" name="senha" required>
@@ -91,8 +92,8 @@
                 </div>
             </div>
 
-            <div class="text-center">
-            <button type="submit" class="btn btn-warning w-50 mt-3">Enviar</button>
+            <div class="text-center m-3">
+            <button type="submit" class="btn w-25 btn-warning ">Finalizar Cadastro</button>
             </div>
         </form>
     </section>

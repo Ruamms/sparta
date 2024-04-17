@@ -31,7 +31,7 @@
         $dataFinal = $_POST['dataFinal'];
     
         // Query SQL para somar os valores da coluna "valor_total" na tabela "pedidos" dentro do intervalo de datas
-        $sql = "SELECT DATE_FORMAT(data_pedido, '%Y-%m') AS mes, SUM(valor_total) AS total FROM pedidos WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal' GROUP BY DATE_FORMAT(data_pedido, '%Y-%m')";
+        $sql = "SELECT DATE_FORMAT(data_pedido, '%Y-%m') AS mes, SUM(valor_total) AS total FROM pedido WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal' GROUP BY DATE_FORMAT(data_pedido, '%Y-%m')";
     
         $result = $conn->query($sql);
     
@@ -63,7 +63,7 @@ while ($row = $result->fetch_assoc()) {
 
     
             // Faturamento total
-            $sqlTotal = "SELECT SUM(valor_total) AS total FROM pedidos WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal'";
+            $sqlTotal = "SELECT SUM(valor_total) AS total FROM pedido WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal'";
             $resultTotal = $conn->query($sqlTotal);
             if ($resultTotal->num_rows > 0) {
                 $rowTotal = $resultTotal->fetch_assoc();

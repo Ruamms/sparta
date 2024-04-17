@@ -20,7 +20,7 @@
     <title>Adicionar Funcionario</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -38,12 +38,12 @@
             </div>
         </div>
     </nav>
-    <h1 class="mt-3 text-center">Cadastro Funcionario</h1>
+    
 
     
-    <section class="container mt-5">
-
-    <form action="salvar_funcionario.php" method="post" class="mt-4 container">
+    <section class="container mt-3">
+<h2 class="m-3 ">Funcionario</h2>
+    <form action="salvar_funcionario.php" method="post" class="m-3 container">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="nome">Nome:</label>
@@ -51,13 +51,17 @@
         </div>
         <div class="form-group col-md-6">
             <label for="matricula">Matrícula:</label>
-            <input type="text" class="form-control" id="matricula" name="matricula" pattern="\d{5}" title="Digite exatamente 5 números" required>
+            <input type="text" class="form-control" id="matricula" placeholder="Digite 5 digitos" name="matricula" pattern="\d{5}" title="Digite exatamente 5 números" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="cpf">CPF:</label>
             <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato 999.999.999-99" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="salario">Salário:</label>
+            <input type="text" class="form-control" id="salario" name="salario" pattern="^\d{1,3}(\.\d{3})*(,\d{2})?$" title="Digite um valor válido  Ex: 5.000,00" required>
         </div>
        
     </div>
@@ -72,9 +76,10 @@
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="salario">Salário:</label>
-            <input type="text" class="form-control" id="salario" name="salario" pattern="^\d{1,3}(\.\d{3})*(,\d{2})?$" title="Digite um valor numérico válido" required>
+            <label for="email">E-mail:</label>
+            <input type="email" class="form-control" id="email" name="email"pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Por favor, insira um endereço de e-mail válido" required>
         </div>
+        
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -82,9 +87,10 @@
             <input type="date" class="form-control" id="data_contratacao" name="data_contratacao" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <label for="senha">Senha:</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
         </div>
+        
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -92,10 +98,7 @@
                 <input type="text" class="form-control" id="endereco" name="endereco" required>
             </div>
    
-        <div class="form-group col-md-6">
-            <label for="senha">Senha:</label>
-            <input type="password" class="form-control" id="senha" name="senha" required>
-        </div>
+        
     </div>
     <button type="submit" class="btn btn-warning w-100 mt-3">Enviar</button>
 </form>

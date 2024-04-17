@@ -31,6 +31,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <h4><a class="nav-link text-warning" href="../usuario_adm/usuarios.php">Usuarios</a></h4>
+                    </li>
                     <li class="nav-item">
                         <h4><a class="nav-link text-warning" href="../produto/lista_produtos.php">Produtos </a></h4>
                     </li>
@@ -45,45 +48,46 @@
         </div>
     </nav>
 
-    <h1 class="text-center m-3">Editar Cliente</h1>
+    
 
     <section class="container">
-    <?php
-include 'conexao.php';
+        <h2 class="m-3">Cliente</h2>
+        <?php
+        include 'conexao.php';
 
-// Verifica se o ID do usuário foi recebido e é válido
-if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
-    $usuario_id = $_GET['usuario_id'];
+        // Verifica se o ID do usuário foi recebido e é válido
+        if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
+            $usuario_id = $_GET['usuario_id'];
 
-    // Busca os dados do cliente com base no ID do usuário
-    $query = "SELECT * FROM cliente WHERE usuario_id = $usuario_id";
-    $result = $conn->query($query);
+            // Busca os dados do cliente com base no ID do usuário
+            $query = "SELECT * FROM cliente WHERE usuario_id = $usuario_id";
+            $result = $conn->query($query);
 
-    // Verifica se o cliente foi encontrado
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        // Preenche os campos do formulário com as informações do cliente
-        $nome = $row['nome'];
-        $endereco = $row['endereco'];
-        $telefone = $row['telefone'];
-        $data_nasc = $row['data_nasc'];
-        $numero_cartao = $row['numero_cartao'];
-        $cpf = $row['cpf'];
-        $email = $row['email'];
-        // Agora você pode preencher os campos do formulário com essas variáveis
-    } else {
-        echo "Cliente não encontrado.";
-    }
-} else {
-    echo "ID do usuário inválido ou não fornecido.";
-}
+            // Verifica se o cliente foi encontrado
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                // Preenche os campos do formulário com as informações do cliente
+                $nome = $row['nome'];
+                $endereco = $row['endereco'];
+                $telefone = $row['telefone'];
+                $data_nasc = $row['data_nasc'];
+                $numero_cartao = $row['numero_cartao'];
+                $cpf = $row['cpf'];
+                $email = $row['email'];
+                // Agora você pode preencher os campos do formulário com essas variáveis
+            } else {
+                echo "Cliente não encontrado.";
+            }
+        } else {
+            echo "ID do usuário inválido ou não fornecido.";
+        }
 
-$conn->close();
-?>
+        $conn->close();
+        ?>
 
-        <form action="salvar_edit.php" class="container" method="post">
+        <form action="salvar_edit_cliente.php" class="container" method="post">
 
-            <div class="form-group">
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>
                     <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $nome; ?>" required>
@@ -91,14 +95,16 @@ $conn->close();
 
                 <div class="form-group col-md-6">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $endereco; ?>" required>
+                    <input type="text" class="form-control" id="endereco" name="endereco"
+                        value="<?php echo $endereco; ?>" required>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="telefone">Telefone:</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" value="<?php echo $telefone; ?>" required>
+                    <input type="tel" class="form-control" id="telefone" name="telefone"
+                        value="<?php echo $telefone; ?>" required>
                 </div>
 
                 <input type="hidden" id="tipo_cliente" name="tipo_cliente" value="cliente">
@@ -106,35 +112,40 @@ $conn->close();
 
                 <div class="form-group col-md-6">
                     <label for="data_nasc">Data de Nascimento:</label>
-                    <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="<?php echo $data_nasc; ?>" required>
+                    <input type="date" class="form-control" id="data_nasc" name="data_nasc"
+                        value="<?php echo $data_nasc; ?>" required>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-6">
+            <div class="form-row">
+                <div class="form-group col-md-6">
                     <label for="cardNumber">Número do Cartão de Crédito:</label>
-                    <input type="text" class="form-control " id="cardNumber" name="numero_cartao" pattern="\d{4}.\d{4}.\d{4}.\d{4}" title="Digite o número do cartão no formato 0000.0000.0000.0000" value="<?php echo $numero_cartao; ?>" required>
+                    <input type="text" class="form-control " id="cardNumber" name="numero_cartao"
+                        pattern="\d{4}.\d{4}.\d{4}.\d{4}"
+                        title="Digite o número do cartão no formato 0000.0000.0000.0000"
+                        value="<?php echo $numero_cartao; ?>" required>
                 </div>
-            </div>
 
-            <div class="form-group">
                 <div class="form-group col-md-6">
                     <label for="cpf">CPF:</label>
-                    <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite o CPF no formato 999.999.999-99" value="<?php echo $cpf; ?>" required>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
+                    <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                        title="Digite o CPF no formato 999.999.999-99" value="<?php echo $cpf; ?>" required>
                 </div>
             </div>
+            <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Por favor, insira um endereço de e-mail válido">
+            </div>
+
 
             <div class="form-group col-md-6">
                 <label for="senha">Senha:</label>
                 <input type="password" class="form-control" id="senha" name="senha" required placeholder="admin">
             </div>
-
-            <button type="submit" class="btn btn-warning w-50 mt-3">Enviar</button>
+            </div>
+            <button type="submit" class="btn btn-warning w-100 mt-2">Enviar</button>
 
         </form>
     </section>

@@ -33,6 +33,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <h4><a class="nav-link text-warning" href="../usuario_adm/usuarios.php">Usuarios</a></h4>
+                    </li>
                     <li class="nav-item">
                         <h4><a class="nav-link text-warning" href="../produto/lista_produtos.php">Produtos </a></h4>
                     </li>
@@ -47,7 +50,7 @@
             </div>
         </div>
     </nav>
-    <h1 class="text-center mt-5">Editar Cliente</h1>
+   
 
     <section class="container text-center mt-5 ">
 
@@ -71,15 +74,18 @@ if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
         $edit_url = '';
         if ($perfil == 'cliente') {
             $edit_url = 'editar_cliente.php';
+            echo ' <h1 class="text-center m-5">Editar Cliente ?</h1>';
         } elseif ($perfil == 'funcionario') {
             $edit_url = 'editar_funcionario.php';
+            echo ' <h1 class="text-center m-5">Editar Funcionario ?</h1>';
         } else {
             echo "Perfil do usuário desconhecido.";
             exit(); // Termina o script se o perfil for desconhecido
         }
 
         // Exibe o botão "Editar" com a URL apropriada
-        echo '<a class="btn w-50 btn-warning mt-1" href="' . $edit_url . '?usuario_id=' . $usuario_id . '">Editar</a>';
+        echo '<a class="btn  btn-success m-3" href="' . $edit_url . '?usuario_id=' . $usuario_id . '">Sim</a>';
+        echo '<a class="btn  btn-danger m-3" href="../usuario_adm/usuarios.php">Nao</a>';
     } else {
         echo "ID do usuário inválido ou não encontrado.";
     }

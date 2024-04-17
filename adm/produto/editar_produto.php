@@ -82,7 +82,7 @@ if (isset($_POST['deletar'])) {
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -107,63 +107,69 @@ if (isset($_POST['deletar'])) {
             </div>
         </div>
     </nav>
-    <div class=" ">
-        <h1 class="text-center m-3">Editar produto/ ADM</h1>
-        <form class=" m-5 text-center" action="" method="POST">
+
+    <h2 class="text-center m-3">Editar produto</h2>
+
+    <section class="container">
+
+        <form class="" action="atualizar_produto.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="produto_id" value="<?php echo $produto_id; ?>">
-            <input class=" btn btn-danger " type="submit" name="deletar" value="Deletar Produto">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="nome">Nome:</label>
+                    <input class="form-control " type="text" name="nome" value="<?php echo $nome; ?>" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="preco">Preço:</label>
+                    <input class="form-control" type="number" name="preco" value="<?php echo $preco; ?>" step="0.01"
+                        required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="tipo">Tipo:</label>
+                    <select class="form-control" name="tipo" required>
+                        <option value="whey" <?php echo ($tipo == 'whey') ? 'selected' : ''; ?>>Whey</option>
+                        <option value="creatina" <?php echo ($tipo == 'creatina') ? 'selected' : ''; ?>>Creatina</option>
+                        <option value="pretreino" <?php echo ($tipo == 'pretreino') ? 'selected' : ''; ?>>Pré Treino
+                        </option>
+                        <option value="glutamina" <?php echo ($tipo == 'glutamina') ? 'selected' : ''; ?>>Glutamina
+                        </option>
+                        <option value="bcaa" <?php echo ($tipo == 'bcaa') ? 'selected' : ''; ?>>BCAA</option>
+                        <option value="kit" <?php echo ($tipo == 'kit') ? 'selected' : ''; ?>>Kit</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="estoque">Estoque:</label>
+                    <input class="form-control" type="number" name="estoque" value="<?php echo $estoque; ?>" step="0.01"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="descricao">Descrição:</label>
+                    <textarea class="form-control" name="descricao" required><?php echo $descricao; ?></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="font-weight-bold" for="imagem">Imagem Atual:</label>
+                    <img src="<?php echo $imagem; ?>" alt="Imagem atual" width="90">
+                    
+                </div>
+
+                <div class="form-group col-md-6">
+
+
+                    <label class="font-weight-bold" for="nova_imagem">Imagem Nova:</label>
+                    <input class="form-control-file" type="file" name="nova_imagem">
+                </div>
+            </div>
+
+            <input class="btn btn-warning w-100 mt-3" type="submit" value="Atualizar Produto">
         </form>
-    </div>
-
-    <section class="container mt-3">
-    <form class="formulario" action="atualizar_produto.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="produto_id" value="<?php echo $produto_id; ?>">
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="font-weight-bold" for="nome">Nome:</label>
-                <input class="form-control" type="text" name="nome" value="<?php echo $nome; ?>" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="font-weight-bold" for="preco">Preço:</label>
-                <input class="form-control" type="number" name="preco" value="<?php echo $preco; ?>" step="0.01" required>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="font-weight-bold" for="descricao">Descrição:</label>
-                <textarea class="form-control" name="descricao" required><?php echo $descricao; ?></textarea>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="font-weight-bold" for="estoque">Estoque:</label>
-                <input class="form-control" type="number" name="estoque" value="<?php echo $estoque; ?>" step="0.01" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="font-weight-bold" for="tipo">Tipo:</label>
-            <select class="form-control" name="tipo" required>
-                <option value="whey" <?php echo ($tipo == 'whey') ? 'selected' : ''; ?>>Whey</option>
-                <option value="creatina" <?php echo ($tipo == 'creatina') ? 'selected' : ''; ?>>Creatina</option>
-                <option value="pretreino" <?php echo ($tipo == 'pretreino') ? 'selected' : ''; ?>>Pré Treino</option>
-                <option value="glutamina" <?php echo ($tipo == 'glutamina') ? 'selected' : ''; ?>>Glutamina</option>
-                <option value="bcaa" <?php echo ($tipo == 'bcaa') ? 'selected' : ''; ?>>BCAA</option>
-                <option value="kit" <?php echo ($tipo == 'kit') ? 'selected' : ''; ?>>Kit</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label class="font-weight-bold" for="imagem">Imagem Atual:</label><br>
-            <img src="<?php echo $imagem; ?>" alt="Imagem atual" width="90"><br>
-
-            <label class="font-weight-bold" for="nova_imagem">Imagem Nova:</label><br>
-            <input class="form-control-file" type="file" name="nova_imagem"><br>
-        </div>
-
-        <input class="btn btn-warning mt-3" type="submit" value="Atualizar Produto">
-    </form>
-</section>
+    </section>
+    
 
 
     <div class="dropdown-divider mt-5 "></div>

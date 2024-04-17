@@ -63,7 +63,31 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 
 ?>
+  <script>
+    function showAlert(message, type) {
+      // Create alert element
+      var alertDiv = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+        message +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>');
 
+      // Append alert to container
+      $('#alertContainer').append(alertDiv);
+
+      // Automatically close alert after 3 seconds
+      setTimeout(function() {
+        alertDiv.alert('close');
+      }, 3000);
+    }
+
+    // Exemplo de uso
+    $(document).ready(function() {
+      // Exibe uma mensagem de aviso temporária
+      showAlert('Esta é uma mensagem de aviso temporária!', 'warning');
+    });
+  </script>
 
 
 <!DOCTYPE html>
@@ -92,7 +116,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     <nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 box-shadow">
         <div class="container">
-            <a href="../index.php" class="navbar-brand">
+            <a href="../produtosWey.php" class="navbar-brand">
                 <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -169,3 +193,39 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </body>
 
 </html>
+
+
+
+ 
+
+  
+
+  <!-- Custom JavaScript <div class="container mt-5">
+    <div id="alertContainer"></div>
+  </div>
+  <script>
+    function showAlert(message, type) {
+      // Create alert element
+      var alertDiv = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+        message +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>');
+
+      // Append alert to container
+      $('#alertContainer').append(alertDiv);
+
+      // Automatically close alert after 3 seconds
+      setTimeout(function() {
+        alertDiv.alert('close');
+      }, 3000);
+    }
+
+    // Exemplo de uso
+    $(document).ready(function() {
+      // Exibe uma mensagem de aviso temporária
+      showAlert('Esta é uma mensagem de aviso temporária!', 'warning');
+    });
+  </script>
+ -->

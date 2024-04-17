@@ -1,5 +1,5 @@
 <?php
-require('./fpdf186/fpdf.php'); // Certifique-se de incluir o caminho correto para o arquivo fpdf.php
+require('./fpdf186/fpdf.php');
 include 'conexao.php';
 
 // Verificar se o formulário foi enviado
@@ -16,13 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Consulta SQL para obter os dados de todos os clientes ordenados pelo total gasto
     $sql = "SELECT u.usuario_id, u.nome, SUM(p.valor_total) as total_gasto
             FROM usuario u
-            JOIN pedidos p ON u.usuario_id = p.id_usuario
+            JOIN pedido p ON u.usuario_id = p.id_usuario
             WHERE p.data_pedido BETWEEN '$data_inicial' AND '$data_final'
             GROUP BY u.usuario_id
             ORDER BY total_gasto DESC";
 
     $result = $conn->query($sql);
-    // Cogigo para imprimir o pdf
+
     if ($result->num_rows > 0) {
         // Exibir os resultados
         $row = $result->fetch_assoc();
@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nome_usuario = $row['nome'];
         $total_gasto = $row['total_gasto'];
 
+        // Exibir informações na página HTML
         echo '
         <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
             <div class="container">
@@ -38,49 +39,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </a>  
             </div>
         </nav>
-    ';
+        ';
         echo '<div class=" mt-3 text-center " style="height: 20rem;">';
         echo '<img class="card-img-top mx-auto " style="width: 9rem;" src="../../img/icons8-contabilidade-de-fundo-96.png" alt="Imagem de capa do card">';
         echo '<div class="card-body text-center  mt-2">';
         echo '<h3 class="card-title">Relatorio cliente</h3>';
         echo "<p class='card-title'>O cliente $nome_usuario (Registro: $usuario_id)<br> É o que mais comprou, gastando um total de R$ $total_gasto <br> no período de $data_inicial a $data_final.</p>";
-
         echo '</div>';
         echo '<a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>';
 
-
-
-
-        // Verificar se o botão de gerar PDF foi pressionado
-        if (isset($_POST['gerar_pdf'])) {
-            ob_start(); // Inicia o buffer de saída
-
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: attachment; filename="relatorio.pdf"');
-
-            // Gerar o relatório em PDF
-            // Gerar o relatório em PDF
-            $pdf = new FPDF();
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 18);
-        $pdf->Cell(40, 10, "Relatório de Clientes");
-
-        $pdf->Ln(10);
-
-
-            // Adicionar informações do cliente ao PDF
-            $pdf->SetFont('Arial', 'B', 16);
-            $pdf->Cell(40, 10, "Cliente: $nome_usuario (Registro: $usuario_id)");
-            $pdf->Ln(10);
-            $pdf->SetFont('Arial', '', 14);
-            $pdf->Cell(40, 10, "Valor gasto: R$ " . number_format($total_gasto, 2), 0, 1, 'C');
-            $pdf->Ln(10);
-
-            $pdf->Output();
-
-            ob_end_flush(); // Envia o buffer de saída e desativa o buffer de saída
-        }
+        // Botão para gerar o PDF
+        echo '<form method="post">';
+        echo '<input type="hidden" name="data_inicial" value="' . $data_inicial . '">';
+        echo '<input type="hidden" name="data_final" value="' . $data_final . '">';
+        echo '<button type="submit" class="btn btn-primary mt-3" name="gerar_pdf">Gerar PDF</button>';
+        echo '</form>';
     } else {
+        // Exibir mensagem se não houver resultados
         echo '
             <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
                 <div class="container">
@@ -96,12 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<h3>';
         echo "Nenhum resultado encontrado para o período de $data_inicial a $data_final.";
         echo '</h3>';
-       
-        echo' </div>';
+        echo '</div>';
         echo '<a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>';
         echo '</div>';
-       
-        
     }
 
     // Fechar a conexão
@@ -133,8 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-   
-
+    <!-- Seu HTML aqui -->
 
 </body>
 

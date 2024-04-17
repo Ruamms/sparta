@@ -30,7 +30,7 @@ $result = $conn->query($query);
 
 <body class="">
     <!-- menu-->
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -54,15 +54,17 @@ $result = $conn->query($query);
             </div>
         </div>
     </nav>
-    <h1 class="text-center mt-5">Usuarios cadastrados / ADM</h1>
+   
     
    
 
 
-    <section class="container ">
-        <a class="btn btn-success mt-5 " href="adicionar.php">Adicionar Cliente </a>
-        <a class="btn btn-success mt-5 " href="adicionar_funcionario.php">Adicionar Funcionarios </a>
-        <table class="table mt-5 table-striped table-hover table-bordered">
+    <section class="container">
+         <h2 class=" text-center mt-3">Usuarios</h2>
+    
+        <a class="btn btn-success mt-3 m-1 " href="adicionar_cliente.php">+ Cliente </a>
+        <a class="btn btn-success mt-3 m-1" href="adicionar_funcionario.php">+ Funcionarios </a>
+        <table class="table mt-3 m-1 table-striped table-hover table-bordered text-center ">
             <tr class="thead-dark ">
                 <th>ID</th>
                 <th>Nome</th>
@@ -74,19 +76,19 @@ $result = $conn->query($query);
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         <?php echo $row['usuario_id']; ?>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <?php echo $row['nome']; ?>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <?php echo $row['email']; ?>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <?php echo $row['senha']; ?>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <?php echo $row['perfil']; ?>
                     </td>
                     
