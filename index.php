@@ -26,13 +26,13 @@
 
 
   <!-- menu-->
-  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
     <div class="container">
       <img class="imagem-login" src="./img/Sparta Suplementos - Logo.png" alt="sparta" />
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-  <span class="navbar-toggler-icon"></span>
-</button>
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -52,32 +52,32 @@
   <section class="d-flex container produtos ">
 
     <?php
-    
+
     $conexao = new mysqli("localhost", "root", "", "cadastro");
 
     if ($conexao->connect_error) {
       die("Erro na conexão: " . $conexao->connect_error);
     }
 
-  
+
     $sql = "SELECT * FROM produtos";
     $resultado = $conexao->query($sql);
 
     if ($resultado->num_rows > 0) {
       while ($row = $resultado->fetch_assoc()) {
         echo '<div class="mt-3 m-3 " >';
-           echo '<div class="card text-center align-items-center" style="width: 16rem;  height: 24rem;">';
-                echo '<div class="p-3">';
-                    echo '<img class="m-3 "style="height: 6rem;width: 6rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
-                      echo '<div class="card-body">';
-                      echo '<h3 >' . $row["nome"] . '</h3>';
-                      echo '<p>' . $row["descricao"] . '</p>';
+        echo '<div class="card text-center align-items-center" style="width: 16rem;  height: 24rem;">';
+        echo '<div class="p-3">';
+        echo '<img class="m-3 "style="height: 6rem;width: 6rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
+        echo '<div class="card-body">';
+        echo '<h3 >' . $row["nome"] . '</h3>';
+        echo '<p>' . $row["descricao"] . '</p>';
 
-                      echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
-                      echo '<a class="btn btn-warning mt-3" href="./usuario/login.php"">Ver Mais</a>';
-                    echo '</div>';
-                echo '</div>';
-            echo '</div>';
+        echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
+        echo '<a class="btn btn-warning mt-3" href="./usuario/login.php"">Ver Mais</a>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
 
       }
@@ -88,7 +88,7 @@
     ?>
 
   </section>
-  
+
   <!-- Kits -->
   <div class="dropdown-divider m-3"></div>
 
@@ -219,7 +219,8 @@
                 style="max-width: 140px">Facebook</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://twitter.com" style="max-width: 140px">Twiter</a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://twitter.com"
+                style="max-width: 140px">Twiter</a>
             </li>
             <li>
               <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.instagram.com/"

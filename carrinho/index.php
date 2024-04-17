@@ -1,5 +1,5 @@
 <?php
-include("conexao.php");
+include ("conexao.php");
 session_start();
 
 
@@ -63,33 +63,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 
 ?>
-  <script>
-    function showAlert(message, type) {
-      // Create alert element
-      var alertDiv = $('<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
-        message +
-        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-        '<span aria-hidden="true">&times;</span>' +
-        '</button>' +
-        '</div>');
-
-      // Append alert to container
-      $('#alertContainer').append(alertDiv);
-
-      // Automatically close alert after 3 seconds
-      setTimeout(function() {
-        alertDiv.alert('close');
-      }, 3000);
-    }
-
-    // Exemplo de uso
-    $(document).ready(function() {
-      // Exibe uma mensagem de aviso temporária
-      showAlert('Esta é uma mensagem de aviso temporária!', 'warning');
-    });
-  </script>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -113,8 +86,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </head>
 
 <body>
+<div class="bg-warning text-center py-1">
+    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 box-shadow">
+    <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-dark py-1 box-shadow">
         <div class="container">
             <a href="../produtosWey.php" class="navbar-brand">
                 <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -128,11 +104,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <h3><a class="nav-link text-warning" href="../usuario/produtosWey.php">Inicio</a></h3>
+                        <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php">Inicio</a></h4>
                     </li>
                     <li class="nav-item">
-                        <h3><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">Minhas
-                                compras</a></h3>
+                        <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">Minhas
+                                compras</a></h4>
                     </li>
                 </ul>
 
@@ -148,7 +124,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <a href="carrinho.php" class="m-3 btn btn-warning text-center ">
                     <h5>Carrinho</h5>
                 </a>
-                
+
                 <div class="row align-middle  m-2">
 
                     <?php
@@ -185,22 +161,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </div>
         </div>
     </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
-
-
-
- 
-
-  
-
-  <!-- Custom JavaScript <div class="container mt-5">
+    <div class="container mt-5">
     <div id="alertContainer"></div>
   </div>
   <script>
@@ -228,4 +189,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
       showAlert('Esta é uma mensagem de aviso temporária!', 'warning');
     });
   </script>
- -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

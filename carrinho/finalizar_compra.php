@@ -18,6 +18,8 @@
         crossorigin="anonymous"></script>
     <!-- Inclua a biblioteca Faker.js a partir do CDN -->
     <script src="https://cdn.rawgit.com/Marak/faker.js/0.7.3/build/build/faker.min.js"></script>
+    <!--  ícones do Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../public/style.css">
 
@@ -25,24 +27,60 @@
 </head>
 
 <body style="height: 50rem;">
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
-        <div class="container">
-            <a href="../usuario/produtosWey.php" class="navbar-brand">
-                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+
+
+<nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+    <div class="container">
+
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+           <!-- inicio-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
+                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Inicio"></i></a>
+            </h4>
+          </li>
+           <!-- relatorio de compra-->
+           <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
+                  class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Minhas Compras"></i></a>
+            </h4>
+          </li>
+          <!-- carrinho de compra-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i>
+              </a></h4>
+          </li>
+           <!--Perfil-->
+          <li class="nav-item mr-5">
+            <a class="nav-link text-warning" href="../usuario/perfil.php">
+              <h4>
+                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i>
+              </h4>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <h3><a class="nav-link text-warning" href="../usuario/produtosWey.php">Inicio</a></h3>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+          </li>
+           <!-- sair-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../usuario/login.php">
+                <i class="bi  bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
+              </a></h4>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
     <div class="container mt-5">
         <h1 class="text-center">Finalize sua compra</h1>
         <div class="text-center">

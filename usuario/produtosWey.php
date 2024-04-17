@@ -17,6 +17,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+  <!--  ícones do Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="../public/style.css">
 
 </head>
@@ -28,7 +30,7 @@
   <div class="bg-warning text-center py-1">
     <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
   </div>
-  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-2 box-shadow">
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
     <div class="container">
 
       <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -39,17 +41,36 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">Minhas Compras</a>
+          <!-- relatorio de compra-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
+                  class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Minhas Compras"></i></a>
             </h4>
           </li>
-          <li class="nav-item">
-            <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">Carrinho</a></h4>
+          <!-- carrinho de compra-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i>
+              </a></h4>
           </li>
-          <li class="nav-item">
-            <h4><a class="nav-link text-warning" href="../usuario/login.php">Sair</a></h4>
+          <!--Perfil-->
+          <li class="nav-item mr-5">
+            <a class="nav-link text-warning" href="../usuario/perfil.php">
+              <h4>
+                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i>
+              </h4>
+              
+            </a>
+            
           </li>
-
+          <!-- sair-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../usuario/login.php">
+                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
+              </a></h4>
+          </li>
+          
         </ul>
       </div>
     </div>
@@ -61,7 +82,7 @@
   <section class="container text-center ">
     <div>
       <h2 class="mt-3 text-center">Bem vindo, </h2>
-      <?php include 'id_usuario.php';?>
+      <?php include 'id_usuario.php'; ?>
 
     </div>
     <br>

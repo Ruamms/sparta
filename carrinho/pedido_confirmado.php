@@ -4,22 +4,66 @@
 <head>
     <title>Confirmação de Pedido</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--  ícones do Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
-        <div class="container">
-            <a href="../index.php" class="navbar-brand">
-                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<div class="bg-warning text-center py-1">
+    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  </div>
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+    <div class="container">
 
-        </div>
-    </nav>
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+           <!-- inicio-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
+                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="inicio"></i></a>
+            </h4>
+          </li>
+           <!-- relatorio de compra-->
+           <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
+                  class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Minhas Compras"></i></a>
+            </h4>
+          </li>
+          <!-- carrinho de compra-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i>
+              </a></h4>
+          </li>
+           <!--Perfil-->
+          <li class="nav-item mr-5">
+            <a class="nav-link text-warning" href="../usuario/perfil.php">
+              <h4>
+                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i>
+              </h4>
+            </a>
+
+          </li>
+           <!-- sair-->
+          <li class="nav-item mr-5">
+            <h4><a class="nav-link text-warning" href="../usuario/login.php">
+                <i class="bi  bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
+              </a></h4>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
 
     <div class="container mt-5">
         <h2 class="m-3">Parabéns pela compra</h2>
