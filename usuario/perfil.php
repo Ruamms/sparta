@@ -18,7 +18,7 @@
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../public/style.css">
-    <title>Adicionar usuario</title>
+    <title>Perfil</title>
 </head>
 
 <body>
@@ -69,7 +69,12 @@
                
                 <div class="form-group m-3">
 
-                    
+                    <div class="form-group ">
+                        <label for="cardNumber">Número do Cartão de Crédito:</label>
+                        <input type="text" class="form-control " id="cardNumber" name="numero_cartao"
+                            pattern="\d{4}.\d{4}.\d{4}.\d{4}"
+                            title="Digite o número do cartão no formato 0000.0000.0000.0000" required>
+                    </div>
                     <div class="form-group ">
                         <label for="cpf">CPF:</label>
                         <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"

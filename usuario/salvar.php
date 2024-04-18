@@ -51,7 +51,7 @@
     $cpf = $_POST['cpf'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-    $numero_cartao = $_POST['numero_cartao'];
+    
 
     // Verificar se o e-mail já existe na tabela de usuários
     $verificarEmail = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
@@ -109,8 +109,8 @@
             $stmtUsuario->close();
 
             // Inserir dados na tabela "cliente"
-            $sqlCliente = "INSERT INTO cliente (usuario_id, nome, endereco, telefone, data_nasc, cpf, email,numero_cartao) 
-                   VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+            $sqlCliente = "INSERT INTO cliente (usuario_id, nome, endereco, telefone, data_nasc, cpf, email) 
+                   VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmtCliente = $conn->prepare($sqlCliente);
 
             if ($stmtCliente === false) {
@@ -118,7 +118,7 @@
             }
 
             // Bind parameters para a declaração de inserção do cliente
-            $stmtCliente->bind_param("isssssss", $usuario_id, $nome, $endereco, $telefone, $data_nasc, $cpf, $email, $numero_cartao);
+            $stmtCliente->bind_param("issssss", $usuario_id, $nome, $endereco, $telefone, $data_nasc, $cpf, $email,);
 
             if ($stmtCliente->execute() === false) {
                 die("Erro ao executar a declaração de inserção do cliente: " . $stmtCliente->error);
