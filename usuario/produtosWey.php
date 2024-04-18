@@ -58,13 +58,13 @@
           <li class="nav-item mr-5">
 
             <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
-                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
+                <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
               Perfil</a></p>
 
           </li>
           <!-- sair-->
           <li class="nav-item mr-5">
-            <p class="text-center"><a class="nav-link text-warning" href="../usuario/login.php">
+            <p class="text-center"><a class="nav-link text-warning" href="../index.php">
                 <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
                 Sair</a></p>
           </li>
@@ -74,74 +74,91 @@
     </div>
   </nav>
 
-
+  <div class="container text-center mt-3">
+  <div class="row align-items-start">
+    <div class="col">
+    <img class="imagem-login" src="../img/suplemento-alimentar-o-que-e-par.png" alt="sparta" />
+    </div>
+    <div class="col">
+    <h2 class="m-5 ">Seja Bem vindo,</h2>
+    <?php  include 'id_usuario.php'; ?>
+    </div>
+    <div class="col">
+    <img class="imagem-login" src="../img/suplementos.png" alt="sparta" />
+    </div>
+  </div>
+</div>
 
   <!-- filtro e nome login-->
-  <section class="container text-center ">
-    <div>
-      <h2 class="mt-3 text-center">Bem vindo, </h2>
-      <?php include 'id_usuario.php'; ?>
 
-    </div>
-    <br>
-    <div>
-      <form action="exibir_produtos_por_tipo.php" method="GET">
-        <label for="tipo">
-          <p class="font-weight-bold m-1">Escolha o produto:</p>
-        </label>
-        <select class="font-weight-bold m-1 border-0" name="tipo" id="tipo">
-          <option value="whey">Whey Protein </option>
-          <option value="creatina">Creatina</option>
-          <option value="pretreino">Pré-treino</option>
-          <option value="bcaa">BCAA</option>
-          <option value="glutamina">Glutamina</option>
-          <option value="Kit">kit</option>
-        </select>
-        <input class="btn btn-warning m-1 " type="submit" value="Mostrar Produtos">
-      </form>
-    </div>
-  </section>
   <div class="dropdown-divider m-3"></div>
   <!-- produtos vindo do banco-->
 
-  <section class="d-flex container produtos">
+  <!-- Início do carrossel -->
+  <div id="carouselProdutos" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <?php
+      $conexao = new mysqli("localhost", "root", "", "cadastro");
 
-    <?php
-    // Conectar ao banco de dados (substitua pelos seus dados de conexão)
-    $conexao = new mysqli("localhost", "root", "", "cadastro");
-
-    if ($conexao->connect_error) {
-      die("Erro na conexão: " . $conexao->connect_error);
-    }
-
-    // Consultar os produtos no banco de dados
-    $sql = "SELECT * FROM produtos";
-    $resultado = $conexao->query($sql);
-
-    if ($resultado->num_rows > 0) {
-      while ($row = $resultado->fetch_assoc()) {
-        echo '<div class="mt-3 m-3 " >';
-        echo '<div class="card text-center align-items-center" style="width: 16rem;  height: 24rem;">';
-        echo '<div class="p-3">';
-        echo '<img class="m-3 "style="height: 6rem;width: 6rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
-        echo '<div class="card-body">';
-        echo '<h3 >' . $row["nome"] . '</h3>';
-        echo '<p>' . $row["descricao"] . '</p>';
-
-        echo '<p class="card-text">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</p>';
-        echo '<a class="btn btn-warning mt-3" href="../carrinho/index.php"">Ver mais</a>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
+      if ($conexao->connect_error) {
+        die("Erro na conexão: " . $conexao->connect_error);
       }
-    } else {
-      echo "Nenhum produto cadastrado.";
-    }
-    $conexao->close();
-    ?>
 
-  </section>
+      $sql = "SELECT * FROM produtos";
+      $resultado = $conexao->query($sql);
+
+      if ($resultado !== false && $resultado->num_rows > 0) {
+        // Se houver resultados, execute o loop para exibir os produtos
+      } else {
+        echo "Nenhum produto cadastrado.";
+      }
+
+      $active = true;
+      $contador = 0;
+      if ($resultado !== false && $resultado->num_rows > 0) {
+        while ($row = $resultado->fetch_assoc()) {
+          if ($contador % 3 == 0) {
+            echo '<div class="carousel-item ' . ($active ? 'active' : '') . '">';
+            echo '<div class="row container mx-auto">';
+          }
+          echo '<div class="col-md-4 " >';
+          echo '<div class="mt-3">';
+          echo '<div class="card text-center align-items-center" style="height: 18rem; width: 20rem;">';
+          echo '<div class="p-2">';
+          echo '<img class="m-1 img-fluid" style="height: 6rem; width: 5rem;" src="http://localhost/sparta/adm/produto/' . $row["imagem"] . '" alt="' . $row["nome"] . '">';
+          echo '<div class="card-body">';
+          echo '<h4>' . $row["nome"] . '</h4>';
+          echo '<p>' . $row["descricao"] . '</p>';
+        
+          echo '<a class="btn btn-warning mt-2" href="../carrinho/index.php">Ver Mais</a>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
+          echo '</div>';
+          $contador++;
+          if ($contador % 3 == 0 || $contador == $resultado->num_rows) {
+            echo '</div>';
+            echo '</div>';
+            $active = false;
+          }
+        }
+      } else {
+        echo "Nenhum produto cadastrado.";
+      }
+      ?>
+    </div>
+    <a class="carousel-control-prev " href="#carouselProdutos" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+      <span class="sr-only ">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselProdutos" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Próximo</span>
+    </a>
+  </div>
+  <!-- Fim do carrossel -->
+
   <!-- Kits -->
   <div class="dropdown-divider mt-3"></div>
   <h2 class="text-center m-5"> Kit Ideal Para Você</h2>
