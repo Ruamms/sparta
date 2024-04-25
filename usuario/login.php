@@ -49,7 +49,7 @@
     </nav>
 
 
-    <h1 style="margin-top:50px; text-align: center;">Faça seu login</h1>
+    <h2 class="text-center m-3">Faça seu login</h2>
 
 
     <form class="container mt-5" style="max-width: 20rem;" action="autenticar.php" method="POST">

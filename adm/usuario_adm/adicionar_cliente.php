@@ -16,13 +16,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <!--  ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!--  mascaras jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 
     <link rel="stylesheet" href="../../public/style.css">
     <title>Adicionar usuario</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+
+    <!-- menu-->
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -33,27 +41,50 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../usuario_adm/usuarios.php">Usuarios</a></h4>
-                    </li>
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../produto/lista_produtos.php">Produtos </a></h4>
-                    </li>
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../relatorio/relatorio.php">Relatorios</a></h4>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../usuario_adm/usuarios.php">
+                                <i class="bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Usuarios"></i><br>
+                                Usuarios</a>
+                        </p>
                     </li>
 
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../../usuario/login.php">Sair</a></h4>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../produto/lista_produtos.php">
+                                <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Produtos"></i><br>
+                                Produtos</a>
+                        </p>
+                    </li>
+                    <!--Perfil-->
+                    <li class="nav-item mr-5">
+
+                        <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="relatorio"></i><br>
+                                Relatorio</a></p>
+
+                    </li>
+
+                    <!-- sair-->
+                    <li class="nav-item mr-5">
+                        <p class="text-center"><a class="nav-link text-warning" href="../usuario_adm/login_adm.php">
+                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Sair"></i><br>
+                                Sair</a></p>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-   
 
 
-    <section class="container mt-3"> <h2 class="m-2 ">Cliente</h2>
+
+    <section class="container mt-3">
+        <h2 class="m-2 ">Cliente</h2>
         <form action="salvar.php" class="container" method="post">
 
             <div class="form-row">
@@ -86,9 +117,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cpf">CPF:</label>
-                    <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
-                        title="Digite o CPF no formato 999.999.999-99" required>
+                    <input type="text" class="form-control" id="cpf" name="cpf" required>
                 </div>
+
 
                 <div class="form-group col-md-6">
                     <label for="email">Email:</label>
@@ -102,7 +133,7 @@
                     <label for="cardNumber">Número do Cartão de Crédito:</label>
                     <input type="text" class="form-control " id="cardNumber" name="numero_cartao"
                         pattern="\d{4}.\d{4}.\d{4}.\d{4}"
-                        title="Digite o número do cartão no formato 0000.0000.0000.0000" required>
+                        title="Digite o número do cartão " required>
 
                 </div>
 
@@ -116,6 +147,18 @@
 
         </form>
     </section>
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#cardNumber').mask('0000.0000.0000.0000', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#telefone').mask('00-00000-0000', { reverse: true });
+        });
+    </script>
+
 
 </body>
 

@@ -55,6 +55,7 @@
     <?php
 include 'conexao.php';
 
+
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recupera os dados do formulário e filtra-os
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $matricula = mysqli_real_escape_string($conn, $_POST['matricula']);
     $salario = mysqli_real_escape_string($conn, $_POST['salario']);
     $cargo = mysqli_real_escape_string($conn, $_POST['cargo']);
-    $data_contratacao = mysqli_real_escape_string($conn, $_POST['d$data_contratacao']);
+    $data_contratacao = mysqli_real_escape_string($conn, $_POST['data_contratacao']);
     $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
     $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
     $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario_id = $_POST['usuario_id'];
 
             // Verifica se o CPF foi alterado
-            $query_cpf_original = "SELECT cpf FROM cliente WHERE usuario_id = $usuario_id";
+            $query_cpf_original = "SELECT cpf FROM funcionario WHERE usuario_id = $usuario_id";
             $result_cpf_original = $conn->query($query_cpf_original);
 
             if ($result_cpf_original) {
@@ -107,10 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "Erro ao obter CPF original: " . $conn->error;
                 exit;
             }
+            
 
             // Verifica se o email foi alterado
             $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
             $result_email_original = $conn->query($query_email_original);
+            
 
             if ($result_email_original) {
                 $row_email_original = $result_email_original->fetch_assoc();

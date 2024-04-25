@@ -51,8 +51,8 @@
           <!-- carrinho de compra-->
           <li class="nav-item mr-5">
             <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
-                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
-                Carrinho</a></p>
+               <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
+                Carrinho</a></p> 
           </li>
           <!--Perfil-->
           <li class="nav-item mr-5">

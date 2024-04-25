@@ -23,14 +23,16 @@ $result = $conn->query($query);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <!--  ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../public/style.css">
     <title>Usuarios</title>
 </head>
 
-<body class="">
+<body>
     <!-- menu-->
-    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -41,37 +43,66 @@ $result = $conn->query($query);
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                    <h4><a class="nav-link text-warning" href="../produto/lista_produtos.php">Produtos </a></h4>
-                    </li>
-                    <li class="nav-item">
-                    <h4><a class="nav-link text-warning" href="../relatorio/relatorio.php">Relatorios</a></h4></li>
 
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../../adm/usuario_adm/login_adm.php">Sair</a></h4>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../produto/lista_produtos.php">
+                                <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Produtos"></i><br>
+                                Produtos</a></p>
+                    </li>
+                    <!--Perfil-->
+                    <li class="nav-item mr-5">
+
+                        <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="relatorio"></i><br>
+                                Relatorio</a></p>
+
+                    </li>
+
+                    <!-- sair-->
+                    <li class="nav-item mr-5">
+                        <p class="text-center"><a class="nav-link text-warning" href="../usuario_adm/login_adm.php">
+                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Sair"></i><br>
+                                Sair</a></p>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-   
-    
-   
+
+
+
 
 
     <section class="container">
-         <h2 class=" text-center mt-3">Usuarios</h2>
-    
-        <a class="btn btn-success mt-3 m-1 " href="adicionar_cliente.php">+ Cliente </a>
-        <a class="btn btn-success mt-3 m-1" href="adicionar_funcionario.php">+ Funcionarios </a>
+        <h2 class=" text-center mt-3">Usuarios Cadastrados</h2>
+        <div class="d-flex">
+            <div class="m-2">
+                <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_cliente.php"><i
+                            class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Cliente"></i><br>
+                        Cliente</a></p>
+            </div>
+            <div class="m-2">
+
+                <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_funcionario.php"><i
+                            class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Funcionario"></i><br>
+                        Funcionario</a></p>
+            </div>
+        </div>
         <table class="table mt-3 m-1 table-striped table-hover table-bordered text-center ">
             <tr class="thead-dark ">
                 <th>ID</th>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>Senha</th>
-                <th>Perfil</th>
                
+                <th>Perfil</th>
+
                 <th>Ações</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
@@ -80,30 +111,28 @@ $result = $conn->query($query);
                         <?php echo $row['usuario_id']; ?>
                     </td>
                     <td class="align-middle">
-                        <?php echo $row['nome']; ?>
+                    <?php echo ucfirst($row['nome']); ?>
                     </td>
                     <td class="align-middle">
                         <?php echo $row['email']; ?>
                     </td>
-                    <td class="align-middle">
-                        <?php echo $row['senha']; ?>
-                    </td>
-                    <td class="align-middle">
-                        <?php echo $row['perfil']; ?>
-                    </td>
                     
-                   
+                    <td class="align-middle">
+                    <?php echo ucfirst($row['perfil']); ?>
+                    </td>
+
+
                     <td>
                         <a class="btn w-75 btn-success mt-1"
                             href="editar.php?usuario_id=<?php echo $row['usuario_id']; ?>">Editar</a>
                         <a class="btn w-75 btn-danger mt-1"
-                            href="excluir.php?usuario_id=<?php echo $row['usuario_id']; ?>">Excluir</a>
+                            href="excluir.php?usuario_id=<?php echo $row['usuario_id']; ?>">Deletar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
         </table>
         <div class="dropdown-divider mt-5"></div>
-       
+
     </section>
 </body>
 

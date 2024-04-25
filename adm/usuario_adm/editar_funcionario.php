@@ -16,6 +16,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+         <!--  mascaras jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <link rel="stylesheet" href="../../public/style.css">
     <title>Editar Funcionario</title>
@@ -91,6 +94,7 @@ if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
 $conn->close();
 ?>
  <form action="salvar_edit_funcionario.php" method="post" class="m-3 container">
+ <input type="hidden" name="usuario_id" value="<?php echo $usuario_id; ?>">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="nome">Nome:</label>
@@ -152,6 +156,23 @@ $conn->close();
 </form>
                  
     </section>
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#cardNumber').mask('0000.0000.0000.0000', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#telefone').mask('00-00000-0000', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#matricula').mask('00000', { reverse: true });
+        });
+        $(document).ready(function () {
+            $('#salario').mask('0.000,00', { reverse: true });
+        });
+    </script>
 
 </body>
 

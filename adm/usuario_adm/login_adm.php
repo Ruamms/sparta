@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>sparta-Adm</title>
+    <title>login-Adm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -16,20 +16,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <!--  ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../public/style.css">
 
-    <title>Login</title>
 </head>
 
-<body class="">
+<body>
 
     <!-- menu-->
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+    <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
         <div class="container">
-           
-                <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
-         
+
+            <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +41,9 @@
 
 
                     <li class="nav-item">
-                        <h3><a class="nav-link text-warning" href="../index.php">Inicio</a></h3>
+                        <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house "
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio"></i><br>Inicio</a>
+                        </p>
                     </li>
 
                 </ul>
@@ -49,8 +52,8 @@
     </nav>
 
 
-    <h1 style="margin-top:50px; text-align: center;">Admin
-</h1>
+    <h2 class="text-center m-3">Admin
+    </h2>
 
 
     <form class="container mt-5" style="max-width: 20rem;" action="autenticar.php" method="POST">
@@ -66,8 +69,9 @@
         <div class="form-group">
             <button type="submit" class="btn btn-warning w-100">Entrar na Conta</button>
         </div>
-        <small class="form-text text-muted">Esqueceu a senha? <a href="https://wa.me/5521976435614">Clique aqui</a>.</small>
-      
+        <small class="form-text text-muted">Esqueceu a senha? <a href="https://wa.me/5521976435614">Clique
+                aqui</a>.</small>
+
     </form>
     </div>
 
