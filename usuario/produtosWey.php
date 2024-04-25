@@ -30,6 +30,7 @@
   <div class="bg-warning text-center py-1 ">
     <p >FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
   </div>
+  
   <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
     <div class="container">
 
@@ -48,6 +49,7 @@
                 Minhas compras</a>
             </p>
           </li>
+          
           <!-- carrinho de compra-->
           <li class="nav-item mr-5">
             <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">

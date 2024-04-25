@@ -40,43 +40,38 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-           <!-- inicio-->
+          <!-- relatorio de compra-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i
-                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Inicio"></i></a>
-            </h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i
+                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                Inicio</a>
+            </p>
           </li>
-          
           <!-- carrinho de compra-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../../carrinho/carrinho.php">
-                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i>
-              </a></h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../../carrinho/carrinho.php">
+               <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
+                Carrinho</a></p> 
           </li>
-           <!--Perfil-->
+          <!--Perfil-->
           <li class="nav-item mr-5">
-            <a class="nav-link text-warning" href="../../usuario/perfil.php">
-              <h4>
-                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i>
-              </h4>
-            </a>
+
+            <p class="text-center"> <a class="nav-link text-warning" href="../../usuario/perfil.php">
+                <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
+              Perfil</a></p>
 
           </li>
-           <!-- sair-->
+          <!-- sair-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../../usuario/login.php">
-                <i class="bi  bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
-              </a></h4>
+            <p class="text-center"><a class="nav-link text-warning" href="../index.php">
+                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                Sair</a></p>
           </li>
 
         </ul>
       </div>
     </div>
   </nav>
-
-
-
   
   <section>
     <?php
@@ -110,7 +105,7 @@
 
         if ($result_compras->num_rows > 0) {
           ?>
-          <h1 class="mb-4 mt-4 text-center ">Relatório de Compras</h1>
+          <h1 class=" m-3 text-center ">Relatório de Compras</h1>
           <div class="container mt-5 ">
 
 
@@ -134,19 +129,19 @@
               <div class=" mt-2">
                 <div class="mt-5 m-2 ">
 
-                  <h3>Pedido realizado: <?php echo $data_pedido; ?></h3>
+                  <h4>Pedido realizado: <?php echo $data_pedido; ?></h4>
                   <h5 class="mt-4">Número do pedido: <?php echo $pedido_id; ?></h5>
-                  <h4>Valor Total: R$ <?php echo $valor_total; ?></h4>
+                  <h5>Valor Total: R$ <?php echo $valor_total; ?></h5>
 
-                  <h4 class="text-center mt-4">Produtos adiquiridos</h4>
+                  <h4 class="text-center m-2">Produtos adiquiridos</h4>
                   <ul>
                     <?php while ($row_detalhes = $result_detalhes_pedido->fetch_assoc()) { ?>
 
-                      <div class="dropdown-divider m-5 "></div>
-                      <span class="border border-warning"></span>
-                      <h4 class="m-4"><?php echo $row_detalhes['nome']; ?> - Quantidade:
+                    
+                      
+                      <p class="m-2"><?php echo $row_detalhes['nome']; ?> - Quantidade:
                         <?php echo $row_detalhes['quantidade']; ?>
-                      </h4>
+                      </p>
                       <span class="border border-warning"></span>
 
 
