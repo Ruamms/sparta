@@ -67,9 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $salario = mysqli_real_escape_string($conn, $_POST['salario']);
     $cargo = mysqli_real_escape_string($conn, $_POST['cargo']);
     $data_contratacao = mysqli_real_escape_string($conn, $_POST['data_contratacao']);
-    $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
-    $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
-    $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
+
+
 
     // Verifica se o nome, email, senha e CPF foram fornecidos
     if (!empty($nome) && !empty($email) && !empty($senha) && !empty($cpf)) {
@@ -118,28 +117,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result_email_original) {
                 $row_email_original = $result_email_original->fetch_assoc();
                 $email_original = $row_email_original['email'];
-
-                if ($email != $email_original) {
-                    // Verifica se o novo e-mail já está em uso por outro cliente ou usuário
-                    $query_verifica_email_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE email = '$email'";
-                    $result_verifica_email_cliente = $conn->query($query_verifica_email_cliente);
-                    $row_verifica_email_cliente = $result_verifica_email_cliente->fetch_assoc();
-                    $total_clientes_com_email_cliente = $row_verifica_email_cliente['total'];
-
-                    $query_verifica_email_usuario = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email'";
-                    $result_verifica_email_usuario = $conn->query($query_verifica_email_usuario);
-                    $row_verifica_email_usuario = $result_verifica_email_usuario->fetch_assoc();
-                    $total_usuarios_com_email_usuario = $row_verifica_email_usuario['total'];
-
-                    if ($total_clientes_com_email_cliente > 0 || $total_usuarios_com_email_usuario > 0) {
+            
+                // Verifica se o novo e-mail já está em uso por outro cliente ou usuário
+                $query_verifica_email = "SELECT usuario_id FROM cliente WHERE email = '$email' UNION ALL SELECT usuario_id FROM usuario WHERE email = '$email'";
+                $result_verifica_email = $conn->query($query_verifica_email);
+            
+                if ($result_verifica_email) {
+                    $usuarios_com_email = [];
+            
+                    while ($row = $result_verifica_email->fetch_assoc()) {
+                        $usuarios_com_email[] = $row['usuario_id'];
+                    }
+            
+                    // Remove o ID do usuário que está sendo editado da lista
+                    $index = array_search($usuario_id, $usuarios_com_email);
+                    if ($index !== false) {
+                        unset($usuarios_com_email[$index]);
+                    }
+            
+                    // Se ainda houver usuários com esse email, exibe mensagem de erro
+                    if (!empty($usuarios_com_email)) {
                         echo "O e-mail '$email' já está em uso por outro cliente ou usuário.";
                         exit; // Para a execução do script
                     }
+                } else {
+                    echo "Erro ao verificar e-mail: " . $conn->error;
+                    exit;
                 }
             } else {
                 echo "Erro ao obter e-mail original: " . $conn->error;
                 exit;
             }
+            
 
             // Atualiza os dados do cliente na tabela cliente
             $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf' WHERE usuario_id=$usuario_id";

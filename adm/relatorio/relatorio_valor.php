@@ -21,47 +21,47 @@
 </head>
 
 <body>
-    <?php
-    require('./fpdf186/fpdf.php');
-    include 'conexao.php';
+<?php
+require('./fpdf186/fpdf.php');
+include 'conexao.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Processa o formulário quando as datas são enviadas
-        $dataInicial = $_POST['dataInicial'];
-        $dataFinal = $_POST['dataFinal'];
-    
-        // Query SQL para somar os valores da coluna "valor_total" na tabela "pedidos" dentro do intervalo de datas
-        $sql = "SELECT DATE_FORMAT(data_pedido, '%Y-%m') AS mes, SUM(valor_total) AS total FROM pedido WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal' GROUP BY DATE_FORMAT(data_pedido, '%Y-%m')";
-    
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Processa o formulário quando as datas são enviadas
+    $dataInicial = $_POST['dataInicial'];
+    $dataFinal = $_POST['dataFinal'];
+
+    // Query SQL para somar os valores da coluna "valor_total" na tabela "pedidos" dentro do intervalo de datas
+    $sql = "SELECT DATE_FORMAT(data_pedido, '%Y-%m') AS mes, SUM(valor_total) AS total FROM pedido WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal' GROUP BY DATE_FORMAT(data_pedido, '%Y-%m')";
+
+    try {
         $result = $conn->query($sql);
-    
+
         if ($result->num_rows > 0) {
             // Configurações para o PDF
             $pdf = new FPDF();
             $pdf->AddPage();
             $pdf->SetFont('Arial', 'B', 18);
-    
-// Título
-$pdf->Cell(40, 10, utf8_decode('Relatório de Faturamento'));
 
-// Informações sobre o período
-$pdf->Ln(10);
-$pdf->SetFont('Arial', 'I', 14);
-$pdf->Cell(0, 10, utf8_decode("Período: $dataInicial até $dataFinal"), 0, 1, 'C');
+            // Título
+            $pdf->Cell(40, 10, utf8_decode('Relatório de Faturamento'));
 
-// Cabeçalho da tabela
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(60, 10, utf8_decode('Mês'), 1, 0, 'C');
-$pdf->Cell(60, 10, utf8_decode('Faturamento'), 1, 1, 'C');
+            // Informações sobre o período
+            $pdf->Ln(10);
+            $pdf->SetFont('Arial', 'I', 14);
+            $pdf->Cell(0, 10, utf8_decode("Período: $dataInicial até $dataFinal"), 0, 1, 'C');
 
-// Dados da tabela
-$pdf->SetFont('Arial', '', 12);
-while ($row = $result->fetch_assoc()) {
-    $pdf->Cell(60, 10, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $row["mes"]), 1, 0, 'C'); // Convertendo para ISO-8859-1
-    $pdf->Cell(60, 10, "R$ " . number_format($row["total"], 2), 1, 1, 'C');
-}
+            // Cabeçalho da tabela
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(60, 10, utf8_decode('Mês'), 1, 0, 'C');
+            $pdf->Cell(60, 10, utf8_decode('Faturamento'), 1, 1, 'C');
 
-    
+            // Dados da tabela
+            $pdf->SetFont('Arial', '', 12);
+            while ($row = $result->fetch_assoc()) {
+                $pdf->Cell(60, 10, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $row["mes"]), 1, 0, 'C'); // Convertendo para ISO-8859-1
+                $pdf->Cell(60, 10, "R$ " . number_format($row["total"], 2), 1, 1, 'C');
+            }
+
             // Faturamento total
             $sqlTotal = "SELECT SUM(valor_total) AS total FROM pedido WHERE data_pedido BETWEEN '$dataInicial' AND '$dataFinal'";
             $resultTotal = $conn->query($sqlTotal);
@@ -71,37 +71,44 @@ while ($row = $result->fetch_assoc()) {
                 $pdf->Ln(10);
                 $pdf->Cell(0, 10, "Faturamento Total: R$ " . number_format($total, 2), 0, 1, 'C');
             }
-    
+
             // Limpa o buffer de saída
             ob_clean();
-    
+
             // Saída do PDF
             $pdf->Output();
         } else {
-            echo "Nenhum dado encontrado para o período especificado.";
+            throw new Exception("Nenhum dado encontrado para o período especificado.");
         }
-    
-        } else {
-            echo '
-            <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
-                <div class="container">
-                    <a href="#" class="navbar-brand">
-                        <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                    </a>
-                    
-                </div>
-            </nav>
-        ';
-        echo '<div class="text-center container">';
+    } catch (Exception $e) {
+        // Exibe mensagem de erro
         echo '<div class="alert alert-danger text-center mt-5" role="alert">
-        <h3>"Nenhum resultado encontrado para o período selecionado.</h3>
-        <a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>
+                <h3>' . $e->getMessage() . '</h3>
+                <a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>
+            </div>';
+    }
+} else {
+    // Formulário não enviado
+    echo '
+        <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+            <div class="container">
+                <a href="#" class="navbar-brand">
+                    <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
+                </a>
+                
+            </div>
+        </nav>
+    ';
+    echo '<div class="text-center container">';
+    echo '<div class="alert alert-danger text-center mt-5" role="alert">
+            <h3>"Nenhum resultado encontrado para o período selecionado.</h3>
+            <a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>
         </div>';
-        echo' </div>';
-        
-        }
-    
-    ?>
+    echo' </div>';
+}
+?>
+
+
 </body>
 
 </html>
