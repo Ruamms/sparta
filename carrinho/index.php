@@ -105,7 +105,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <ul class="navbar-nav ml-auto">
           <!-- relatorio de compra-->
           <li class="nav-item mr-5">
-            <p class="text-center"><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i
+            <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
                   class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                 Inicio</a>
             </p>
@@ -119,7 +119,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
           <!--Perfil-->
           <li class="nav-item mr-5">
 
-            <p class="text-center"> <a class="nav-link text-warning" href="../../usuario/perfil.php">
+            <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
                 <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
               Perfil</a></p>
 
