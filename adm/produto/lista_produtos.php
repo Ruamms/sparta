@@ -85,6 +85,7 @@
                 <option value="bcaa">BCAA</option>
                 <option value="glutamina">Glutamina</option>
                 <option value="Kit">kit</option>
+                <option value="Vitamina">Vitamina</option>
             </select>
             <input class="btn btn-warning ml-3" type="submit" value="Visualizar">
         </form>
