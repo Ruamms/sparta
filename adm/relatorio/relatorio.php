@@ -83,8 +83,7 @@
                     <input class="w-75" type="date" name="dataFinal" required><br>
 
                     <button class="m-3 btn btn-warning" type="submit" name="gerarPdf">Gerar PDF</button>
-                    <button class=" m-3 btn btn-secondary" type="submit" name="exibirResultado">Gerar
-                        Relatorio</button>
+                    
                 </form>
 
             </div>
@@ -97,7 +96,6 @@
                     <label class="font-weight-bold  m-3" for="data_final">Data Final:</label><br>
                     <input class="w-75" type="date" id="data_final" name="data_final" required><br>
                     <input class="m-3 btn btn-warning" type="submit" name="gerar_pdf" value="Gerar PDF">
-                    <input class=" m-3 btn btn-secondary" type="submit" value="Gerar Relatório">
                 </form>
             </div>
             <div class="m-5 text-center ">

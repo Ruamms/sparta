@@ -1,113 +1,70 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Sparta</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="../../public/style.css">
-    <title>Document</title>
-</head>
-
-<body>
 <?php
-require('./fpdf186/fpdf.php');
-include 'conexao.php';
+// conexao.php
+$host = 'localhost';
+$db = 'cadastro';
+$user = 'root';
+$pass = '';
 
-// Verificar se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obter as datas do formulário
-    $data_inicial = $_POST["data_inicial"];
-    $data_final = $_POST["data_final"];
+$conn = new mysqli($host, $user, $pass, $db);
 
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Falha na conexão: " . $conn->connect_error);
+if ($conn->connect_error) {
+    die('Erro na conexão: ' . $conn->connect_error);
+}
+require_once ('./fpdf186/fpdf.php');
+
+if (isset($_POST['gerar_pdf'])) {
+    // Receber os dados do formulário
+    $data_inicial = $_POST['data_inicial'];
+    $data_final = $_POST['data_final'];
+
+    // Consulta ao banco de dados para obter os pedidos dentro do intervalo de datas
+    $query = "SELECT c.nome, c.cpf, SUM(p.valor_total) AS total_comprado
+              FROM pedido AS p
+              INNER JOIN cliente AS c ON p.usuario_id = c.usuario_id
+              WHERE p.data_pedido BETWEEN '$data_inicial' AND '$data_final'
+              GROUP BY c.nome, c.cpf
+              ORDER BY total_comprado DESC";
+
+    $result = mysqli_query($conn, $query);
+
+
+
+    // Gerar PDF
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+
+    // Título
+    $pdf->Cell(0, 10, 'Relatorio de Clientes', 0, 1, 'C');
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(0, 10, 'Periodo: ' . date('d/m/Y', strtotime($data_inicial)) . ' - ' . date('d/m/Y', strtotime($data_final)), 0, 1, 'C');
+    $pdf->Ln(10);
+
+    // Cabeçalhos da tabela
+    $pdf->SetFillColor(229, 229, 229); // Cor de fundo #E0A800
+    $pdf->SetTextColor(0); // Cor do texto branco
+    $pdf->Cell(60, 10, 'Nome', 1, 0, 'C', true);
+    $pdf->Cell(50, 10, 'CPF', 1, 0, 'C', true);
+    $pdf->Cell(50, 10, 'Total Comprado', 1, 1, 'C', true);
+
+    // Conteúdo da tabela
+    $pdf->SetFillColor(255); // Cor de fundo branca para alternar
+    $pdf->SetTextColor(0); // Cor do texto preto
+    $pdf->SetFont('Arial', '', 12);
+    $fill = false; // Variável para alternar cores de fundo
+    $total_comprado = 0; // Variável para somar os valores
+    while ($row = mysqli_fetch_assoc($result)) {
+        $pdf->Cell(60, 10, $row['nome'], 1, 0, 'L', $fill);
+        $pdf->Cell(50, 10, $row['cpf'], 1, 0, 'C', $fill);
+        $pdf->Cell(50, 10, $row['total_comprado'], 1, 1, 'R', $fill);
+        $total_comprado += $row['total_comprado']; // Adiciona o valor ao total
+        $fill = !$fill; // Alterna a cor de fundo para cada linha
     }
+    // Adiciona a linha com o total
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(110, 10, 'Total Geral', 1, 0, 'C', true);
+    $pdf->Cell(50, 10, number_format($total_comprado, 2, ',', '.'), 1, 1, 'R', true);
 
-    // Consulta SQL para obter os dados de todos os clientes ordenados pelo total gasto
-    $sql = "SELECT u.usuario_id, u.nome, SUM(p.valor_total) as total_gasto
-            FROM usuario u
-            JOIN pedido p ON u.usuario_id = p.id_usuario
-            WHERE p.data_pedido BETWEEN '$data_inicial' AND '$data_final'
-            GROUP BY u.usuario_id
-            ORDER BY total_gasto DESC";
-
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Exibir os resultados
-        $row = $result->fetch_assoc();
-        $usuario_id = $row['usuario_id'];
-        $nome_usuario = $row['nome'];
-        $total_gasto = $row['total_gasto'];
-
-        // Exibir informações na página HTML
-        echo '
-        <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
-            <div class="container">
-                <a href="#" class="navbar-brand">
-                    <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                </a>  
-            </div>
-        </nav>
-        ';
-        echo '<div class=" mt-3 text-center " style="height: 20rem;">';
-        echo '<img class="card-img-top mx-auto " style="width: 9rem;" src="../../img/icons8-contabilidade-de-fundo-96.png" alt="Imagem de capa do card">';
-        echo '<div class="card-body text-center  mt-2">';
-        echo '<h3 class="card-title">Relatorio cliente</h3>';
-        echo "<p class='card-title'>O cliente $nome_usuario (Registro: $usuario_id)<br> É o que mais comprou, gastando um total de R$ $total_gasto <br> no período de $data_inicial a $data_final.</p>";
-        echo '</div>';
-        echo '<a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>';
-
-        // Botão para gerar o PDF
-        echo '<form method="post">';
-        echo '<input type="hidden" name="data_inicial" value="' . $data_inicial . '">';
-        echo '<input type="hidden" name="data_final" value="' . $data_final . '">';
-        echo '<button type="submit" class="btn btn-primary mt-3" name="gerar_pdf">Gerar PDF</button>';
-        echo '</form>';
-    } else {
-        // Exibir mensagem se não houver resultados
-        echo '
-            <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
-                <div class="container">
-                    <a href="#" class="navbar-brand">
-                        <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                    </a>
-                    
-                </div>
-            </nav>
-        ';
-        echo '<div class="text-center container">';
-        echo '<div class="alert alert-danger text-center mt-5" role="alert">';
-        echo '<h3>';
-        echo "Nenhum resultado encontrado para o período de $data_inicial a $data_final.";
-        echo '</h3>';
-        echo '</div>';
-        echo '<a class="btn btn-warning mt-3" href="./relatorio.php">Voltar</a>';
-        echo '</div>';
-    }
-
-    // Fechar a conexão
-    $conn->close();
+    $pdf->Output();
 }
 ?>
-
-    <!-- Seu HTML aqui -->
-
-</body>
-
-</html>
