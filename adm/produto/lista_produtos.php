@@ -46,7 +46,7 @@
                         </p>
                     </li>
 
-                    
+
                     <!--Perfil-->
                     <li class="nav-item mr-5">
 
@@ -71,11 +71,11 @@
     </nav>
 
 
-    <h3 class="text-center m-3">Produtos </h3>
-    <section class="container ">
 
-        <a class="btn btn-success mt-2" href="formulario.php"><i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Produtos"></i><br> Adicionar Produto</a>
+    <section class="container ">
+        <h3 class=" mt-3">Produtos </h3>
+
+       
         <form class="mt-3 text-center" action="exibir_produtos_por_tipo.php" method="GET">
             <label for="tipo">Filtrar:</label>
             <select name="tipo" id="tipo">
@@ -89,6 +89,8 @@
             </select>
             <input class="btn btn-warning ml-3" type="submit" value="Visualizar">
         </form>
+        <a class="btn btn-success mt-3" href="formulario.php"><i class="bi-box" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Produtos"></i><br> Adicionar Produto</a>
 
         <table class="table table-striped table-bordered mt-5">
             <tr class="thead-dark text-center">

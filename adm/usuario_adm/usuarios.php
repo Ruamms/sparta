@@ -80,7 +80,7 @@ $result = $conn->query($query);
 
 
     <section class="container">
-        <h3 class=" text-center m-3">Usuarios Cadastrados</h3>
+        <h3 class=" m-3">Usuarios Cadastrados</h3>
         <div class="d-flex">
             <div class="m-2">
                 <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_cliente.php"><i
