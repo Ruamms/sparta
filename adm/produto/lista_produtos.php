@@ -71,10 +71,11 @@
     </nav>
 
 
-    <h3 class="text-center mt-5">Produtos </h3>
+    <h3 class="text-center m-3">Produtos </h3>
     <section class="container ">
 
-        <a class="btn btn-success mt-3" href="formulario.php">+ Produtos</a>
+        <a class="btn btn-success mt-2" href="formulario.php"><i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Produtos"></i><br> Adicionar Produto</a>
         <form class="mt-3 text-center" action="exibir_produtos_por_tipo.php" method="GET">
             <label for="tipo">Filtrar:</label>
             <select name="tipo" id="tipo">

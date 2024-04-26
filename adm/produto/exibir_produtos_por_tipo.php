@@ -17,13 +17,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <!--  ícones do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../public/style.css">
 
     <title>Produto Selecionado</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
+    <!-- menu-->
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -34,19 +37,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-
-                        <h4><a class="nav-link text-warning" href="lista_produtos.php">Produtos</a></h4>
-                    </li>
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../usuario_adm/usuarios.php">Usuarios</a></h4>
-                    </li>
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../relatorio/relatorio.php">Relatorios</a></h4>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../usuario_adm/usuarios.php">
+                                <i class="bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Usuarios"></i><br>
+                                Usuarios</a>
+                        </p>
                     </li>
 
-                    <li class="nav-item">
-                        <h4><a class="nav-link text-warning" href="../usuario/login.php">Sair</a></h4>
+
+                    <!--Perfil-->
+                    <li class="nav-item mr-5">
+
+                        <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="relatorio"></i><br>
+                                Relatorio</a></p>
+
+                    </li>
+
+                    <!-- sair-->
+                    <li class="nav-item mr-5">
+                        <p class="text-center"><a class="nav-link text-warning" href="../usuario_adm/login_adm.php">
+                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Sair"></i><br>
+                                Sair</a></p>
                     </li>
                 </ul>
             </div>
@@ -80,7 +97,7 @@ if (isset($_GET['tipo'])) {
     $resultado = $conexao->query($sql);
 
     if ($resultado->num_rows > 0) {
-        echo "<h2 class='text-center mt-5'>Produtos do Tipo: $tipo</h2>";
+        echo "<h3 class='text-center mt-3'>Produtos do Tipo: $tipo</h3>";
         while ($row = $resultado->fetch_assoc()) {
             $produto_id = $row["produto_id"];
             $nome = $row["nome"];

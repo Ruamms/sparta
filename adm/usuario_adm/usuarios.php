@@ -49,15 +49,16 @@ $result = $conn->query($query);
                             <a class="nav-link text-warning" href="../produto/lista_produtos.php">
                                 <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
                                     title="Produtos"></i><br>
-                                Produtos</a></p>
+                                Produtos</a>
+                        </p>
                     </li>
                     <!--Perfil-->
                     <li class="nav-item mr-5">
 
                         <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
 
-                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="relatorio"></i><br>
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="relatorio"></i><br>
                                 Relatorio</a></p>
 
                     </li>
@@ -79,20 +80,20 @@ $result = $conn->query($query);
 
 
     <section class="container">
-        <h2 class=" text-center mt-3">Usuarios Cadastrados</h2>
+        <h3 class=" text-center m-3">Usuarios Cadastrados</h3>
         <div class="d-flex">
             <div class="m-2">
                 <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_cliente.php"><i
                             class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Cliente"></i><br>
-                        Cliente</a></p>
+                        Adicionar Cliente</a></p>
             </div>
             <div class="m-2">
 
                 <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_funcionario.php"><i
                             class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Funcionario"></i><br>
-                        Funcionario</a></p>
+                        Adicionar Funcionario</a></p>
             </div>
         </div>
         <table class="table mt-3 m-1 table-striped table-hover table-bordered text-center ">
@@ -100,7 +101,7 @@ $result = $conn->query($query);
                 <th>ID</th>
                 <th>Nome</th>
                 <th>E-mail</th>
-               
+
                 <th>Perfil</th>
 
                 <th>Ações</th>
@@ -111,14 +112,14 @@ $result = $conn->query($query);
                         <?php echo $row['usuario_id']; ?>
                     </td>
                     <td class="align-middle">
-                    <?php echo ucfirst($row['nome']); ?>
+                        <?php echo ucfirst($row['nome']); ?>
                     </td>
                     <td class="align-middle">
                         <?php echo $row['email']; ?>
                     </td>
-                    
+
                     <td class="align-middle">
-                    <?php echo ucfirst($row['perfil']); ?>
+                        <?php echo ucfirst($row['perfil']); ?>
                     </td>
 
 

@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <!--  ícones do Bootstrap -->
+    <!--  ícones do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/style.css">
     <title>Relatorio</title>
@@ -24,8 +24,8 @@
 
 <body class="">
     <!-- menu-->
-       <!-- menu-->
-       <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
+    <!-- menu-->
+    <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
@@ -54,7 +54,7 @@
                         </p>
                     </li>
                     <!--Perfil-->
-                
+
 
                     <!-- sair-->
                     <li class="nav-item mr-5">
@@ -68,13 +68,14 @@
         </div>
     </nav>
 
-    <h2 class="m-3 text-center">Relatorios</h2>
 
-    <section>
+
+    <section class=" container text-center aling-center">
+        <h2 class="m-3 ">Relatorios</h2>
         <div class="d-flex container aling-center">
 
             <div class="m-5 text-center ">
-                <h3>Relatorio mensal de ganhos</h3>
+                <h3>Relatorio de ganhos</h3>
                 <form action="relatorio_valor.php" method="post">
                     <label class="font-weight-bold  m-3" for="dataInicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="dataInicial" required><br>
@@ -83,12 +84,12 @@
                     <input class="w-75" type="date" name="dataFinal" required><br>
 
                     <button class="m-3 btn btn-warning" type="submit" name="gerarPdf">Gerar PDF</button>
-                    
+
                 </form>
 
             </div>
             <div class="m-5 text-center ">
-                <h3>Cliente que mais comprou</h3>
+                <h3>Ranking de clientes</h3>
                 <form action="relatorio_cliente.php" method="post">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" id="data_inicial" name="data_inicial" required><br>
@@ -99,16 +100,14 @@
                 </form>
             </div>
             <div class="m-5 text-center ">
-                <h3>Produto</h3>
+                <h3>Ranking de produto</h3>
                 <form action="relatorio_Produto.php" method="post">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="data_inicial" required><br>
-                    <label class="font-weight-bold  m-3"for="data_final">Data Final:</label><br>
-                   <input class="w-75" type="date"name="data_final" required><br>
-                   <button class="m-3 btn btn-warning" type="submit" name="gerarPDF">Gerar PDF</button>
-                    <button class=" m-3 btn btn-secondary" type="submit" name="visualizarTela">Gerar Relaptorio </button>
-                   
-                     </form>
+                    <label class="font-weight-bold  m-3" for="data_final">Data Final:</label><br>
+                    <input class="w-75" type="date" name="data_final" required><br>
+                    <button class="m-3 btn btn-warning" type="submit" name="gerarPDF">Gerar PDF</button>
+                </form>
             </div>
         </div>
     </section>
