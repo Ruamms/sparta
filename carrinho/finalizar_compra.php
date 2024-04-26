@@ -82,7 +82,7 @@
   </nav>
 
     <div class="container mt-5">
-        <h1 class="text-center">Finalize sua compra</h1>
+        <h1 class="text-center">Detalhes do pedido</h1>
         <div class="text-center">
 
 

@@ -70,8 +70,8 @@
 
 
 
-    <section class=" container text-center aling-center">
-        <h2 class="m-3 ">Relatorios</h2>
+    <section class=" container  ">
+        
         <div class="d-flex container aling-center">
 
             <div class="m-5 text-center ">

@@ -130,11 +130,11 @@ if (isset($_POST['deletar'])) {
     </nav>
 
 
-    <h3 class="text-center m-3">Editar produto</h3>
+   
 
     <section class="container">
-
-        <form class="" action="atualizar_produto.php" method="POST" enctype="multipart/form-data">
+ <h3 class="mt-3">Editar Produto</h3>
+        <form class="mt-3" action="atualizar_produto.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="produto_id" value="<?php echo $produto_id; ?>">
 
             <div class="form-row">
