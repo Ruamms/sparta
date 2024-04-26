@@ -16,6 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <!--  ícones do Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../public/style.css">
 
@@ -25,29 +27,30 @@
 <body class="">
 
     <!-- menu-->
-    <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
         <div class="container">
-           
-                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-         
+
+            <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
 
 
                     <li class="nav-item">
-                        <h3><a class="nav-link text-warning" href="../index.php">Inicio</a></h3>
+                        <p class="text-center"><a class="nav-link text-warning" href="../index.php"><i
+                                    class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Inicio"></i><br>Inicio</a>
+                        </p>
                     </li>
 
                 </ul>
             </div>
         </div>
     </nav>
-
 
     <h2 class="text-center m-3">Faça seu login</h2>
 
