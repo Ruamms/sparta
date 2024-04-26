@@ -79,12 +79,13 @@
             <div class="form-group">
                 <label class="font-weight-bold" for="tipo">Tipo:</label><br>
                 <select class="w-100" name="tipo" required>
-                    <option value="whey">whey</option>
-                    <option value="creatina">creatina</option>
-                    <option value="pretreino">pré treino</option>
+                    <option value="whey">Whey</option>
+                    <option value="creatina">Creatina</option>
+                    <option value="pretreino">Pré treino</option>
                     <option value="glutamina">Glutamina</option>
                     <option value="bcaa">Bcaa</option>
-                    <option value="Kit">kit</option>
+                    <option value="Kit">Kit</option>
+                    <option value="vitamina">Vitamina</option>
                 </select>
             </div>
 

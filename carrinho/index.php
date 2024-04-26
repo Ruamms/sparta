@@ -105,7 +105,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <ul class="navbar-nav ml-auto">
           <!-- relatorio de compra-->
           <li class="nav-item mr-5">
-            <p class="text-center"><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i
+            <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
                   class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                 Inicio</a>
             </p>
@@ -119,7 +119,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
           <!--Perfil-->
           <li class="nav-item mr-5">
 
-            <p class="text-center"> <a class="nav-link text-warning" href="../../usuario/perfil.php">
+            <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
                 <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
               Perfil</a></p>
 
@@ -157,13 +157,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             echo '<div class="card-body">';
                             echo '<h4 class="card-title">' . $row['nome'] . '</h4>';
                             echo '<p class="font-weight-light">' . $row['descricao'] . '</p>';
-                            echo '<p class="font-weight-light"> Estoque: ' . $row['estoque'] . '</p>';
-                            echo '<p class="font-weight-bold">Preço: R$ ' . number_format($row['preco'], 2) . '</p>';
+                            // Alteração na exibição do estoque para adicionar uma classe se o estoque for zero
+                            if ($row['estoque'] == 0) {
+                              echo '<p class="font-weight-light text-danger"> Estoque: ' . $row['estoque'] . '</p>';
+                              echo '<a href="index.php?id=' . $row['produto_id'] . '" class="btn btn-warning disabled">Adicionar ao Carrinho</a>';
+                            } else {
+                              echo '<p class="font-weight-light"> Estoque: ' . $row['estoque'] . '</p>';
+                              echo '<a href="index.php?id=' . $row['produto_id'] . '" class="btn btn-warning">Adicionar ao Carrinho</a>';
+                            }
 
-
-                            echo '<a href="index.php?id=' . $row['produto_id'] . '" class="btn btn-warning">Adicionar ao Carrinho
+                            echo '<p class="font-weight-bold">Preço: R$ ' . number_format($row['preco'], 2) . '</p>';                         
                                                     
-                                                    </a>';
+                                                    
                             echo '</div>';
                             echo '</div>';
                             echo '</div>';
