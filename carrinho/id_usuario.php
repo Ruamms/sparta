@@ -41,7 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             // Verificar se o perfil é "cliente"
             if ($perfil_usuario == "cliente") {
                 // Consulta SQL para obter as informações do cliente
-                $sql_cliente_info = "SELECT nome, email FROM cliente WHERE usuario_id = ?";
+                $sql_cliente_info = "SELECT nome, email, endereco, telefone, data_nasc, cep, numero, cidade, estado, complemento FROM cliente WHERE usuario_id = ?";
                 $stmt_cliente_info = $conn->prepare($sql_cliente_info);
 
                 if ($stmt_cliente_info) {
@@ -61,6 +61,14 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         $_SESSION['id_usuario'] = $id_usuario;
                         $_SESSION['nome_usuario'] = $row_cliente_info['nome'];
                         $_SESSION['email_usuario'] = $row_cliente_info['email'];
+                        $_SESSION['endereco_usuario'] = $row_cliente_info['endereco'];
+                        $_SESSION['telefone_usuario'] = $row_cliente_info['telefone'];
+                        $_SESSION['data_nasc_usuario'] = $row_cliente_info['data_nasc'];
+                        $_SESSION['cep_usuario'] = $row_cliente_info['cep'];
+                        $_SESSION['numero_usuario'] = $row_cliente_info['numero'];
+                        $_SESSION['cidade_usuario'] = $row_cliente_info['cidade'];
+                        $_SESSION['estado_usuario'] = $row_cliente_info['estado'];
+                        $_SESSION['complemento_usuario'] = $row_cliente_info['complemento'];
 
                         // Fechar a instrução e liberar recursos
                         $stmt_cliente_info->close();
@@ -90,4 +98,4 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('Location: login.php');
     exit; // Certifique-se de que o script pare de ser executado após a redireção
 }
-?>
+?> 
