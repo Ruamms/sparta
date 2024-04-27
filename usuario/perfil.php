@@ -110,17 +110,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $nome; ?>">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="<?php echo $nome; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="numero_cartao">Número do Cartão de Crédito:</label>
-                    <input type="text" class="form-control " id="numero_cartao" name="numero_cartao" value="<?php echo $numero_cartao; ?>" pattern="\d{4}.\d{4}.\d{4}.\d{4}" title="Digite o número do cartão no formato 0000.0000.0000.0000">
+                    <input type="text" class="form-control " id="numero_cartao" name="numero_cartao" placeholder="<?php echo $numero_cartao; ?>" pattern="\d{4}.\d{4}.\d{4}.\d{4}" title="Digite o número do cartão no formato 0000.0000.0000.0000">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="telefone">Telefone:</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" value="<?php echo $telefone; ?>">
+                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="<?php echo $telefone; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="data_nasc">Data de Nascimento:</label>
@@ -130,7 +130,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo $email; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="confirmar_email">Confirmar Email:</label>
@@ -150,31 +150,31 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cep">CEP:</label>
-                    <input type="text" class="form-control" id="cep" name="cep" value="<?php echo $cep; ?>">
+                    <input type="text" class="form-control" id="cep" name="cep" placeholder="<?php echo $cep; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $endereco; ?>" readonly>
+                    <input type="text" class="form-control" id="endereco" name="endereco" placeholder="<?php echo $endereco; ?>" readonly>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="numero">Número:</label>
-                    <input type="text" class="form-control" id="numero" name="numero" value="<?php echo $numero; ?>">
+                    <input type="text" class="form-control" id="numero" name="numero" placeholder="<?php echo $numero; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade" value="<?php echo $cidade; ?>" readonly>
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="<?php echo $cidade; ?>" readonly>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="estado">Estado:</label>
-                    <input type="text" class="form-control" id="estado" name="estado" value="<?php echo $estado; ?>" readonly>
+                    <input type="text" class="form-control" id="estado" name="estado" placeholder="<?php echo $estado; ?>" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="complemento">Complemento:</label>
-                    <input type="text" class="form-control" id="complemento" name="complemento" value="<?php echo $complemento; ?>">
+                    <input type="text" class="form-control" id="complemento" name="complemento" placeholder="<?php echo $complemento; ?>">
                 </div>
             </div>
             <div class="text-center m-3">
@@ -188,7 +188,7 @@
             $('#numero_cartao').mask('0000.0000.0000.0000', {
                 reverse: true
             });
-            $('#telefone').mask('00-00000-0000', {
+            $('#telefone').mask('(00)00000-0000', {
                 reverse: true
             });
             $('#cep').mask('00000-000');
