@@ -152,6 +152,7 @@ session_start();
 </td>
 </tr>';
             }
+            $cep_cliente = isset($_SESSION['cliente']['cep']) ? $_SESSION['cliente']['cep'] : '';
 
             echo '</tbody></table>';
             echo '<h5 class="mt-3 m-2">Quantidade total de itens no carrinho: ' . $totalItems . '</h5>';
@@ -167,7 +168,7 @@ session_start();
                 }
                 echo '<form method="post">';
                 echo '<input type="hidden" name="id" value="1">'; // Adiciona um campo hidden com um valor arbitrário
-                echo '<input type="text" name="cep" placeholder="CEP">';
+                echo '<input type="text" name="cep" placeholder="CEP" value="$cep_client">';
                 echo '<button class="btn btn-dark m-1" type="submit" name="action" value="calc_frete">Calcular Frete</button>';
                 echo '</form>';
             }
