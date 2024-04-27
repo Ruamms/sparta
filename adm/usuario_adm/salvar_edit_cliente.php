@@ -66,6 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefone = mysqli_real_escape_string($conn, $_POST['telefone']);
     $data_nasc = mysqli_real_escape_string($conn, $_POST['data_nasc']);
     $numero_cartao = mysqli_real_escape_string($conn, $_POST['numero_cartao']);
+    $cep = mysqli_real_escape_string($conn,$_POST['cep']);
+    $numero = mysqli_real_escape_string($conn,$_POST['numero']);
+    $cidade = mysqli_real_escape_string($conn,$_POST['cidade']);
+    $estado = mysqli_real_escape_string($conn,$_POST['estado']);
+    $complemento = mysqli_real_escape_string($conn,$_POST['complemento']);
+
 
     // Verifica se o nome, email, senha e CPF foram fornecidos
     if (!empty($nome) && !empty($email) && !empty($senha) && !empty($cpf)) {
@@ -136,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // Atualiza os dados do cliente na tabela cliente
-            $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco',telefone='$telefone',data_nasc='$data_nasc',numero_cartao='$numero_cartao' WHERE usuario_id=$usuario_id";
+            $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco',telefone='$telefone',data_nasc='$data_nasc',numero_cartao='$numero_cartao', cep = '$cep', $numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento' WHERE usuario_id=$usuario_id";
             if ($conn->query($query_update_cliente) === TRUE) {
                 // Atualiza os dados do usuário na tabela usuario
                 $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";

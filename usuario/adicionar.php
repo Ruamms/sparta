@@ -128,7 +128,7 @@
     $(document).ready(function () {
         // Máscaras para os campos
         $('#cpf').mask('000.000.000-00', { reverse: true });
-        $('#telefone').mask('00-00000-0000', { reverse: true });
+        $('#telefone').mask('(00)00000-0000', { reverse: true });
         $('#cep').mask('00000-000');
         
         // Evento blur para preencher o endereço usando a API ViaCEP
