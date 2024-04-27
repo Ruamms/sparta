@@ -105,6 +105,9 @@ session_start();
                     // Diminuir a quantidade do item no carrinho, mas garantir que não seja menor que 1
                     if ($_SESSION['carrinho'][$id]['quantidade'] > 1) {
                         $_SESSION['carrinho'][$id]['quantidade']--;
+                    } else {
+                        // Remover o produto do carrinho
+                        unset($_SESSION['carrinho'][$id]);
                     }
                     break;
                 case 'remove':
