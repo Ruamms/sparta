@@ -71,7 +71,7 @@
 
     <section class="container mt-3">
         <h2 class="m-2 ">Cliente</h2>
-        <form action="salvar.php" class="container" method="post">
+        <form action="../../usuario/salvar.php" class="container" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>

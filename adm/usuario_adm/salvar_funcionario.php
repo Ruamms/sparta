@@ -82,6 +82,11 @@ $data_contratacao = $_POST['data_contratacao'];
 $email = $_POST['email'];
 $endereco = $_POST['endereco'];
 $senha = $_POST['senha'];
+$cep = $_POST['cep'];
+$numero = $_POST['numero'];
+$cidade = $_POST['cidade'];
+$estado = $_POST['estado'];
+$complemento = $_POST['complemento'];
 
 // Verificar se o e-mail já existe na tabela de usuários
 $verificarEmail = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
@@ -119,10 +124,10 @@ if ($resultEmail->num_rows > 0) {
             $usuario_id = $stmtUsuario->insert_id;
 
             // Inserir dados na tabela "funcionario" usando declarações preparadas
-            $sqlFuncionario = "INSERT INTO funcionario (usuario_id, nome, email, matricula, cpf, cargo, salario, endereco, data_contratacao) 
+            $sqlFuncionario = "INSERT INTO funcionario (usuario_id, nome, email, matricula, cpf, cargo, salario, endereco, data_contratacao, cep, numero, cidade, estado, complemento) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmtFuncionario = $conn->prepare($sqlFuncionario);
-            $stmtFuncionario->bind_param("isssdssss", $usuario_id, $nome, $email, $matricula, $cpf, $cargo, $salario, $endereco, $data_contratacao);
+            $stmtFuncionario->bind_param("isssdssss", $usuario_id, $nome, $email, $matricula, $cpf, $cargo, $salario, $endereco, $data_contratacao, $cep, $numero, $cidade, $estado, $complemento);
 
             if ($stmtFuncionario->execute()) {
                 header('Location: usuarios.php');

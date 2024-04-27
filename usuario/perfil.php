@@ -107,7 +107,7 @@
 
 
     <section class="container mt-3">
-        <form action="editar.php" class="container" method="post">
+        <form action="../adm/usuario_adm/salvar_edit_funcionario.php" class="container" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>
