@@ -75,7 +75,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- inicio-->
                     <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                        <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                                 Inicio</a>
                         </p>
                     </li>
