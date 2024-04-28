@@ -31,60 +31,55 @@ session_start();
 
 </head>
 
-<body>
-    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
-        <div class="container">
+<div class="bg-warning text-center py-1">
+    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  </div>
 
-            <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <!-- inicio-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house "
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio"></i></a>
-                        </h4>
-                    </li>
-                    <!-- relatorio de compra-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
-                                    class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Minhas Compras"></i></a>
-                        </h4>
-                    </li>
-                    <!-- carrinho de compra-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../carrinho/carrinho.php">
-                                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Carrinho de Compras"></i>
-                            </a></h4>
-                    </li>
-                    <!--Perfil-->
-                    <li class="nav-item mr-5">
-                        <a class="nav-link text-warning" href="../usuario/perfil.php">
-                            <h4>
-                                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Configuração"></i>
-                            </h4>
-                        </a>
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+    <div class="container">
 
-                    </li>
-                    <!-- sair-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../usuario/login.php">
-                                <i class="bi  bi-box-ar-right " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Sair"></i>
-                            </a></h4>
-                    </li>
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <!-- relatorio de compra-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
+                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                Inicio</a>
+            </p>
+          </li>
+          <!-- carrinho de compra-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Carrinho de Compras"></i><br>
+                Carrinho</a></p>
+          </li>
+          <!--Perfil-->
+          <li class="nav-item mr-5">
 
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
+                <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Configuração"></i><br>
+                Perfil</a></p>
+
+          </li>
+          <!-- sair-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../index.php">
+                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                Sair</a></p>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
     <div class="container mt-3">
         <h2>Detalhes do pedido</h2>
         <div class="container m-5">
@@ -184,7 +179,8 @@ session_start();
         </div>
 
         <!-- Formulário de compra -->
-        <form class="container m-3 " onsubmit="return validarFormulario();" action="processar_pedido.php" method="POST">
+        <form class="container m-3" id="formulario-pedido" onsubmit="return validarFormulario();" action="processar_pedido.php" method="POST">
+
 
             <div class="d-flex  col-md-14">
 
@@ -308,23 +304,33 @@ session_start();
             </div>
         </form>
         <script>
-            // Função para verificar se o campo do número do cartão está vazio
-            function verificarCartao() {
-                var numeroCartao = document.getElementById("numero_cartao").value;
-                if (numeroCartao === "") {
-                    // Se o campo estiver vazio, exiba uma mensagem temporária e adicione um link para adicionar o cartão
-                    alert("Por favor, adicione o número do cartão de crédito para prosseguir com a compra.");
-                    // Você pode redirecionar o usuário para uma página onde ele pode adicionar o cartão
-                    // window.location.href = "adicionar_cartao.php";
-                    return false; // Impede o envio do formulário
-                }
-                return true; // Permite o envio do formulário se o campo do número do cartão não estiver vazio
-            }
+            function validarFormulario() {
+        // Verificar se todos os campos estão preenchidos
+        var nome = document.getElementsByName('nome_cliente')[0].value;
+        var endereco = document.getElementsByName('endereco_cliente')[0].value;
+        var cep = document.getElementsByName('cep_cliente')[0].value;
+        var cidade = document.getElementsByName('cidade_cliente')[0].value;
+        var estado = document.getElementsByName('estado_cliente')[0].value;
+        var cvc = document.getElementsByName('cvc')[0].value;
 
-            // Vincule a função verificarCartao() ao evento onsubmit do formulário
-            document.getElementById("seu_formulario_id").onsubmit = function () {
-                return verificarCartao();
-            };
+        if (nome === "" || endereco === "" || cep === "" || cidade === "" || estado === "" || cvc === "") {
+    alert("Por favor, Atualize seus dados.");
+    // Redirecionar para outra página
+    window.location.href = "../usuario/perfil.php";
+    return false; // Impede o envio do formulário
+}
+
+
+        // Verificar se o método de pagamento foi selecionado
+        var metodoPagamento = document.getElementById('metodo_pagamento').value;
+        if (metodoPagamento === "selecione") {
+            alert("Por favor, selecione um método de pagamento.");
+            return false; // Impede o envio do formulário
+        }
+
+        // Se todos os campos estiverem preenchidos e o método de pagamento selecionado, permitir o envio do formulário
+        return true;
+    }
 
             function mostrarParcelas() {
                 var metodoPagamento = document.getElementById("metodo_pagamento").value;

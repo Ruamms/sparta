@@ -28,57 +28,55 @@
 
 <body>
 
-    <div class="bg-warning text-center py-1">
-        <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+<div class="bg-warning text-center py-1">
+    <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+  </div>
+
+  <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+    <div class="container">
+
+      <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <!-- relatorio de compra-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
+                  class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                Inicio</a>
+            </p>
+          </li>
+          <!-- carrinho de compra-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Carrinho de Compras"></i><br>
+                Carrinho</a></p>
+          </li>
+          <!--Perfil-->
+          <li class="nav-item mr-5">
+
+            <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
+                <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Configuração"></i><br>
+                Perfil</a></p>
+
+          </li>
+          <!-- sair-->
+          <li class="nav-item mr-5">
+            <p class="text-center"><a class="nav-link text-warning" href="../index.php">
+                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                Sair</a></p>
+          </li>
+
+        </ul>
+      </div>
     </div>
-    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
-        <div class="container">
-
-            <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <!-- inicio-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house "
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio"></i></a>
-                        </h4>
-                    </li>
-                    <!-- relatorio de compra-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i
-                                    class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Minhas Compras"></i></a>
-                        </h4>
-                    </li>
-
-                    <!--Perfil-->
-                    <li class="nav-item mr-5">
-                        <a class="nav-link text-warning" href="../usuario/perfil.php">
-                            <h4>
-                                <i class="bi bi-person-gear " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Configuração"></i>
-
-                            </h4>
-                        </a>
-
-                    </li>
-                    <!-- sair-->
-                    <li class="nav-item mr-5">
-                        <h4><a class="nav-link text-warning" href="../usuario/login.php">
-                                <i class="bi  bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Sair"></i>
-                            </a></h4>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
+  </nav>
 
     <div class="container mt-3">
         <h3 class="mt-3">Carrinho de Compras</h3>
