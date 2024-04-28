@@ -264,9 +264,9 @@
         <div class="mt-3">
           <h4 class="h6">Franquias</h4>
           <ul class="list-unstyled  mt-3">
-            <li><a class="text-warning" href="#">São Paulo</a></li>
-            <li><a class="text-warning" href="#">Minas Gerais</a></li>
-            <li><a class="text-warning" href="#">Braslia</a></li>
+            <li><a class="text-warning" href="./filiais.php">São Paulo</a></li>
+            <li><a class="text-warning" href="./filiais.php">Minas Gerais</a></li>
+            <li><a class="text-warning" href="./filiais.php">Braslia</a></li>
           </ul>
         </div>
 

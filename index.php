@@ -42,9 +42,9 @@
         <ul class="navbar-nav ml-auto">
           <!-- relatorio de compra-->
           <li class="nav-item mr-5">
-            <p class="text-center"><a class="nav-link text-warning"
-                href="usuario/login.php"><i class="bi bi-box-arrow-in-left "
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Login"></i><br>
+            <p class="text-center"><a class="nav-link text-warning" href="usuario/login.php"><i
+                  class="bi bi-box-arrow-in-left " data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Login"></i><br>
                 Login</a>
             </p>
           </li>
@@ -55,22 +55,22 @@
     </div>
   </nav>
   <div class="container text-center mt-3">
-  <div class="row align-items-start">
-    <div class="col">
-    <img class="imagem-login" src="img/suplemento-alimentar-o-que-e-par.png" alt="sparta" />
-    </div>
-    <div class="col">
-    <h2 class="m-5 ">Seja Bem vindo</h2>
-    </div>
-    <div class="col">
-    <img class="imagem-login" src="img/suplementos.png" alt="sparta" />
+    <div class="row align-items-start">
+      <div class="col">
+        <img class="imagem-login" src="img/suplemento-alimentar-o-que-e-par.png" alt="sparta" />
+      </div>
+      <div class="col">
+        <h2 class="m-5 ">Seja Bem vindo</h2>
+      </div>
+      <div class="col">
+        <img class="imagem-login" src="img/suplementos.png" alt="sparta" />
+      </div>
     </div>
   </div>
-</div>
 
   <div class="dropdown-divider"></div>
 
-  <!-- produtos vindo do banco-->
+
   <!-- Início do carrossel -->
   <div id="carouselProdutos" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
@@ -106,7 +106,7 @@
           echo '<div class="card-body">';
           echo '<h4>' . $row["nome"] . '</h4>';
           echo '<p>' . $row["descricao"] . '</p>';
-        
+
           echo '<a class="btn btn-warning mt-2" href="./usuario/login.php">Ver Mais</a>';
           echo '</div>';
           echo '</div>';
@@ -137,8 +137,8 @@
   <!-- Fim do carrossel -->
 
 
- <!-- Kits -->
- <div class="dropdown-divider mt-3"></div>
+  <!-- Kits -->
+  <div class="dropdown-divider mt-3"></div>
   <h2 class="text-center m-5"> Kit Ideal Para Você</h2>
   <div class="dropdown-divider"></div>
   <section class=" container mt-3 d-sm-flex ">
@@ -240,9 +240,9 @@
         <div class="mt-3">
           <h4 class="h6">Franquias</h4>
           <ul class="list-unstyled  mt-3">
-            <li><a class="text-warning" href="#">São Paulo</a></li>
-            <li><a class="text-warning" href="#">Minas Gerais</a></li>
-            <li><a class="text-warning" href="#">Braslia</a></li>
+            <li><a class="text-warning" href="./filiais.php">São Paulo</a></li>
+            <li><a class="text-warning" href="./filiais.php">Minas Gerais</a></li>
+            <li><a class="text-warning" href="./filiais.php">Braslia</a></li>
           </ul>
         </div>
 
