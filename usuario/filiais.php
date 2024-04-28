@@ -75,7 +75,7 @@
         </div>
     </nav>
     <div class="mt-3 container">
-        <h1 class="text-center m-3">Empresa Sparta- Nossas Sedes</h1>
+        <h1 class="text-center m-3">Sparta- Nossas Sedes</h1>
 
     </div>
     <div class="dropdown-divider m-3"></div>
