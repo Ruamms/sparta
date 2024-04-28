@@ -81,7 +81,7 @@
     </nav>
 
     <div class="container mt-3">
-        <h1 class="mt-3">Carrinho de Compras</h1>
+        <h3 class="mt-3">Carrinho de Compras</h3>
         <?php
         include 'id_usuario.php';
         // Função para remover um produto do carrinho
@@ -97,6 +97,7 @@
         // Se o formulário for enviado e o botão de remover for pressionado
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['id'])) {
+                $id = $_POST['id']; // Defina $id usando $_POST['id']
                  switch ($_POST['action']) {
                 case 'add':
                     // Verificar a quantidade disponível em estoque antes de adicionar ao carrinho
@@ -175,14 +176,14 @@
             echo '</tbody></table>';
             echo '<h5 class="mt-3 m-2">Quantidade total de itens no carrinho: ' . $totalItems . '</h5>';
             if ($total >= 149.9) {
-                echo '<h4 class="mt-4 m-2">Valor total dos produtos no carrinho: R$ ' . number_format($total, 2) . ' (Frete grátis)</h4>';
+                echo '<h5 class="mt-4 m-2">Valor total dos produtos no carrinho: R$ ' . number_format($total, 2) . ' (Frete grátis)</h5>';
             } else {
-                echo '<h4 class="mt-4 m-2">Valor total dos produtos no carrinho: R$ ' . number_format($total, 2) . '</h4>';
+                echo '<h5 class="mt-4 m-2">Valor total dos produtos no carrinho: R$ ' . number_format($total, 2) . '</h5>';
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'calc_frete') {
                     $frete = 25.00;
                     $total += $frete;
-                    echo '<h4 class="mt-4 m-2">Valor do frete: R$ ' . number_format($frete, 2) . '</h4>';
-                    echo '<h4 class="mt-4 m-2">Valor final do carrinho (incluindo frete): R$ ' . number_format($total, 2) . '</h4>';
+                    echo '<h5 class="mt-4 m-2">Valor do frete: R$ ' . number_format($frete, 2) . '</h5>';
+                    echo '<h5 class="mt-4 m-2">Valor final do carrinho (incluindo frete): R$ ' . number_format($total, 2) . '</h5>';
                 }
                 // Exibir formulário para calcular frete
                 echo '<form method="post">';
