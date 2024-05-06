@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13/03/2024 às 19:23
+-- Tempo de geração: 06/05/2024 às 18:17
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -36,18 +36,27 @@ CREATE TABLE `cliente` (
   `telefone` varchar(20) DEFAULT NULL,
   `data_nasc` date DEFAULT NULL,
   `cpf` varchar(14) DEFAULT NULL,
-  `numero_cartao` varchar(255) NOT NULL
+  `numero_cartao` varchar(255) NOT NULL,
+  `cep` varchar(20) DEFAULT NULL,
+  `numero` varchar(20) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `cliente`
 --
 
-INSERT INTO `cliente` (`cliente_id`, `usuario_id`, `nome`, `email`, `endereco`, `telefone`, `data_nasc`, `cpf`, `numero_cartao`) VALUES
-(6, 7, 'diogo vieira', 'diogo@hotmail.com', 'Rua amendoeiras', '21981736968', '2024-02-21', '143.451.287-22', '1111.2222.3333.4444'),
-(14, 18, 'shay', 'shay@hotmail.com', ' 7 de abril', '33165218', '2024-03-29', '143.451.287-27', '25546565'),
-(16, 20, 'pedro vieira', 'pedrovieira@hotmail.com', 'Rua vieras', '21981736968', '2024-02-21', '142.451.297-22', '1111.2222.3333.4444'),
-(17, 22, 'aline', 'aline@hotmail.com', 'campo grande', '34096806', '1992-08-11', '142.452.297-27', '7896.3698.1236.7896');
+INSERT INTO `cliente` (`cliente_id`, `usuario_id`, `nome`, `email`, `endereco`, `telefone`, `data_nasc`, `cpf`, `numero_cartao`, `cep`, `numero`, `cidade`, `estado`, `complemento`) VALUES
+(6, 7, 'Diogo lopes', 'diogolopes@hotmail.com', 'Rua da luz', '21-98173-6999', '2000-02-21', '143.451.287-29', '1111.2222.3333.5555', NULL, NULL, NULL, NULL, NULL),
+(14, 18, 'shay', 'shay@hotmail.com', ' 7 de abril', '33165218', '2024-03-29', '143.451.287-27', '25546565', '23585270', NULL, NULL, NULL, NULL),
+(16, 20, 'pedro vieira', 'pedrovieira@hotmail.com', 'Rua vieras', '21981736968', '2024-02-21', '142.451.297-22', '1111.2222.3333.4444', '35684752', '287', 'Rio de janeiro', 'Rj', 'Qd 26 lt 60'),
+(17, 22, 'aline', 'aline@hotmail.com', 'campo grande', '34096806', '1992-08-11', '142.452.297-27', '7896.3698.1236.7896', NULL, NULL, NULL, NULL, NULL),
+(21, 25, 'vitor', 'vitor@hotmail.com', 'Rua Pedra do Sino', '21981736968', '2023-12-13', '143.451.287-27', '1111.2222.3333.5555', NULL, NULL, NULL, NULL, NULL),
+(22, 26, 'leticia', 'leticia@hotmail.com', 'Rua Pedra do Sino', '21981736968', '2024-04-03', '142.451.297-50', '1111.2222.3333.4444', NULL, NULL, NULL, NULL, NULL),
+(23, 27, 'miguel', 'miguel@hotmail.com', 'Rua Pedra do Sino', '21981736968', '2024-04-05', '183.451.287-27', '', NULL, NULL, NULL, NULL, NULL),
+(24, 29, 'André', 'andre@hormail.com', 'Paciencia', '2-13409-6806', '1992-08-11', '159.123.654-78', '', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,7 +129,18 @@ INSERT INTO `detalhes_pedido` (`id`, `pedido_id`, `produto_id`, `quantidade`) VA
 (85, 77, 40, 4),
 (86, 78, 41, 3),
 (87, 78, 40, 4),
-(88, 79, 40, 13);
+(88, 79, 40, 13),
+(89, 80, 41, 1),
+(90, 81, 41, 1),
+(91, 82, 44, 1),
+(92, 83, 44, 1),
+(93, 83, 41, 1),
+(94, 84, 41, 2),
+(95, 85, 44, 1),
+(96, 86, 41, 1),
+(97, 87, 40, 1),
+(98, 88, 41, 1),
+(99, 88, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -138,15 +158,22 @@ CREATE TABLE `funcionario` (
   `salario` decimal(10,2) DEFAULT NULL,
   `matricula` varchar(20) DEFAULT NULL,
   `data_contratacao` date DEFAULT NULL,
-  `endereco` varchar(255) NOT NULL
+  `endereco` varchar(255) NOT NULL,
+  `cep` varchar(20) DEFAULT NULL,
+  `numero` varchar(20) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `funcionario`
 --
 
-INSERT INTO `funcionario` (`funcionario_id`, `usuario_id`, `nome`, `cpf`, `email`, `cargo`, `salario`, `matricula`, `data_contratacao`, `endereco`) VALUES
-(10, 8, 'Átila Vieira', 142451, 'atilavieiralopes@hotmail.com', 'diretor', 3.00, '22222', '2024-02-02', 'Rua Pedra do Sino');
+INSERT INTO `funcionario` (`funcionario_id`, `usuario_id`, `nome`, `cpf`, `email`, `cargo`, `salario`, `matricula`, `data_contratacao`, `endereco`, `cep`, `numero`, `cidade`, `estado`, `complemento`) VALUES
+(10, 8, 'Átila Vieira', 142451, 'atilavieiralopes@hotmail.com', 'diretor', 3.00, '22222', '2024-02-02', 'Rua Pedra do Sino', NULL, NULL, NULL, NULL, NULL),
+(13, 23, 'Aline', 143, 'alinesouza@hotmail.com', 'assistente', 5.00, '11111', '2024-04-01', 'campo grande', NULL, NULL, NULL, NULL, NULL),
+(14, 28, 'Rhuan', 125, 'Rhuanfeuc@hotmail.com', 'assistente', 3.00, '68785', '2024-04-10', 'Inhoaiba', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +206,16 @@ INSERT INTO `pagamento` (`id`, `pedido_id`, `valor`, `data_pagamento`, `metodo_p
 (10, 76, 870.00, '2024-03-13', 'selecione', '7896.3698.1236.7', 1),
 (11, 77, 870.00, '2024-03-13', 'selecione', '7896.3698.1236.7', 1),
 (12, 78, 870.00, '2024-03-13', 'selecione', '7896.3698.1236.7', 1),
-(13, 79, 1950.00, '2024-03-13', 'credito', '7896.3698.1236.7', 4);
+(13, 79, 1950.00, '2024-03-13', 'credito', '7896.3698.1236.7', 4),
+(14, 80, 90.00, '2024-04-17', 'selecione', '25546565', 1),
+(15, 81, 90.00, '2024-04-25', 'credito', '1111.2222.3333.4', 4),
+(16, 82, 50.00, '2024-04-27', 'credito', '25546565', 5),
+(17, 83, 165.00, '2024-04-27', 'credito', '1111.2222.3333.4', 5),
+(18, 84, 180.00, '2024-04-27', 'credito', '***************4', 1),
+(19, 85, 75.00, '2024-04-27', 'debito', '1111.2222.3333.4', 1),
+(20, 86, 115.00, '2024-04-27', 'credito', '1111.2222.3333.4', 3),
+(21, 87, 150.00, '2024-04-27', 'credito', '1111.2222.3333.4', 4),
+(22, 88, 240.00, '2024-04-27', 'selecione', '', 1);
 
 -- --------------------------------------------------------
 
@@ -274,7 +310,16 @@ INSERT INTO `pedido` (`pedido_id`, `usuario_id`, `data_pedido`, `endereco_entreg
 (76, 22, '2024-03-13', 'campo grande', 870.00),
 (77, 22, '2024-03-13', 'campo grande', 870.00),
 (78, 22, '2024-03-13', 'campo grande', 870.00),
-(79, 22, '2024-03-13', 'campo grande', 1950.00);
+(79, 22, '2024-03-13', 'campo grande', 1950.00),
+(80, 18, '2024-04-17', ' 7 de abril', 90.00),
+(81, 20, '2024-04-25', 'Rua vieras', 90.00),
+(82, 18, '2024-04-27', ' 7 de abril', 50.00),
+(83, 20, '2024-04-27', 'Rua vieras', 165.00),
+(84, 20, '2024-04-27', 'Rua vieras', 180.00),
+(85, 20, '2024-04-27', 'Rua vieras', 75.00),
+(86, 20, '2024-04-27', 'Rua vieras', 115.00),
+(87, 20, '2024-04-27', 'Rua vieras', 150.00),
+(88, 27, '2024-04-27', 'Rua Pedra do Sino', 240.00);
 
 -- --------------------------------------------------------
 
@@ -298,16 +343,22 @@ CREATE TABLE `produtos` (
 
 INSERT INTO `produtos` (`produto_id`, `nome`, `descricao`, `preco`, `estoque`, `imagem`, `tipo`) VALUES
 (40, 'Horus', 'Acelerar', 150.00, 0, 'produto/uploads/pretreino2.png', 'pretreino'),
-(41, 'Whey universal', 'Hipertrofia', 90.00, 29, 'produto/uploads/whey1.png', 'whey'),
+(41, 'Whey universal', 'Hipertrofia', 90.00, 23, 'produto/uploads/whey1.png', 'whey'),
 (44, 'Bcaa 5:1:1', 'Sabor natural', 50.00, 0, 'produto/uploads/bcaa1.png', 'bcaa'),
 (45, 'Glutamina 100%', 'Suplemento alimentar', 80.00, 44, 'produto/uploads/glutamina1.png', 'glutamina'),
 (46, 'Creatina pura', 'Força e resitencia', 110.00, 47, 'produto/uploads/creatina2.png', 'creatina'),
 (49, 'Whey Full', 'Hipertrofia', 70.00, 45, 'produto/uploads/whey2.png', 'whey'),
 (50, 'Hipertofria', 'Combo definição', 210.00, 48, 'produto/uploads/ki1.jpg', 'Kit'),
 (51, 'Power treino', 'Melhore seu treino', 190.00, 47, 'produto/uploads/kit4.jpg', 'Kit'),
-(52, 'Ganho de massa', 'Ganhe massa muscular', 270.00, 0, 'produto/uploads/kit3.jpg', 'Kit'),
 (53, 'BcaaSupport', 'Vitamina', 75.00, 39, 'produto/uploads/bcaa2.png', 'bcaa'),
-(54, 'Glutamina Powder', 'Vitamina', 70.00, 0, 'produto/uploads/glutamina1.jpg', 'glutamina');
+(55, 'Whey Growth', '80% Proteina', 120.00, 50, 'produto/uploads/whey4.png', 'whey'),
+(56, 'Creatina Universal', 'Ganho de massa', 80.00, 50, 'produto/uploads/creatina1.png', 'creatina'),
+(57, 'Evorapw', 'Energia', 65.00, 20, 'produto/uploads/pretreino1.png', 'pretreino'),
+(58, 'Bope', 'Energia', 99.00, 38, 'produto/uploads/pretreino3.png', 'pretreino'),
+(59, 'Glutamina Max', 'Suplemento ', 80.00, 30, 'produto/uploads/0671_glutamina-max-titanium-2455.png', 'glutamina'),
+(60, 'Vitamina C', 'Energia', 35.00, 30, 'produto/uploads/small-vitamina-c-120caps-growth.png', 'vitamina'),
+(61, 'Vitamina B12', 'Energia', 50.00, 30, 'produto/uploads/vitamina-b12.png', 'vitamina'),
+(62, 'Vitamina D', 'Energia', 45.00, 30, 'produto/uploads/vitamina-d-2000-catarinense-nutr.png', 'vitamina');
 
 -- --------------------------------------------------------
 
@@ -320,19 +371,26 @@ CREATE TABLE `usuario` (
   `nome` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `senha` int(100) DEFAULT NULL,
-  `perfil` enum('cliente','funcionario') DEFAULT NULL
+  `perfil` enum('cliente','funcionario') DEFAULT NULL,
+  `bloqueado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`usuario_id`, `nome`, `email`, `senha`, `perfil`) VALUES
-(7, 'diogo vieira', 'diogo@hotmail.com', 123, 'cliente'),
-(8, 'Átila Vieira', 'atilavieiralopes@hotmail.com', 123, 'funcionario'),
-(18, 'shay', 'shay@hotmail.com', 123, 'cliente'),
-(20, 'pedro vieira', 'pedrovieira@hotmail.com', 123, 'cliente'),
-(22, 'aline', 'aline@hotmail.com', 123, 'cliente');
+INSERT INTO `usuario` (`usuario_id`, `nome`, `email`, `senha`, `perfil`, `bloqueado`) VALUES
+(7, 'Diogo lopes', 'diogolopes@hotmail.com', 123, 'cliente', 0),
+(8, 'Átila Vieira', 'atilavieiralopes@hotmail.com', 123, 'funcionario', 0),
+(18, 'shay', 'shay@hotmail.com', 123, 'cliente', 0),
+(20, 'pedro vieira', 'pedrovieira@hotmail.com', 123, 'cliente', 0),
+(22, 'aline', 'aline@hotmail.com', 321, 'cliente', 0),
+(23, 'Aline', 'alinesouza@hotmail.com', 123, 'funcionario', 0),
+(25, 'vitor', 'vitor@hotmail.com', 453, 'cliente', 0),
+(26, 'leticia', 'leticia@hotmail.com', 123, 'cliente', 0),
+(27, 'miguel', 'miguel@hotmail.com', 123, 'cliente', 0),
+(28, 'Rhuan', 'Rhuanfeuc@hotmail.com', 123, 'funcionario', 0),
+(29, 'André', 'andre@hormail.com', 123, 'cliente', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -393,43 +451,43 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `detalhes_pedido`
 --
 ALTER TABLE `detalhes_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `funcionario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `funcionario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `produto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `produto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restrições para tabelas despejadas

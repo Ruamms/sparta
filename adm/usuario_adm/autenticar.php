@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<!-- link bootstrap   -->
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,25 +17,35 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../public/style.css">
+  <link rel="stylesheet" href="../../public/style.css">
+
 </head>
+
 <body>
+
+
   <!-- menu-->
-  <nav class="navbar navbar-expand-md navbar-light bg-dark py-3 box-shadow">
+  <!-- menu-->
+  <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-      </a>
+
+      <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          
+
+
+         
+
         </ul>
       </div>
     </div>
+  </nav>
   </nav>
 
   <div class="mx-auto">
@@ -45,42 +57,51 @@
     $senha = $_POST['senha'];
 
     // Use instruções preparadas para evitar injeção de SQL
-    $query = "SELECT nome, perfil FROM usuario WHERE email = ? AND senha = ?";
+    $query = "SELECT nome, perfil, bloqueado FROM usuario WHERE email = ? AND senha = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ss', $email, $senha);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($nome, $perfil);
-        $stmt->fetch();
+      $stmt->bind_result($nome, $perfil, $bloqueado);
+      $stmt->fetch();
 
-        $_SESSION['nome'] = $nome; // Armazene o nome na sessão
-        $_SESSION['email'] = $email;
-
-        if ($perfil === 'funcionario') {
-            $_SESSION['funcionario'] = true;
-            header('Location: usuarios.php'); // Substitua com a página do funcionário
-            exit();
-        } else {
-            // Redirecione para a página de clientes ou adote outro tratamento apropriado
-            header('Location: produtosWey.php'); // Substitua com a página do cliente
-            exit();
-        }
-    } else {
-        // Usuário não encontrado ou credenciais incorretas
+      $_SESSION['nome'] = $nome; // Armazene o nome na sessão
+      $_SESSION['email'] = $email;
+      if ($bloqueado == 1) {
+        // Conta bloqueada
         echo '<div class="text-center container">';
         echo '<div class="alert alert-danger text-center mt-5" role="alert">
-                <h3>Credenciais incorretas ou usuário não encontrado.</h3>
-              </div>';
-        echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+            <h3>Sua conta está bloqueada.</h3>
+          </div>';
+        echo '<a class="btn btn-warning mt-2" href="login_adm.php">Voltar</a>';
         echo '</div>';
+      } elseif ($perfil === 'funcionario') {
+        $_SESSION['funcionario'] = true;
+        header('Location: usuarios.php'); // Substitua com a página do funcionário
         exit();
+      } else {
+        // Redirecione para a página de clientes ou adote outro tratamento apropriado
+        header('Location: produtosWey.php'); // Substitua com a página do cliente
+        exit();
+      }
+    } else {
+      // Usuário não encontrado ou credenciais incorretas
+      echo '<div class="text-center container">';
+      echo '<div class="alert alert-danger text-center mt-5" role="alert">
+            <h3>Credenciais incorretas ou usuário não encontrado.</h3>
+          </div>';
+      echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+      echo '</div>';
+      exit();
     }
 
     $stmt->close();
     $conn->close();
     ?>
+
   </div>
 </body>
+
 </html>

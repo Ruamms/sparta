@@ -69,7 +69,7 @@
         <div class="form-group">
             <button type="submit" class="btn btn-warning w-100">Entrar na Conta</button>
         </div>
-        <small class="form-text text-muted">Esqueceu a senha? <a href="https://wa.me/5521976435614">Clique
+        <small class="form-text text-muted">Esqueceu a senha, falar com RH? <a href="https://wa.me/5521976435614">Clique
                 aqui</a>.</small>
 
     </form>

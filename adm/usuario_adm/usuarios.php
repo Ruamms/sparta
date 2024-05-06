@@ -107,30 +107,37 @@ $result = $conn->query($query);
                 <th>Ações</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td class="align-middle">
-                        <?php echo $row['usuario_id']; ?>
-                    </td>
-                    <td class="align-middle">
-                        <?php echo ucfirst($row['nome']); ?>
-                    </td>
-                    <td class="align-middle">
-                        <?php echo $row['email']; ?>
-                    </td>
+    <tr>
+        <td class="align-middle">
+            <?php echo $row['usuario_id']; ?>
+        </td>
+        <td class="align-middle">
+            <?php echo ucfirst($row['nome']); ?>
+        </td>
+        <td class="align-middle">
+            <?php echo $row['email']; ?>
+        </td>
+        <td class="align-middle">
+            <?php echo ucfirst($row['perfil']); ?>
+        </td>
+        <td>
+            <?php if ($row['bloqueado'] == 0): ?>
+                
+                <a class="btn w-75 btn-danger mt-1"
+                    href="bloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Bloquear</a>
+                    <a class="btn w-75 btn-success mt-1"
+                href="editar_cliente.php?usuario_id=<?php echo $row['usuario_id']; ?>">Editar</a>
+            <?php else: ?>
+               
+                    <a class="btn w-75 btn-warning mt-1"
+                    href="desbloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Desbloquear</a>
+            <?php endif; ?>
+            
+        </td>
+    </tr>
+<?php endwhile; ?>
 
-                    <td class="align-middle">
-                        <?php echo ucfirst($row['perfil']); ?>
-                    </td>
 
-
-                    <td>
-                        <a class="btn w-75 btn-success mt-1"
-                            href="editar.php?usuario_id=<?php echo $row['usuario_id']; ?>">Editar</a>
-                        <a class="btn w-75 btn-danger mt-1"
-                            href="excluir.php?usuario_id=<?php echo $row['usuario_id']; ?>">Deletar</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
         </table>
         <div class="dropdown-divider mt-5"></div>
 

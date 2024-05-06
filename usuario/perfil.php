@@ -125,7 +125,7 @@
 
     <section class="container mt-3">
         <h2 class="mt-3 ">Editar cadastro</h2>
-        <form action="../adm/usuario_adm/salvar_edit_funcionario.php" class="container" method="post">
+        <form action="../adm/usuario_adm/salvar_edit_cliente.php" class="container" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>
@@ -217,7 +217,7 @@
             $('#numero_cartao').mask('0000.0000.0000.0000', {
                 reverse: true
             });
-            $('#telefone').mask('(00)00000-0000', {
+            $('#telefone').mask('00-00000-0000', {
                 reverse: true
             });
             $('#cep').mask('00000-000');

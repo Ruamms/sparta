@@ -50,36 +50,43 @@
     $senha = $_POST['senha'];
 
     // Use instruções preparadas para evitar injeção de SQL
-    $query = "SELECT nome, perfil FROM usuario WHERE email = ? AND senha = ?";
+    $query = "SELECT usuario_id, nome, perfil, bloqueado FROM usuario WHERE email = ? AND senha = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('ss', $email, $senha);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
-      $stmt->bind_result($nome, $perfil);
+      $stmt->bind_result($usuario_id, $nome, $perfil, $bloqueado);
       $stmt->fetch();
 
-      $_SESSION['nome'] = $nome; // Armazene o nome na sessão
-      $_SESSION['email'] = $email;
-
-      if ($perfil === 'cliente') {
-        $_SESSION['logged_in'] = true;
-        header('Location: produtosWey.php'); // Substitua com a página do cliente
-    
-      } else if ($perfil === 'funcionario') {
-        $_SESSION['funcionario'] = true;
-        header('Location: ../adm/usuario_adm/usuarios.php'); // Substitua com a página do funcionário
-        exit();
-      } else {
-        // Usuário não encontrado
+      if ($bloqueado == 1) {
+        // Conta bloqueada
         echo '<div class="text-center container">';
         echo '<div class="alert alert-danger text-center mt-5" role="alert">
-            <h3>Somente Clientes </h3>
+            <h3>Sua conta está bloqueada.</h3>
+            
           </div>';
-        echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
-        echo '</div>'; // Perfil desconhecido, adote o tratamento apropriado
+        echo '<a class="btn btn-warning mt-2" href="login.php">Voltar</a>';
+        echo '</div>';
+      } else {
+        $_SESSION['usuario_id'] = $usuario_id;
+        $_SESSION['nome'] = $nome; // Armazene o nome na sessão
+        $_SESSION['email'] = $email;
+
+        if ($perfil === 'cliente') {
+          $_SESSION['logged_in'] = true;
+          header('Location: produtosWey.php'); // Substitua com a página do cliente
     
+        } else {
+          // Perfil desconhecido
+          echo '<div class="text-center container">';
+          echo '<div class="alert alert-danger text-center mt-5" role="alert">
+                <h3>Somente Clientes.</h3>
+              </div>';
+              echo '<a class="btn btn-warning mt-2" href="login.php">Voltar</a>';
+          echo '</div>';
+        }
       }
     } else {
       // Usuário não encontrado
@@ -87,13 +94,14 @@
       echo '<div class="alert alert-danger text-center mt-5" role="alert">
             <h3>Usuário não encontrado.</h3>
           </div>';
-      echo '<a class="btn btn-warning mt-3" href="login.php">Voltar</a>';
+          echo '<a class="btn btn-warning mt-2" href="login.php">Voltar</a>';
       echo '</div>';
     }
 
     $stmt->close();
     $conn->close();
     ?>
+
 
 
   </div>
