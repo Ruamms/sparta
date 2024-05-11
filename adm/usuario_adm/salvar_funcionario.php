@@ -70,7 +70,7 @@
     </nav>
 <section class="text-center container">
 <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 // Receber os dados do formulário
 $nome = $_POST['nome'];

@@ -58,7 +58,7 @@
     <section class="container">
     <h2 class="m-3">Funcionario</h2>
     <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 // Verifica se o ID do usuário foi recebido e é válido
 if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {

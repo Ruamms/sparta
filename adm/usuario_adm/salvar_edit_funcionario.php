@@ -53,7 +53,7 @@
 
     <section class="container mt-3">
     <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 
 // Verifica se o formulário foi enviado

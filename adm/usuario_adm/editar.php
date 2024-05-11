@@ -80,7 +80,7 @@
     <section class="container text-center mt-5 ">
 
     <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 // Verifica se o ID do usuário foi fornecido e é válido
 if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {

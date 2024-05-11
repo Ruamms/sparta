@@ -46,7 +46,7 @@
     <section class="container mt-3">
         <?php
         session_start();
-        include 'conexao.php';
+        include '../../usuario/conexao.php';
 
         if (isset($_SESSION['perfil']) and ($_SESSION['perfil'] === 'cliente')) {
             $email = $_SESSION['email'];

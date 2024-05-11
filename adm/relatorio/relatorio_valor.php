@@ -1,6 +1,6 @@
 <?php
 require('./fpdf186/fpdf.php');
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Processa o formulário quando as datas são enviadas

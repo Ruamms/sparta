@@ -1,5 +1,5 @@
 <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 $query = "SELECT * FROM usuario";
 $result = $conn->query($query);

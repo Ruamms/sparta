@@ -1,6 +1,6 @@
 <?php
 require_once('./fpdf186/fpdf.php');
-include('conexao.php');
+include('../../usuario/conexao.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recebe as datas do formulário

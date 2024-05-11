@@ -1,5 +1,5 @@
 <?php
-include 'conexao.php';
+include '../../usuario/conexao.php';
 
 // Verifica se o parâmetro 'usuario_id' foi enviado via GET e se é um número válido
 if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
