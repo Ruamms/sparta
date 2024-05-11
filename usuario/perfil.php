@@ -32,7 +32,7 @@
         include 'conexao.php';
 
         // Verificar se o email foi enviado via GET
-        if (isset($_SESSION['email'])) {
+        if (isset($_SESSION['perfil']) and ($_SESSION['perfil'] === 'cliente')) {
             $email = $_SESSION['email'];
 
             $conn = new mysqli('localhost', 'root', '', 'cadastro');
@@ -50,22 +50,33 @@
             if ($resultEmail->num_rows > 0) {
                 // email existe, então recuperamos os dados do cliente
                 $cliente = $resultEmail->fetch_assoc();
-                // Preencher os campos do formulário com os dados do cliente
-                $nome = $cliente['nome'];
-                $telefone = $cliente['telefone'];
-                $data_nasc = $cliente['data_nasc'];
-                $cep = $cliente['cep'];
-                $endereco = $cliente['endereco'];
-                $numero = $cliente['numero'];
-                $cidade = $cliente['cidade'];
-                $estado = $cliente['estado'];
-                $complemento = $cliente['complemento'];
-                $numero_cartao = $cliente['numero_cartao'];
-            }
+            }            
 
             // Fechar a declaração de verificação do email
             $verificarEmail->close();
+        } else if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
+            $usuario_id = $_GET['usuario_id'];
+
+            // Busca os dados do cliente com base no ID do usuário
+            $query = "SELECT * FROM cliente WHERE usuario_id = $usuario_id";
+            $result = $conn->query($query);
+            // Verifica se o cliente foi encontrado
+            if ($result->num_rows > 0) {
+                $cliente = $result->fetch_assoc();
+                $email = $cliente['email'];
+            }
         }
+        // Preencher os campos do formulário com os dados do cliente
+        $nome = $cliente['nome'];
+        $telefone = $cliente['telefone'];
+        $data_nasc = $cliente['data_nasc'];
+        $cep = $cliente['cep'];
+        $endereco = $cliente['endereco'];
+        $numero = $cliente['numero'];
+        $cidade = $cliente['cidade'];
+        $estado = $cliente['estado'];
+        $complemento = $cliente['complemento'];
+        $numero_cartao = $cliente['numero_cartao'];
 
         // Fechar a conexão
         $conn->close();
@@ -125,7 +136,7 @@
 
     <section class="container mt-3">
         <h2 class="mt-3 ">Editar cadastro</h2>
-        <form action="../adm/usuario_adm/salvar_edit_cliente.php" class="container" method="post">
+        <form action="../adm/usuario_adm/salvar_edit_cliente.php?usuario_id=<?php echo $_GET['usuario_id']; ?>" class="container" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>

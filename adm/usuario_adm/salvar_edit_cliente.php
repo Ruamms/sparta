@@ -48,7 +48,7 @@
         session_start();
         include 'conexao.php';
 
-        if (isset($_SESSION['email'])) {
+        if (isset($_SESSION['perfil']) and ($_SESSION['perfil'] === 'cliente')) {
             $email = $_SESSION['email'];
 
             $conn = new mysqli('localhost', 'root', '', 'cadastro');
@@ -62,129 +62,129 @@
             $verificarEmail->bind_param("s", $email);
             $verificarEmail->execute();
             $resultEmail = $verificarEmail->get_result();
+            // Fechar a declaração de verificação do email
+            $verificarEmail->close();
             $cliente = $resultEmail->fetch_assoc();
+            $usuario_id = $cliente['usuario_id'];
+        } else if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
+            $usuario_id = $_GET['usuario_id'];
 
-            // Verifica se o formulário foi enviado
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Recupera os dados do formulário e filtra-os
-                $nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : $cliente['nome'];
-                $endereco = isset($_POST['endereco']) && !empty($_POST['endereco']) ? $_POST['endereco'] : $cliente['endereco'];
-                $telefone = isset($_POST['telefone']) && !empty($_POST['telefone']) ? $_POST['telefone'] : $cliente['telefone'];
-                $data_nasc = isset($_POST['data_nasc']) && !empty($_POST['data_nasc']) ? $_POST['data_nasc'] : $cliente['data_nasc'];
-                $senha = isset($_POST['senha']) && !empty($_POST['senha']) ? $_POST['senha'] : $cliente['senha'];
-                $cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : $cliente['cep'];
-                $numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : $cliente['numero'];
-                $cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : $cliente['cidade'];
-                $estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado'] : $cliente['estado'];
-                $complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $_POST['complemento'] : $cliente['complemento'];
-                $numero_cartao = isset($_POST['numero_cartao']) && !empty($_POST['numero_cartao']) ? $_POST['numero_cartao'] : $cliente['numero_cartao'];
-                $cpf = $cliente['cpf'];
+            // Busca os dados do cliente com base no ID do usuário
+            $query = "SELECT * FROM cliente WHERE usuario_id = $usuario_id";
+            $result = $conn->query($query);
+            // Verifica se o cliente foi encontrado
+            if ($result->num_rows > 0) {
+                $cliente = $result->fetch_assoc();
+            }
+        }
 
-                // Fechar a declaração de verificação do email
-                $verificarEmail->close();
-                // Verifica se o nome, email, senha e CPF foram fornecidos
-                if (!empty($nome) && !empty($email) && !empty($cpf)) {
-                    // Verifica se o usuário ID foi fornecido
-                    if (isset($_SESSION['usuario_id'])) {
-                        $usuario_id = $_SESSION['usuario_id'];
+        // Verifica se o formulário foi enviado
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Recupera os dados do formulário e filtra-os
+            $nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : $cliente['nome'];
+            $email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : $cliente['email'];
+            $endereco = isset($_POST['endereco']) && !empty($_POST['endereco']) ? $_POST['endereco'] : $cliente['endereco'];
+            $telefone = isset($_POST['telefone']) && !empty($_POST['telefone']) ? $_POST['telefone'] : $cliente['telefone'];
+            $data_nasc = isset($_POST['data_nasc']) && !empty($_POST['data_nasc']) ? $_POST['data_nasc'] : $cliente['data_nasc'];
+            $senha = isset($_POST['senha']) && !empty($_POST['senha']) ? $_POST['senha'] : $cliente['senha'];
+            $cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : $cliente['cep'];
+            $numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : $cliente['numero'];
+            $cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : $cliente['cidade'];
+            $estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado'] : $cliente['estado'];
+            $complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $_POST['complemento'] : $cliente['complemento'];
+            $numero_cartao = isset($_POST['numero_cartao']) && !empty($_POST['numero_cartao']) ? $_POST['numero_cartao'] : $cliente['numero_cartao'];
+            $cpf = $cliente['cpf'];
 
-                        // Verifica se o CPF foi alterado
-                        $query_cpf_original = "SELECT cpf FROM cliente WHERE usuario_id = $usuario_id";
-                        $result_cpf_original = $conn->query($query_cpf_original);
+            // Verifica se o nome, email, senha e CPF foram fornecidos
+            if (!empty($nome) && !empty($email) && !empty($cpf)) {
+                // Verifica se o usuário ID foi fornecido
 
-                        if ($result_cpf_original) {
-                            $row_cpf_original = $result_cpf_original->fetch_assoc();
-                            $cpf_original = $row_cpf_original['cpf'];
+                // Verifica se o CPF foi alterado
+                $query_cpf_original = "SELECT cpf FROM cliente WHERE usuario_id = $usuario_id";
+                $result_cpf_original = $conn->query($query_cpf_original);
 
-                            // Verifica se o CPF foi alterado
-                            if ($cpf != $cpf_original) {
-                                // Verifica se o CPF está em uso por outro cliente
-                                $query_verifica_cpf_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE cpf = '$cpf'";
-                                $result_verifica_cpf_cliente = $conn->query($query_verifica_cpf_cliente);
+                if ($result_cpf_original) {
+                    $row_cpf_original = $result_cpf_original->fetch_assoc();
+                    $cpf_original = $row_cpf_original['cpf'];
 
-                                if ($result_verifica_cpf_cliente) {
-                                    $row_verifica_cpf_cliente = $result_verifica_cpf_cliente->fetch_assoc();
-                                    $total_clientes_com_cpf = $row_verifica_cpf_cliente['total'];
+                    // Verifica se o CPF foi alterado
+                    if ($cpf != $cpf_original) {
+                        // Verifica se o CPF está em uso por outro cliente
+                        $query_verifica_cpf_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE cpf = '$cpf'";
+                        $result_verifica_cpf_cliente = $conn->query($query_verifica_cpf_cliente);
 
-                                    if ($total_clientes_com_cpf > 0) {
-                                        echo "O CPF '$cpf' já está em uso por outro cliente.";
-                                        exit; // Para a execução do script
-                                    }
-                                } else {
-                                    echo "Erro ao verificar CPF: " . $conn->error;
-                                    exit;
-                                }
+                        if ($result_verifica_cpf_cliente) {
+                            $row_verifica_cpf_cliente = $result_verifica_cpf_cliente->fetch_assoc();
+                            $total_clientes_com_cpf = $row_verifica_cpf_cliente['total'];
+
+                            if ($total_clientes_com_cpf > 0) {
+                                echo "O CPF '$cpf' já está em uso por outro cliente.";
+                                exit; // Para a execução do script
                             }
                         } else {
-                            echo "Erro ao obter CPF original: " . $conn->error;
+                            echo "Erro ao verificar CPF: " . $conn->error;
                             exit;
                         }
-
-                        // Verifica se o email foi alterado
-                        $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
-                        $result_email_original = $conn->query($query_email_original);
-
-                        if ($result_email_original) {
-                            $row_email_original = $result_email_original->fetch_assoc();
-                            $email_original = $row_email_original['email'];
-
-                            if ($email != $email_original) {
-                                // Verifica se o novo e-mail já está em uso por outro cliente ou usuário
-                                $query_verifica_email_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE email = '$email'";
-                                $result_verifica_email_cliente = $conn->query($query_verifica_email_cliente);
-                                $row_verifica_email_cliente = $result_verifica_email_cliente->fetch_assoc();
-                                $total_clientes_com_email_cliente = $row_verifica_email_cliente['total'];
-
-                                $query_verifica_email_usuario = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email'";
-                                $result_verifica_email_usuario = $conn->query($query_verifica_email_usuario);
-                                $row_verifica_email_usuario = $result_verifica_email_usuario->fetch_assoc();
-                                $total_usuarios_com_email_usuario = $row_verifica_email_usuario['total'];
-
-                                if ($total_clientes_com_email_cliente > 0 || $total_usuarios_com_email_usuario > 0) {
-                                    echo "O e-mail '$email' já está em uso por outro cliente ou usuário.";
-                                    exit; // Para a execução do script
-                                }
-                            }
-                        } else {
-                            echo "Erro ao obter e-mail original: " . $conn->error;
-                            exit;
-                        }
-
-                        // Atualiza os dados do cliente na tabela cliente                        
-                        $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco',telefone='$telefone',data_nasc='$data_nasc',numero_cartao='$numero_cartao', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento' WHERE usuario_id=$usuario_id";
-                        if ($conn->query($query_update_cliente) === TRUE) {
-                            // Atualiza os dados do usuário na tabela usuario                            
-                            $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
-                            if ($conn->query($query_update_usuario) === TRUE) {
-                                echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento
-                                if ($_SESSION['perfil'] === 'cliente') {
-                                    echo '<script>setTimeout(function(){window.location.href="../../usuario/produtosWey.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
-                                } else if ($_SESSION['perfil'] === 'funcionario') {
-                                    echo '<script>setTimeout(function(){window.location.href="usuarios.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
-                                }
-                                exit;
-                            } else {
-                                echo "Erro ao atualizar os dados do usuário: " . $conn->error;
-                            }                            
-                        } else {
-                            echo "Erro ao atualizar os dados do cliente: " . $conn->error;
-                        }
-                    } else {
-                        echo "ID do usuário não foi fornecido.";
                     }
                 } else {
-                    echo "O nome, email, senha e CPF não foram fornecidos.";
+                    echo "Erro ao obter CPF original: " . $conn->error;
+                    exit;
+                }
+
+                // Verifica se o email foi alterado
+                $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
+                $result_email_original = $conn->query($query_email_original);
+
+                if ($result_email_original) {
+                    $row_email_original = $result_email_original->fetch_assoc();
+                    $email_original = $row_email_original['email'];
+
+                    if ($email != $email_original) {
+                        // Verifica se o novo e-mail já está em uso por outro cliente ou usuário
+                        $query_verifica_email_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE email = '$email'";
+                        $result_verifica_email_cliente = $conn->query($query_verifica_email_cliente);
+                        $row_verifica_email_cliente = $result_verifica_email_cliente->fetch_assoc();
+                        $total_clientes_com_email_cliente = $row_verifica_email_cliente['total'];
+
+                        $query_verifica_email_usuario = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email'";
+                        $result_verifica_email_usuario = $conn->query($query_verifica_email_usuario);
+                        $row_verifica_email_usuario = $result_verifica_email_usuario->fetch_assoc();
+                        $total_usuarios_com_email_usuario = $row_verifica_email_usuario['total'];
+
+                        if ($total_clientes_com_email_cliente > 0 || $total_usuarios_com_email_usuario > 0) {
+                            echo "O e-mail '$email' já está em uso por outro cliente ou usuário.";
+                            exit; // Para a execução do script
+                        }
+                    }
+                } else {
+                    echo "Erro ao obter e-mail original: " . $conn->error;
+                    exit;
+                }
+
+                // Atualiza os dados do cliente na tabela cliente                        
+                $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco',telefone='$telefone',data_nasc='$data_nasc',numero_cartao='$numero_cartao', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento' WHERE usuario_id=$usuario_id";
+                if ($conn->query($query_update_cliente) === TRUE) {
+                    // Atualiza os dados do usuário na tabela usuario                            
+                    $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
+                    if ($conn->query($query_update_usuario) === TRUE) {
+                        echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento
+                        if ($_SESSION['perfil'] === 'cliente') {
+                            echo '<script>setTimeout(function(){window.location.href="../../usuario/produtosWey.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
+                        } else if ($_SESSION['perfil'] === 'funcionario') {
+                            echo '<script>setTimeout(function(){window.location.href="usuarios.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
+                        }
+                        exit;
+                    } else {
+                        echo "Erro ao atualizar os dados do usuário: " . $conn->error;
+                    }
+                } else {
+                    echo "Erro ao atualizar os dados do cliente: " . $conn->error;
                 }
             } else {
-                echo "O formulário não foi enviado.";
+                echo "O nome, email, senha e CPF não foram fornecidos.";
             }
         } else {
-            // CPF não encontrado na tabela de clientes
-            echo '<div class="container text-center">';
-            echo '<div class="alert alert-danger my-5">';
-            echo '<h3 class="text-center">CPF não encontrado. Por favor, verifique o CPF informado.</h3>';
-            echo '</div>';
-            echo '</div>';
+            echo "O formulário não foi enviado.";
         }
         $conn->close();
         ?>

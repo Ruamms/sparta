@@ -126,7 +126,7 @@ $result = $conn->query($query);
                 <a class="btn w-75 btn-danger mt-1"
                     href="bloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Bloquear</a>
                     <a class="btn w-75 btn-success mt-1"
-                href="editar_cliente.php?usuario_id=<?php echo $row['usuario_id']; ?>">Editar</a>
+                href="../../usuario/perfil.php?usuario_id=<?php echo $row['usuario_id']; ?>">Editar</a>
             <?php else: ?>
                
                     <a class="btn w-75 btn-warning mt-1"
