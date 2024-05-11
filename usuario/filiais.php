@@ -46,7 +46,7 @@
                         session_start();
                     }
                     include("../usuario/conexao.php");
-                    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+                    if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
                         echo '<li class="nav-item mr-5">
                                     <p class="text-center">
                                         <a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">
@@ -74,7 +74,7 @@
                     } else {
                         echo '<!-- Tela Login-->
                                 <li class="nav-item mr-5">
-                                    <p class="text-center"><a class="nav-link text-warning" href="usuario/login.php"><i
+                                    <p class="text-center"><a class="nav-link text-warning" href="./login.php"><i
                                         class="bi bi-box-arrow-in-left " data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Login"></i><br>
                                         Login</a>

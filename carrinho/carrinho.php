@@ -53,7 +53,7 @@
                         session_start();
                     }
                     include("../usuario/conexao.php");
-                    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+                    if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
                         echo '<li class="nav-item mr-5">
                                     <p class="text-center">
                                         <a class="nav-link text-warning" href="../usuario/perfil.php">
@@ -73,7 +73,7 @@
                     } else {
                         echo '<!-- Tela Login-->
                                 <li class="nav-item mr-5">
-                                    <p class="text-center"><a class="nav-link text-warning" href="usuario/login.php"><i
+                                    <p class="text-center"><a class="nav-link text-warning" href="../usuario/login.php"><i
                                         class="bi bi-box-arrow-in-left " data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Login"></i><br>
                                         Login</a>
@@ -197,7 +197,7 @@
             }
             if (!empty($_SESSION['carrinho'])) {
                 echo '<a href="index.php" class="btn btn-warning mt-3 m-2">Continuar Comprando</a>';
-                if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+                if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
                     echo '<a href="finalizar_compra.php" class="btn btn-primary mt-3 m-2">Finalizar compra</a>';
                 } else {
                     echo '<a href="../usuario/login.php" class="btn btn-primary mt-3 m-2">Finalizar compra</a>';

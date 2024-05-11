@@ -48,7 +48,7 @@
             session_start();
           }
           include("../usuario/conexao.php");
-          if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+          if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
             echo '<li class="nav-item mr-5">
                       <p class="text-center">
                           <a class="nav-link text-warning" href="../usuario/perfil.php">
