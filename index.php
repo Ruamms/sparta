@@ -107,7 +107,7 @@
           echo '<h4>' . $row["nome"] . '</h4>';
           echo '<p>' . $row["descricao"] . '</p>';
 
-          echo '<a class="btn btn-warning mt-2" href="./usuario/login.php">Ver Mais</a>';
+          echo '<a class="btn btn-warning mt-2" href="carrinho/index.php">Ver Mais</a>';
           echo '</div>';
           echo '</div>';
           echo '</div>';
@@ -150,7 +150,7 @@
           <h2 class="card-title">Hipertofria</h2>
           <p class="">Combo Definição</p>
           <h3 class="card-text m-3 ">R$210,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
+          <a href="carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@
           <h2 class="card-title">Power Treino</h2>
           <p class="">Melhore Seu Treino</p>
           <h3 class="card-text m-3 ">R$190,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-2">Ver mais</a>
+          <a href="carrinho/index.php" class="btn btn-warning m-2">Ver mais</a>
         </div>
       </div>
     </div>
@@ -175,7 +175,7 @@
           <h2 class="card-title">Ganho de Massa</h2>
           <p class="">Ganhe massa muscular</p>
           <h3 class="card-text ">R$270,00</h3>
-          <a href="../carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
+          <a href="carrinho/index.php" class="btn btn-warning m-3">Ver mais</a>
         </div>
       </div>
     </div>

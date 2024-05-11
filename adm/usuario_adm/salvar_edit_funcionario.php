@@ -45,7 +45,9 @@
 
     <section class="container mt-3">
         <?php
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         include '../../usuario/conexao.php';
 
         if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {

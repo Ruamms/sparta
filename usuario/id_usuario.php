@@ -1,14 +1,16 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // Verifique se o usuário está logado
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     // O usuário está logado, então exiba uma mensagem de boas-vindas com o nome
     echo '<h3>'  . $_SESSION['nome'] . '</h3>';
-    
+
     // Faça uma consulta para obter o ID do usuário com base no nome de usuário
     $nome_usuario = $_SESSION['nome'];
-    
+
     $host = 'localhost';
     $db = 'cadastro';
     $user = 'root';
@@ -22,7 +24,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
     // Consulta SQL para obter o ID do usuário
     $sql_id_usuario = "SELECT usuario_id FROM usuario WHERE nome = ?";
-    
+
     // Preparar a instrução SQL
     $stmt_id_usuario = $conn->prepare($sql_id_usuario);
 
@@ -42,9 +44,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
             // Armazene o ID do usuário em uma variável de sessão
             $_SESSION['id_usuario'] = $id_usuario;
-            
+
             // Agora você tem o ID do usuário disponível em $_SESSION['id_usuario']
-            
+
             // Fechar a instrução SQL
             $stmt_id_usuario->close();
         } else {
@@ -56,10 +58,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     } else {
         echo "Erro ao preparar a consulta de ID de usuário: " . $conn->error;
     }
-
 } else {
     // O usuário não está logado, redirecione-o para a página de login
     header('Location: login.php');
     exit; // Certifique-se de que o script pare de ser executado após a redireção
 }
-?>

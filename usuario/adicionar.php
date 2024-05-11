@@ -21,7 +21,9 @@
 <body>
     <!-- menu-->
     <?php
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
     if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
     ?>
         <div class="bg-warning text-center py-1">

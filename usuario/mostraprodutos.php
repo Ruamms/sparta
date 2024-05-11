@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 include 'conexao';
 // Consulta para obter a lista de produtos
 $sql = "SELECT * FROM produtos";
@@ -22,4 +24,3 @@ if ($result->num_rows > 0) {
 } else {
     echo "Nenhum produto encontrado.";
 }
-?>

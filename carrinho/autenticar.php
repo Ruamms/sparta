@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 include '../usuario/conexao.php';
 
 $email = $_POST['email'];
@@ -41,4 +43,3 @@ if ($result->num_rows == 1) {
 
 
 $conn->close();
-?>

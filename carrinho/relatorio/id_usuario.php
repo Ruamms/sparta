@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // Verificar se o usuário está logado
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -90,4 +92,3 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('Location: login.php');
     exit; // Certifique-se de que o script pare de ser executado após a redireção
 }
-?>

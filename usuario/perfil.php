@@ -21,7 +21,9 @@
 <body>
     <section>
         <?php
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         include 'conexao.php';
 
         // Verificar se o email foi enviado via GET

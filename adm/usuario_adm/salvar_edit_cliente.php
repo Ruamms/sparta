@@ -45,7 +45,9 @@
 
     <section class="container mt-3">
         <?php
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         include '../../usuario/conexao.php';
 
         if (isset($_SESSION['perfil']) and ($_SESSION['perfil'] === 'cliente')) {
@@ -96,7 +98,7 @@
             $cpf = $cliente['cpf'];
 
             // Verifica se o nome, email, senha e CPF foram fornecidos
-            if (!empty($nome) && !empty($email)) {               
+            if (!empty($nome) && !empty($email)) {
 
                 // Verifica se o email foi alterado
                 $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
@@ -136,7 +138,7 @@
                         $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email' WHERE usuario_id=$usuario_id";
                     } else {
                         $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
-                    }                                               
+                    }
                     if ($conn->query($query_update_usuario) === TRUE) {
                         echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento
                         if ($_SESSION['perfil'] === 'cliente') {

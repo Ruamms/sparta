@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // Verificar se os dados do formulário foram recebidos
 if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_cartao'], $_POST['id_usuario'], $_POST['total'], $_POST['metodo_pagamento'], $_POST['cvc'], $_POST['parcelas'], $_POST['detalhes_carrinho'])) {
@@ -43,7 +45,7 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
             // Obter o ID do pedido inserido
             $pedido_id = $stmt_pedido->insert_id;
 
-         
+
 
             // Dividir a string $detalhes_carrinho para obter detalhes de cada produto
             if (!empty($detalhes_carrinho)) {
@@ -108,7 +110,6 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
                             } else {
                                 echo "Erro ao preparar a consulta para obter produto: " . $conn->error;
                             }
-
                         } else {
                             //echo "Erro: Detalhes dos produtos em um formato inválido.";
                         }
@@ -119,29 +120,29 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
             } else {
                 //echo "Erro: Detalhes do carrinho não encontrados.";
             }
-              // Inserir dados na tabela "pagamento"
-              $sql_pagamento = "INSERT INTO pagamento (pedido_id, valor, data_pagamento, metodo_pagamento, numero_do_cartao, parcelas) VALUES (?, ?, NOW(), ?, ?, ?)";
-              $stmt_pagamento = $conn->prepare($sql_pagamento);
-  
-              if ($stmt_pagamento) {
-                  // Vincular os parâmetros da consulta
-                  $stmt_pagamento->bind_param("idsss", $pedido_id, $total, $metodo_pagamento, $numero_cartao, $parcelas);
-  
-                  // Executar a consulta
-                  $stmt_pagamento->execute();
-  
-                  // Verificar se a consulta foi bem-sucedida
-                  if ($stmt_pagamento->affected_rows > 0) {
-                      echo "Dados de pagamento inseridos com sucesso.";
-                  } else {
-                      echo "Erro ao inserir dados de pagamento.";
-                  }
-  
-                  // Fechar a instrução de pagamento
-                  $stmt_pagamento->close();
-              } else {
-                  echo "Erro ao preparar a consulta para inserir dados de pagamento: " . $conn->error;
-              }
+            // Inserir dados na tabela "pagamento"
+            $sql_pagamento = "INSERT INTO pagamento (pedido_id, valor, data_pagamento, metodo_pagamento, numero_do_cartao, parcelas) VALUES (?, ?, NOW(), ?, ?, ?)";
+            $stmt_pagamento = $conn->prepare($sql_pagamento);
+
+            if ($stmt_pagamento) {
+                // Vincular os parâmetros da consulta
+                $stmt_pagamento->bind_param("idsss", $pedido_id, $total, $metodo_pagamento, $numero_cartao, $parcelas);
+
+                // Executar a consulta
+                $stmt_pagamento->execute();
+
+                // Verificar se a consulta foi bem-sucedida
+                if ($stmt_pagamento->affected_rows > 0) {
+                    echo "Dados de pagamento inseridos com sucesso.";
+                } else {
+                    echo "Erro ao inserir dados de pagamento.";
+                }
+
+                // Fechar a instrução de pagamento
+                $stmt_pagamento->close();
+            } else {
+                echo "Erro ao preparar a consulta para inserir dados de pagamento: " . $conn->error;
+            }
 
             // Fechar a instrução do pedido
             $stmt_pedido->close();
@@ -208,8 +209,6 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
                 // Produto não encontrado
                 return false;
             }
-
-
         } else {
             // Erro ao preparar a consulta de estoque atual
             return false;
@@ -224,11 +223,9 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
         // Erro ao atualizar o estoque
         echo "Erro ao atualizar o estoque do produto.";
     }
-    
+
     header('Location: ./pedido_confirmado.php');
 
     // Fechar a conexão com o banco de dados
     $conn->close();
-
 }
-?>
