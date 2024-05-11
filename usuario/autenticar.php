@@ -68,6 +68,7 @@
         $_SESSION['nome'] = $nome; // Armazene o nome na sessão
         $_SESSION['email'] = $email;
         $_SESSION['perfil'] = $perfil;
+        $_SESSION['logado'] = 2;
 
         if ($perfil === 'cliente') {
           $_SESSION['logged_in'] = true;

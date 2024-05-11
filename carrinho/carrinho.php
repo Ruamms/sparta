@@ -64,7 +64,7 @@
                                 </li>';
                         echo '<li class="nav-item mr-5">
                                 <p class="text-center">
-                                <a class="nav-link text-warning" href="../index.php">
+                                <a class="nav-link text-warning" href="../index.php?logout=1">
                                 <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
                                         Sair
                                     </a>

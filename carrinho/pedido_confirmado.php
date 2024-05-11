@@ -55,7 +55,7 @@
           </li>
            <!-- sair-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../usuario/login.php">
+            <h4><a class="nav-link text-warning" href="../index.php?logout=1">
                 <i class="bi  bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i>
               </a></h4>
           </li>

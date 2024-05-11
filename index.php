@@ -46,7 +46,7 @@
             session_start();
           }
           include("usuario/conexao.php");
-          if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+          if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
             echo '<li class="nav-item mr-5">
                                     <p class="text-center">
                                         <a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">
@@ -74,7 +74,8 @@
 
             // Processamento do logout
             if (isset($_GET['logout'])) {
-              header("location: index.php");               
+              $_SESSION['logado'] = 1;
+              header("location: index.php");
               exit();
             }
           } else {
