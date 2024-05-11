@@ -137,33 +137,39 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
 
-                            <li class="nav-item mr-5">
-                                <p class="text-center">
-                                    <a class="nav-link text-warning" href="../produto/lista_produtos.php">
-                                        <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
-                                        Produtos</a>
-                                </p>
-                            </li>
-                            <!--Perfil-->
-                            <li class="nav-item mr-5">
+                        <li class="nav-item mr-5">
+                            <p class="text-center">
+                                <a class="nav-link text-warning" href="../produto/lista_produtos.php">
+                                    <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
+                                    Produtos</a>
+                            </p>
+                        </li>
+                        <!--Perfil-->
+                        <li class="nav-item mr-5">
 
-                                <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+                            <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
 
-                                        <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
-                                        Relatorio</a></p>
+                                    <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
+                                    Relatorio</a></p>
 
-                            </li>
-
-                            <!-- sair-->
-                            <li class="nav-item mr-5">
-                                <p class="text-center"><a class="nav-link text-warning" href="../../index.php">
-                                        <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
-                                        Sair</a></p>
-                            </li>
-                        </ul>
-                    </div>
+                        </li>
+                        <li class="nav-item mr-5">
+                            <p class="text-center">
+                                <a class="nav-link text-warning" href="../adm/usuario_adm/usuarios.php">
+                                    <i class="bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Usuarios"></i><br>
+                                    Usuarios</a>
+                            </p>
+                        </li>
+                        <!-- sair-->
+                        <li class="nav-item mr-5">
+                            <p class="text-center"><a class="nav-link text-warning" href="../../index.php">
+                                    <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                    Sair</a></p>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </nav>
         </nav>
     <?php
     }
