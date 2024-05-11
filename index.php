@@ -54,7 +54,7 @@
                                             Minhas compras
                                         </a>
                                     </p>
-                                </li>';  
+                                </li>';
             echo '<li class="nav-item mr-5">
                       <p class="text-center">
                           <a class="nav-link text-warning" href="usuario/perfil.php">
@@ -64,13 +64,19 @@
                       </p>
                   </li>';
             echo '<li class="nav-item mr-5">
-                      <p class="text-center">
-                      <a class="nav-link text-warning" href="index.php">
-                      <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
-                              Sair
-                          </a>
-                      </p>
-                  </li>';
+                  <p class="text-center">
+                      <a class="nav-link text-warning" href="index.php?logout=1">
+                          <i class="bi bi-box-arrow-right" data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                          Sair
+                      </a>
+                  </p>
+              </li>';
+
+            // Processamento do logout
+            if (isset($_GET['logout'])) {
+              header("location: index.php");               
+              exit();
+            }
           } else {
             echo '<!-- Tela Login-->
                   <li class="nav-item mr-5">
