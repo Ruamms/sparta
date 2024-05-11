@@ -86,7 +86,7 @@
             $endereco = isset($_POST['endereco']) && !empty($_POST['endereco']) ? $_POST['endereco'] : $cliente['endereco'];
             $telefone = isset($_POST['telefone']) && !empty($_POST['telefone']) ? $_POST['telefone'] : $cliente['telefone'];
             $data_nasc = isset($_POST['data_nasc']) && !empty($_POST['data_nasc']) ? $_POST['data_nasc'] : $cliente['data_nasc'];
-            $senha = isset($_POST['senha']) && !empty($_POST['senha']) ? $_POST['senha'] : $cliente['senha'];
+            $senha = $_POST['senha'];
             $cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : $cliente['cep'];
             $numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : $cliente['numero'];
             $cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : $cliente['cidade'];
@@ -96,40 +96,7 @@
             $cpf = $cliente['cpf'];
 
             // Verifica se o nome, email, senha e CPF foram fornecidos
-            if (!empty($nome) && !empty($email) && !empty($cpf)) {
-                // Verifica se o usuário ID foi fornecido
-
-                // Verifica se o CPF foi alterado
-                $query_cpf_original = "SELECT cpf FROM cliente WHERE usuario_id = $usuario_id";
-                $result_cpf_original = $conn->query($query_cpf_original);
-
-                if ($result_cpf_original) {
-                    $row_cpf_original = $result_cpf_original->fetch_assoc();
-                    $cpf_original = $row_cpf_original['cpf'];
-
-                    // Verifica se o CPF foi alterado
-                    if ($cpf != $cpf_original) {
-                        // Verifica se o CPF está em uso por outro cliente
-                        $query_verifica_cpf_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE cpf = '$cpf'";
-                        $result_verifica_cpf_cliente = $conn->query($query_verifica_cpf_cliente);
-
-                        if ($result_verifica_cpf_cliente) {
-                            $row_verifica_cpf_cliente = $result_verifica_cpf_cliente->fetch_assoc();
-                            $total_clientes_com_cpf = $row_verifica_cpf_cliente['total'];
-
-                            if ($total_clientes_com_cpf > 0) {
-                                echo "O CPF '$cpf' já está em uso por outro cliente.";
-                                exit; // Para a execução do script
-                            }
-                        } else {
-                            echo "Erro ao verificar CPF: " . $conn->error;
-                            exit;
-                        }
-                    }
-                } else {
-                    echo "Erro ao obter CPF original: " . $conn->error;
-                    exit;
-                }
+            if (!empty($nome) && !empty($email)) {               
 
                 // Verifica se o email foi alterado
                 $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
@@ -164,8 +131,12 @@
                 // Atualiza os dados do cliente na tabela cliente                        
                 $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco',telefone='$telefone',data_nasc='$data_nasc',numero_cartao='$numero_cartao', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento' WHERE usuario_id=$usuario_id";
                 if ($conn->query($query_update_cliente) === TRUE) {
-                    // Atualiza os dados do usuário na tabela usuario                            
-                    $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
+                    // Atualiza os dados do usuário na tabela usuario 
+                    if (empty($senha)) {
+                        $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email' WHERE usuario_id=$usuario_id";
+                    } else {
+                        $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
+                    }                                               
                     if ($conn->query($query_update_usuario) === TRUE) {
                         echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento
                         if ($_SESSION['perfil'] === 'cliente') {

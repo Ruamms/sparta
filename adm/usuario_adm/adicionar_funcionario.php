@@ -81,16 +81,6 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="telefone">Telefone:</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="data_nasc">Data de Nascimento:</label>
-                    <input type="date" class="form-control" id="data_nasc" name="data_nasc" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>

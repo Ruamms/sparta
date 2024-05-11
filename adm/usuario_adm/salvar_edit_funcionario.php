@@ -5,17 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>sparta</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../../public/style.css">
     <title>Adicionar usuario</title>
@@ -27,8 +20,7 @@
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -52,130 +44,100 @@
     </nav>
 
     <section class="container mt-3">
-    <?php
-include '../../usuario/conexao.php';
+        <?php
+        session_start();
+        include '../../usuario/conexao.php';
 
+        if (isset($_GET['usuario_id']) && is_numeric($_GET['usuario_id'])) {
+            $usuario_id = $_GET['usuario_id'];
 
-// Verifica se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recupera os dados do formulário e filtra-os
-    $nome = mysqli_real_escape_string($conn, $_POST['nome']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $senha = mysqli_real_escape_string($conn, $_POST['senha']);
-    $cpf = mysqli_real_escape_string($conn, $_POST['cpf']);
-    $matricula = mysqli_real_escape_string($conn, $_POST['matricula']);
-    $salario = mysqli_real_escape_string($conn, $_POST['salario']);
-    $cargo = mysqli_real_escape_string($conn, $_POST['cargo']);
-    $data_contratacao = mysqli_real_escape_string($conn, $_POST['data_contratacao']);
+            // Busca os dados do funcionario com base no ID do usuário
+            $query = "SELECT * FROM funcionario WHERE usuario_id = $usuario_id";
+            $result = $conn->query($query);
+            // Verifica se o funcionario foi encontrado
+            if ($result->num_rows > 0) {
+                $funcionario = $result->fetch_assoc();
+            }
+        }
+        // Verifica se o formulário foi enviado
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Recupera os dados do formulário e filtra-os
+            $nome = isset($_POST['nome']) && !empty($_POST['nome']) ? $_POST['nome'] : $funcionario['nome'];
+            $email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : $funcionario['email'];
+            $endereco = isset($_POST['endereco']) && !empty($_POST['endereco']) ? $_POST['endereco'] : $funcionario['endereco'];
+            $senha = $_POST['senha'];
+            $cep = isset($_POST['cep']) && !empty($_POST['cep']) ? $_POST['cep'] : $funcionario['cep'];
+            $numero = isset($_POST['numero']) && !empty($_POST['numero']) ? $_POST['numero'] : $funcionario['numero'];
+            $cidade = isset($_POST['cidade']) && !empty($_POST['cidade']) ? $_POST['cidade'] : $funcionario['cidade'];
+            $estado = isset($_POST['estado']) && !empty($_POST['estado']) ? $_POST['estado'] : $funcionario['estado'];
+            $complemento = isset($_POST['complemento']) && !empty($_POST['complemento']) ? $_POST['complemento'] : $funcionario['complemento'];
+            $cpf = $funcionario['cpf'];
+            $salario = isset($_POST['salario']) && !empty($_POST['salario']) ? $_POST['salario'] : $funcionario['salario'];
+            $cargo = isset($_POST['cargo']) && !empty($_POST['cargo']) ? $_POST['cargo'] : $funcionario['cargo'];
+            $data_contratacao = isset($_POST['data_contratacao']) && !empty($_POST['data_contratacao']) ? $_POST['data_contratacao'] : $funcionario['data_contratacao'];
 
+            // Verifica se o nome, email, senha e CPF foram fornecidos
+            if (!empty($nome) && !empty($email)) {              
 
+                // Verifica se o email foi alterado
+                $query_email_original = "SELECT email FROM funcionario WHERE usuario_id = $usuario_id";
+                $result_email_original = $conn->query($query_email_original);
 
-    // Verifica se o nome, email, senha e CPF foram fornecidos
-    if (!empty($nome) && !empty($email) && !empty($senha) && !empty($cpf)) {
-        // Verifica se o usuário ID foi fornecido
-        if (isset($_POST['usuario_id'])) {
-            $usuario_id = $_POST['usuario_id'];
+                if ($result_email_original) {
+                    $row_email_original = $result_email_original->fetch_assoc();
+                    $email_original = $row_email_original['email'];
 
-            // Verifica se o CPF foi alterado
-            $query_cpf_original = "SELECT cpf FROM funcionario WHERE usuario_id = $usuario_id";
-            $result_cpf_original = $conn->query($query_cpf_original);
+                    if ($email != $email_original) {
+                        // Verifica se o novo e-mail já está em uso por outro funcionario ou usuário
+                        $query_verifica_email_funcionario = "SELECT COUNT(*) AS total FROM funcionario WHERE email = '$email'";
+                        $result_verifica_email_funcionario = $conn->query($query_verifica_email_funcionario);
+                        $row_verifica_email_funcionario = $result_verifica_email_funcionario->fetch_assoc();
+                        $total_funcionarios_com_email_funcionario = $row_verifica_email_funcionario['total'];
 
-            if ($result_cpf_original) {
-                $row_cpf_original = $result_cpf_original->fetch_assoc();
-                $cpf_original = $row_cpf_original['cpf'];
+                        $query_verifica_email_usuario = "SELECT COUNT(*) AS total FROM usuario WHERE email = '$email'";
+                        $result_verifica_email_usuario = $conn->query($query_verifica_email_usuario);
+                        $row_verifica_email_usuario = $result_verifica_email_usuario->fetch_assoc();
+                        $total_usuarios_com_email_usuario = $row_verifica_email_usuario['total'];
 
-                // Verifica se o CPF foi alterado
-                if ($cpf != $cpf_original) {
-                    // Verifica se o CPF está em uso por outro cliente
-                    $query_verifica_cpf_cliente = "SELECT COUNT(*) AS total FROM cliente WHERE cpf = '$cpf'";
-                    $result_verifica_cpf_cliente = $conn->query($query_verifica_cpf_cliente);
-
-                    if ($result_verifica_cpf_cliente) {
-                        $row_verifica_cpf_cliente = $result_verifica_cpf_cliente->fetch_assoc();
-                        $total_clientes_com_cpf = $row_verifica_cpf_cliente['total'];
-
-                        if ($total_clientes_com_cpf > 0) {
-                            echo "O CPF '$cpf' já está em uso por outro cliente.";
+                        if ($total_funcionarios_com_email_funcionario > 0 || $total_usuarios_com_email_usuario > 0) {
+                            echo "O e-mail '$email' já está em uso por outro funcionario ou usuário.";
                             exit; // Para a execução do script
                         }
+                    }
+                } else {
+                    echo "Erro ao obter e-mail original: " . $conn->error;
+                    exit;
+                }
+
+
+                // Atualiza os dados do funcionario na tabela funcionario
+                $query_update_funcionario = "UPDATE funcionario SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento', salario = '$salario', data_contratacao = '$data_contratacao', cargo = '$cargo' WHERE usuario_id=$usuario_id";
+                if ($conn->query($query_update_funcionario) === TRUE) {
+                    // Atualiza os dados do usuário na tabela usuario
+                    if (empty($senha)) {
+                        $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email' WHERE usuario_id=$usuario_id";
                     } else {
-                        echo "Erro ao verificar CPF: " . $conn->error;
+                        $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
+                    }
+                    if ($conn->query($query_update_usuario) === TRUE) {
+                        echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento                            
+                        echo '<script>setTimeout(function(){window.location.href="usuarios.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
                         exit;
-                    }
-                }
-            } else {
-                echo "Erro ao obter CPF original: " . $conn->error;
-                exit;
-            }
-            
-
-            // Verifica se o email foi alterado
-            $query_email_original = "SELECT email FROM cliente WHERE usuario_id = $usuario_id";
-            $result_email_original = $conn->query($query_email_original);
-            
-
-            if ($result_email_original) {
-                $row_email_original = $result_email_original->fetch_assoc();
-                $email_original = $row_email_original['email'];
-            
-                // Verifica se o novo e-mail já está em uso por outro cliente ou usuário
-                $query_verifica_email = "SELECT usuario_id FROM cliente WHERE email = '$email' UNION ALL SELECT usuario_id FROM usuario WHERE email = '$email'";
-                $result_verifica_email = $conn->query($query_verifica_email);
-            
-                if ($result_verifica_email) {
-                    $usuarios_com_email = [];
-            
-                    while ($row = $result_verifica_email->fetch_assoc()) {
-                        $usuarios_com_email[] = $row['usuario_id'];
-                    }
-            
-                    // Remove o ID do usuário que está sendo editado da lista
-                    $index = array_search($usuario_id, $usuarios_com_email);
-                    if ($index !== false) {
-                        unset($usuarios_com_email[$index]);
-                    }
-            
-                    // Se ainda houver usuários com esse email, exibe mensagem de erro
-                    if (!empty($usuarios_com_email)) {
-                        echo "O e-mail '$email' já está em uso por outro cliente ou usuário.";
-                        exit; // Para a execução do script
+                    } else {
+                        echo "Erro ao atualizar os dados do usuário: " . $conn->error;
                     }
                 } else {
-                    echo "Erro ao verificar e-mail: " . $conn->error;
-                    exit;
+                    echo "Erro ao atualizar os dados do funcionario: " . $conn->error;
                 }
             } else {
-                echo "Erro ao obter e-mail original: " . $conn->error;
-                exit;
-            }
-            
-
-            // Atualiza os dados do cliente na tabela cliente
-            $query_update_cliente = "UPDATE cliente SET nome='$nome', email='$email', cpf='$cpf' WHERE usuario_id=$usuario_id";
-            if ($conn->query($query_update_cliente) === TRUE) {
-                // Atualiza os dados do usuário na tabela usuario
-                $query_update_usuario = "UPDATE usuario SET nome='$nome', email='$email', senha='$senha' WHERE usuario_id=$usuario_id";
-                if ($conn->query($query_update_usuario) === TRUE) {
-                    header('Location: usuarios.php');
-                    exit;
-                } else {
-                    echo "Erro ao atualizar os dados do usuário: " . $conn->error;
-                }
-            } else {
-                echo "Erro ao atualizar os dados do cliente: " . $conn->error;
+                echo "O nome, email, senha e CPF não foram fornecidos.";
             }
         } else {
-            echo "ID do usuário não foi fornecido.";
+            echo "O formulário não foi enviado.";
         }
-    } else {
-        echo "O nome, email, senha e CPF não foram fornecidos.";
-    }
-} else {
-    echo "O formulário não foi enviado.";
-}
 
-$conn->close();
-?>
+        $conn->close();
+        ?>
 
 
 

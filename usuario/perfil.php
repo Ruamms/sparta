@@ -147,7 +147,7 @@
                         <!--Perfil-->
                         <li class="nav-item mr-5">
 
-                            <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+                            <p class="text-center"> <a class="nav-link text-warning" href="../adm/relatorio/relatorio.php">
 
                                     <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
                                     Relatorio</a></p>
@@ -169,7 +169,6 @@
                     </ul>
                 </div>
             </div>
-        </nav>
         </nav>
     <?php
     }
