@@ -162,7 +162,7 @@
             <div class="alert alert-danger text-center mt-5" role="alert">
               <h3>Você ainda não fez compras.</h3>
             </div>
-            <a class="btn btn-warning mt-3" href="../../usuario/../index.php">Voltar</a>
+            <a class="btn btn-warning mt-3" href="../../index.php">Voltar</a>
           </div>
           <?php
         }

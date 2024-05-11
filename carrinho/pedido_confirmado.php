@@ -87,7 +87,7 @@
          
         </p>
 
-        <a href="../usuario/../index.php" class="m-3 btn btn-warning">Voltar para a Página Inicial</a>
+        <a href="../index.php" class="m-3 btn btn-warning">Voltar para a Página Inicial</a>
         <?php
         // Processo de finalização da compra
         
