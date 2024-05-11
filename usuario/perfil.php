@@ -6,17 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>sparta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- mascaras jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -50,7 +43,7 @@
             if ($resultEmail->num_rows > 0) {
                 // email existe, então recuperamos os dados do cliente
                 $cliente = $resultEmail->fetch_assoc();
-            }            
+            }
 
             // Fechar a declaração de verificação do email
             $verificarEmail->close();
@@ -77,66 +70,111 @@
         $estado = $cliente['estado'];
         $complemento = $cliente['complemento'];
         $numero_cartao = $cliente['numero_cartao'];
+        $usuario_id = isset($cliente['usuario_id']) && !empty($cliente['usuario_id']) ? $cliente['usuario_id'] : $_GET['usuario_id'];
 
         // Fechar a conexão
         $conn->close();
         ?>
     </section>
-    <div class="bg-warning text-center py-1">
-        <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
-    </div>
-    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
-        <div class="container">
-
-            <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <!-- inicio-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
-                                    class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="inicio"></i><br>
-                                Inicio</a>
-                        </p>
-                    </li>
-                    <!-- relatorio de compra-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning"
-                                href="../carrinho/relatorio/relatorio_compra.php"><i class="bi bi-bag-check "
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
-                                Minhas compras</a>
-                        </p>
-                    </li>
-
-                    <!-- carrinho de compra-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
-                                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Carrinho de Compras"></i><br>
-                                Carrinho</a></p>
-                    </li>
-                    <!-- sair-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../index.php">
-                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Sair"></i><br>
-                                Sair</a></p>
-                    </li>
-                </ul>
-            </div>
+    <!-- menu-->
+    <?php
+    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+    ?>
+        <div class="bg-warning text-center py-1">
+            <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
         </div>
-    </nav>
+        <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+            <div class="container">
+
+                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <!-- inicio-->
+                        <li class="nav-item mr-5">
+                            <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                                    Inicio</a>
+                            </p>
+                        </li>
+                        <!-- relatorio de compra-->
+                        <li class="nav-item mr-5">
+                            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php"><i class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
+                                    Minhas compras</a>
+                            </p>
+                        </li>
+
+                        <!-- carrinho de compra-->
+                        <li class="nav-item mr-5">
+                            <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
+                                    <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
+                                    Carrinho</a></p>
+                        </li>
+                        <!-- sair-->
+                        <li class="nav-item mr-5">
+                            <p class="text-center"><a class="nav-link text-warning" href="../index.php">
+                                    <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                    Sair</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <?php
+    } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'funcionario') {
+    ?>
+        <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
+            <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
+                <div class="container">
+                    <a href="#" class="navbar-brand">
+                        <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item mr-5">
+                                <p class="text-center">
+                                    <a class="nav-link text-warning" href="../produto/lista_produtos.php">
+                                        <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
+                                        Produtos</a>
+                                </p>
+                            </li>
+                            <!--Perfil-->
+                            <li class="nav-item mr-5">
+
+                                <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
+
+                                        <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
+                                        Relatorio</a></p>
+
+                            </li>
+
+                            <!-- sair-->
+                            <li class="nav-item mr-5">
+                                <p class="text-center"><a class="nav-link text-warning" href="../../index.php">
+                                        <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                        Sair</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </nav>
+    <?php
+    }
+    ?>
 
 
 
     <section class="container mt-3">
         <h2 class="mt-3 ">Editar cadastro</h2>
-        <form action="../adm/usuario_adm/salvar_edit_cliente.php?usuario_id=<?php echo $_GET['usuario_id']; ?>" class="container" method="post">
+        <form action="../adm/usuario_adm/salvar_edit_cliente.php?usuario_id=<?php echo $usuario_id; ?>" class="container" method="post">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome:</label>
@@ -144,28 +182,23 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="numero_cartao">Número do Cartão de Crédito:</label>
-                    <input type="text" class="form-control " id="numero_cartao" name="numero_cartao"
-                        placeholder="<?php echo $numero_cartao; ?>" pattern="\d{4}.\d{4}.\d{4}.\d{4}"
-                        title="Digite o número do cartão no formato 0000.0000.0000.0000">
+                    <input type="text" class="form-control " id="numero_cartao" name="numero_cartao" placeholder="<?php echo $numero_cartao; ?>" pattern="\d{4}.\d{4}.\d{4}.\d{4}" title="Digite o número do cartão no formato 0000.0000.0000.0000">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="telefone">Telefone:</label>
-                    <input type="tel" class="form-control" id="telefone" name="telefone"
-                        placeholder="<?php echo $telefone; ?>">
+                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="<?php echo $telefone; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="data_nasc">Data de Nascimento:</label>
-                    <input type="date" class="form-control" id="data_nasc" name="data_nasc"
-                        value="<?php echo $data_nasc; ?>">
+                    <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="<?php echo $data_nasc; ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email"
-                        placeholder="<?php echo $email; ?>">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo $email; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="confirmar_email">Confirmar Email:</label>
@@ -189,32 +222,27 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" class="form-control" id="endereco" name="endereco"
-                        placeholder="<?php echo $endereco; ?>" readonly>
+                    <input type="text" class="form-control" id="endereco" name="endereco" placeholder="<?php echo $endereco; ?>" readonly>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="numero">Número:</label>
-                    <input type="text" class="form-control" id="numero" name="numero"
-                        placeholder="<?php echo $numero; ?>">
+                    <input type="text" class="form-control" id="numero" name="numero" placeholder="<?php echo $numero; ?>">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade"
-                        placeholder="<?php echo $cidade; ?>" readonly>
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="<?php echo $cidade; ?>" readonly>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="estado">Estado:</label>
-                    <input type="text" class="form-control" id="estado" name="estado"
-                        placeholder="<?php echo $estado; ?>" readonly>
+                    <input type="text" class="form-control" id="estado" name="estado" placeholder="<?php echo $estado; ?>" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="complemento">Complemento:</label>
-                    <input type="text" class="form-control" id="complemento" name="complemento"
-                        placeholder="<?php echo $complemento; ?>">
+                    <input type="text" class="form-control" id="complemento" name="complemento" placeholder="<?php echo $complemento; ?>">
                 </div>
             </div>
             <div class="text-center m-3">
@@ -223,7 +251,7 @@
         </form>
     </section>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Máscaras para os campos
             $('#numero_cartao').mask('0000.0000.0000.0000', {
                 reverse: true
@@ -234,9 +262,9 @@
             $('#cep').mask('00000-000');
 
             // Evento blur para preencher o endereço usando a API ViaCEP
-            $('#cep').blur(function () {
+            $('#cep').blur(function() {
                 var cep = $(this).val().replace('-', '');
-                $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function (data) {
+                $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
                     $('#endereco').val(data.logradouro);
                     $('#cidade').val(data.localidade);
                     $('#estado').val(data.uf);
@@ -244,7 +272,7 @@
             });
 
             // Evento de envio do formulário
-            $('form').submit(function (event) {
+            $('form').submit(function(event) {
                 // Verificação das senhas
                 var senha = $('#senha').val();
                 var confirmarSenha = $('#confirmar_senha').val();
@@ -265,7 +293,7 @@
             });
 
             // Se o campo de senha for preenchido, tornar o campo de confirmar senha obrigatório
-            $('#senha').keyup(function () {
+            $('#senha').keyup(function() {
                 var senha = $(this).val();
                 if (senha.trim() !== '') {
                     $('#confirmar_senha').prop('required', true);
@@ -275,7 +303,7 @@
             });
 
             // Se o campo de e-mail for preenchido, tornar o campo de confirmar e-mail obrigatório
-            $('#email').keyup(function () {
+            $('#email').keyup(function() {
                 var email = $(this).val();
                 if (email.trim() !== '') {
                     $('#confirmar_email').prop('required', true);
