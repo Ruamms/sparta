@@ -83,7 +83,7 @@ $result = $conn->query($query);
         <h3 class=" m-3">Usuarios Cadastrados</h3>
         <div class="d-flex">
             <div class="m-2">
-                <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_cliente.php"><i
+                <p><a class="btn btn-success mt-3 m-1 w-100" href="../../usuario/adicionar.php"><i
                             class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
                             title="Cliente"></i><br>
                         Adicionar Cliente</a></p>
