@@ -37,7 +37,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- relatorio de compra-->
                     <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
+                        <p class="text-center"><a class="nav-link text-warning" href="../index.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                                 Inicio</a>
                         </p>
                     </li>
@@ -197,7 +197,11 @@
             }
             if (!empty($_SESSION['carrinho'])) {
                 echo '<a href="index.php" class="btn btn-warning mt-3 m-2">Continuar Comprando</a>';
-                echo '<a href="finalizar_compra.php" class="btn btn-primary mt-3 m-2">Finalizar compra</a>';
+                if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+                    echo '<a href="finalizar_compra.php" class="btn btn-primary mt-3 m-2">Finalizar compra</a>';
+                } else {
+                    echo '<a href="../usuario/login.php" class="btn btn-primary mt-3 m-2">Finalizar compra</a>';
+                }
             } else {
                 echo '<p class="mt-3">Seu carrinho está vazio. Não é possível finalizar a compra.</p>';
             }

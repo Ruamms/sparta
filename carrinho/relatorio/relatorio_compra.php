@@ -42,7 +42,7 @@
         <ul class="navbar-nav ml-auto">
           <!-- -->
           <li class="nav-item mr-5">
-            <p class="text-center"><a class="nav-link text-warning" href="../../usuario/produtosWey.php"><i
+            <p class="text-center"><a class="nav-link text-warning" href="../../index.php"><i
                   class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                 Inicio</a>
             </p>
@@ -162,7 +162,7 @@
             <div class="alert alert-danger text-center mt-5" role="alert">
               <h3>Você ainda não fez compras.</h3>
             </div>
-            <a class="btn btn-warning mt-3" href="../../usuario/produtosWey.php">Voltar</a>
+            <a class="btn btn-warning mt-3" href="../../usuario/../index.php">Voltar</a>
           </div>
           <?php
         }

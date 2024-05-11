@@ -26,7 +26,7 @@
         <ul class="navbar-nav ml-auto">
            <!-- inicio-->
           <li class="nav-item mr-5">
-            <h4><a class="nav-link text-warning" href="../usuario/produtosWey.php"><i
+            <h4><a class="nav-link text-warning" href="../index.php"><i
                   class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top"
                   title="inicio"></i></a>
             </h4>
@@ -87,7 +87,7 @@
          
         </p>
 
-        <a href="../usuario/produtosWey.php" class="m-3 btn btn-warning">Voltar para a Página Inicial</a>
+        <a href="../usuario/../index.php" class="m-3 btn btn-warning">Voltar para a Página Inicial</a>
         <?php
         // Processo de finalização da compra
         

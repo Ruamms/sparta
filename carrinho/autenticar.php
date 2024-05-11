@@ -33,7 +33,7 @@ if ($result->num_rows == 1) {
         $_SESSION['logged_in'] = true;
         $_SESSION['nome'] = $nome; // Armazene o nome na sessão
         $_SESSION['email'] = $email;
-        header('Location: produtosWey.php');
+        header('Location: ../index.php');
     }
 } else {
     echo '<div class="alert alert-danger" role="alert">

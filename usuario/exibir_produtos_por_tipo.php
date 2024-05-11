@@ -29,7 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <h3><a class="nav-link text-warning" href="../usuario/produtosWey.php">Inicio</a></h3>
+            <h3><a class="nav-link text-warning" href="../index.php">Inicio</a></h3>
           </li>
         </ul>
       </div>

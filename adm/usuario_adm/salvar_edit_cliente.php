@@ -142,7 +142,7 @@
                     if ($conn->query($query_update_usuario) === TRUE) {
                         echo '<script>alert("Salvo com sucesso!");</script>'; // Mensagem de sucesso antes do redirecionamento
                         if ($_SESSION['perfil'] === 'cliente') {
-                            echo '<script>setTimeout(function(){window.location.href="../../usuario/produtosWey.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
+                            echo '<script>setTimeout(function(){window.location.href="../../index.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
                         } else if ($_SESSION['perfil'] === 'funcionario') {
                             echo '<script>setTimeout(function(){window.location.href="usuarios.php";}, 1000);</script>'; // Redirecionamento com atraso de 1 segundo (1000 milissegundos)
                         }

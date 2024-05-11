@@ -54,22 +54,39 @@
                                 Carrinho</a></p>
                     </li>
                     <!--Perfil-->
-                    <li class="nav-item mr-5">
-
-                        <p class="text-center"> <a class="nav-link text-warning" href="../usuario/perfil.php">
-                                <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Configuração"></i><br>
-                                Perfil</a></p>
-
-                    </li>
-                    <!-- sair-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../index.php">
-                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Sair"></i><br>
-                                Sair</a></p>
-                    </li>
-
+                    <?php
+                    if (!isset($_SESSION)) {
+                        session_start();
+                    }
+                    include("../usuario/conexao.php");
+                    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
+                        echo '<li class="nav-item mr-5">
+                                    <p class="text-center">
+                                        <a class="nav-link text-warning" href="../usuario/perfil.php">
+                                            <i class="bi bi-person-circle " data-bs-toggle="tooltip" data-bs-placement="top" title="Configuração"></i><br>
+                                            Perfil
+                                        </a>
+                                    </p>
+                                </li>';
+                        echo '<li class="nav-item mr-5">
+                                <p class="text-center">
+                                <a class="nav-link text-warning" href="../index.php">
+                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                        Sair
+                                    </a>
+                                </p>
+                            </li>';
+                    } else {
+                        echo '<!-- Tela Login-->
+                                <li class="nav-item mr-5">
+                                    <p class="text-center"><a class="nav-link text-warning" href="usuario/login.php"><i
+                                        class="bi bi-box-arrow-in-left " data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Login"></i><br>
+                                        Login</a>
+                                    </p>
+                                </li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

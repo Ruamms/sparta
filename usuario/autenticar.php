@@ -71,7 +71,7 @@
 
         if ($perfil === 'cliente') {
           $_SESSION['logged_in'] = true;
-          header('Location: produtosWey.php'); // Substitua com a página do cliente
+          header('Location: ../index.php'); // Substitua com a página do cliente
 
         } elseif ($perfil === 'funcionario') {
           $_SESSION['funcionario'] = true;
