@@ -126,17 +126,16 @@
     <?php
     } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'funcionario') {
     ?>
-        <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
-            <nav class="navbar navbar-expand-md navbar-light bg-dark box-shadow">
-                <div class="container">
-                    <a href="#" class="navbar-brand">
-                        <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
+        <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+            <div class="container">
+
+                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
 
                             <li class="nav-item mr-5">
                                 <p class="text-center">
