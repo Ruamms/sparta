@@ -80,7 +80,7 @@
     </section>
     <!-- menu-->
     <?php
-    if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
+    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
     ?>
         <div class="bg-warning text-center py-1">
             <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>

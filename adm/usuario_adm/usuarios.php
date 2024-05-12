@@ -35,7 +35,6 @@ $result = $conn->query($query);
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-
                     <li class="nav-item mr-5">
                         <p class="text-center">
                             <a class="nav-link text-warning" href="../produto/lista_produtos.php">
@@ -45,12 +44,9 @@ $result = $conn->query($query);
                     </li>
                     <!--Perfil-->
                     <li class="nav-item mr-5">
-
                         <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
-
                                 <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
                                 Relatorio</a></p>
-
                     </li>
 
                     <!-- sair-->
@@ -109,7 +105,7 @@ $result = $conn->query($query);
                         <?php if ($row['bloqueado'] == 0) : ?>
 
                             <a class="btn w-75 btn-danger mt-1" href="bloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Bloquear</a>
-                            
+
                             <?php
                             if ($row['perfil'] == 'cliente') {
                                 echo '<a class="btn w-75 btn-success mt-1" href="../../usuario/perfil.php?usuario_id=' . $row['usuario_id'] . '">Editar</a>';
