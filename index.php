@@ -49,7 +49,7 @@
           if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
             echo '<li class="nav-item mr-5">
                                     <p class="text-center">
-                                        <a class="nav-link text-warning" href="../carrinho/relatorio/relatorio_compra.php">
+                                        <a class="nav-link text-warning" href="./carrinho/relatorio/relatorio_compra.php">
                                         <i class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
                                             Minhas compras
                                         </a>

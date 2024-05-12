@@ -35,17 +35,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <!-- relatorio de compra-->
+                    <!-- Inicio -->
                     <li class="nav-item mr-5">
                         <p class="text-center"><a class="nav-link text-warning" href="../index.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                                 Inicio</a>
                         </p>
-                    </li>
-                    <!-- carrinho de compra-->
-                    <li class="nav-item mr-5">
-                        <p class="text-center"><a class="nav-link text-warning" href="../carrinho/carrinho.php">
-                                <i class="bi bi-cart" data-bs-toggle="tooltip" data-bs-placement="top" title="Carrinho de Compras"></i><br>
-                                Carrinho</a></p>
                     </li>
                     <!--Perfil-->
                     <?php
@@ -54,6 +48,14 @@
                     }
                     include("../usuario/conexao.php");
                     if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {
+                        echo '<li class="nav-item mr-5">
+                                    <p class="text-center">
+                                        <a class="nav-link text-warning" href="./relatorio/relatorio_compra.php">
+                                        <i class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
+                                            Minhas compras
+                                        </a>
+                                    </p>
+                                </li>';
                         echo '<li class="nav-item mr-5">
                                     <p class="text-center">
                                         <a class="nav-link text-warning" href="../usuario/perfil.php">

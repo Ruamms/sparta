@@ -31,6 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <!-- relatorio de compra-->
+          
           <li class="nav-item mr-5">
             <p class="text-center"><a class="nav-link text-warning" href="../index.php"><i class="bi bi-house " data-bs-toggle="tooltip" data-bs-placement="top" title="inicio"></i><br>
                 Inicio</a>
@@ -57,6 +58,14 @@
                           </a>
                       </p>
                   </li>';
+            echo '<li class="nav-item mr-5">
+                              <p class="text-center">
+                                  <a class="nav-link text-warning" href="./relatorio/relatorio_compra.php">
+                                  <i class="bi bi-bag-check " data-bs-toggle="tooltip" data-bs-placement="top" title="Minhas Compras"></i><br>
+                                      Minhas compras
+                                  </a>
+                              </p>
+                          </li>';
           }
           ?>
 
