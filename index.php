@@ -75,6 +75,10 @@
             // Processamento do logout
             if (isset($_GET['logout'])) {
               $_SESSION['logado'] = 1;
+              $_SESSION['usuario_id'] = 0;
+              $_SESSION['nome'] = ''; // Armazene o nome na sessão
+              $_SESSION['email'] = '';
+              $_SESSION['perfil'] = '';
               header("location: index.php");
               exit();
             }
@@ -101,7 +105,7 @@
       </div>
       <div class="col">
         <h2 class="m-5 ">Seja Bem vindo,</h2>
-        <?php include 'usuario/id_usuario.php'; ?>
+        <?php if ($_SESSION['logado'] === 2){ include 'usuario/id_usuario.php';} ?>
       </div>
       <div class="col">
         <img class="imagem-login" src="img/suplementos.png" alt="sparta" />
