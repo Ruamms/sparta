@@ -76,7 +76,7 @@
 
             <div class="m-5 text-center ">
                 <h3>Relatorio de ganhos</h3>
-                <form action="relatorio_valor.php" method="post">
+                <form action="relatorio_valor.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="dataInicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="dataInicial" required><br>
 
@@ -90,7 +90,7 @@
             </div>
             <div class="m-5 text-center ">
                 <h3>Ranking de clientes</h3>
-                <form action="relatorio_cliente.php" method="post">
+                <form action="relatorio_cliente.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" id="data_inicial" name="data_inicial" required><br>
 
@@ -101,7 +101,7 @@
             </div>
             <div class="m-5 text-center ">
                 <h3>Ranking de produto</h3>
-                <form action="relatorio_Produto.php" method="post">
+                <form action="relatorio_Produto.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="data_inicial" required><br>
                     <label class="font-weight-bold  m-3" for="data_final">Data Final:</label><br>
