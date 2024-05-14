@@ -79,6 +79,7 @@
               $_SESSION['nome'] = ''; // Armazene o nome na sessão
               $_SESSION['email'] = '';
               $_SESSION['perfil'] = '';
+              $_SESSION['cep_usuario'] = '';
               header("location: index.php");
               exit();
             }

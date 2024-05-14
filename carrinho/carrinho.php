@@ -91,7 +91,7 @@
     <div class="container mt-3">
         <h3 class="mt-3">Carrinho de Compras</h3>
         <?php
-        include '../usuario/id_usuario.php';
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2) {include '../usuario/id_usuario.php';}
         // Função para remover um produto do carrinho
         function deleteCartItem($productId)
         {
