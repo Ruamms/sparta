@@ -105,7 +105,7 @@
         <img class="imagem-login" src="img/suplemento-alimentar-o-que-e-par.png" alt="sparta" />
       </div>
       <div class="col">
-        <h2 class="m-5 ">Seja Bem vindo,</h2>
+        <h2 class="m-5 ">Seja Bem vindo</h2>
         <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2){ include 'usuario/id_usuario.php';} ?>
       </div>
       <div class="col">
