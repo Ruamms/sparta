@@ -69,7 +69,7 @@
     if (!isset($_SESSION)) {
       session_start();
     }
-    include '../../usuario/id_usuario.php';
+    include ("../../usuario/id_usuario.php");
 
     if (isset($_SESSION['usuario_id'])) {
       $usuario_id = $_SESSION['usuario_id'];

@@ -72,7 +72,7 @@
     <h2 class="m-3">Parabéns pela compra</h2>
     <div class="m-3">
       <h1>
-        <?php include '../../usuario/id_usuario.php'; ?>
+        <?php include '../usuario/id_usuario.php'; ?>
       </h1>
     </div>
 
