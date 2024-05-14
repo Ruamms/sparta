@@ -113,7 +113,8 @@
 
 
                 // Atualiza os dados do funcionario na tabela funcionario
-                $query_update_funcionario = "UPDATE funcionario SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento', salario = '$salario', data_contratacao = '$data_contratacao', cargo = '$cargo' WHERE usuario_id=$usuario_id";
+                $salario = str_replace(',', '.', $salario);
+                $query_update_funcionario = "UPDATE funcionario SET nome='$nome', email='$email', cpf='$cpf',endereco='$endereco', cep = '$cep', numero = '$numero', cidade = '$cidade',estado = '$estado', complemento = '$complemento', salario = $salario, data_contratacao = '$data_contratacao', cargo = '$cargo' WHERE usuario_id='$usuario_id'";
                 if ($conn->query($query_update_funcionario) === TRUE) {
                     // Atualiza os dados do usuário na tabela usuario
                     if (empty($senha)) {

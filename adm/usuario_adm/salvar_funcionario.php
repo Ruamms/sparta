@@ -124,6 +124,7 @@ if ($resultEmail->num_rows > 0) {
             $usuario_id = $stmtUsuario->insert_id;
 
             // Inserir dados na tabela "funcionario" usando declarações preparadas
+            $salario = str_replace(',', '.', $salario);
             $sqlFuncionario = "INSERT INTO funcionario (usuario_id, nome, email, matricula, cpf, cargo, salario, endereco, data_contratacao, cep, numero, cidade, estado, complemento) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmtFuncionario = $conn->prepare($sqlFuncionario);

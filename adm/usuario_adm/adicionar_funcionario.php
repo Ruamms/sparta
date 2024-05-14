@@ -82,6 +82,16 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
+                    <label for="data_contratacao">Data de Contratação:</label>
+                    <input type="date" class="form-control" id="data_contratacao" name="data_contratacao" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="matricula">Matrícula:</label>
+                    <input type="text" class="form-control" id="matricula" name="matricula" pattern="\d{5}" title="Digite exatamente 5 números" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
@@ -143,12 +153,6 @@
                         <option value="analista">Analista</option>
                         <option value="assistente">Assistente</option>
                     </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="data_contratacao">Data de Contratação:</label>
-                    <input type="date" class="form-control" id="data_contratacao" name="data_contratacao" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-warning w-100 mt-3">Enviar</button>
