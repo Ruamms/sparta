@@ -4,13 +4,13 @@ if (!isset($_SESSION)) {
 }
 
 // Verificar se os dados do formulário foram recebidos
-if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_cartao'], $_POST['id_usuario'], $_POST['total'], $_POST['metodo_pagamento'], $_POST['cvc'], $_POST['parcelas'], $_POST['detalhes_carrinho'])) {
+if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_cartao'], $_POST['usuario_id'], $_POST['total'], $_POST['metodo_pagamento'], $_POST['cvc'], $_POST['parcelas'], $_POST['detalhes_carrinho'])) {
 
     // Receber os dados do formulário
     $nome_cliente = $_POST['nome_cliente'];
     $endereco_cliente = $_POST['endereco_cliente'];
     $numero_cartao = $_POST['numero_cartao'];
-    $id_usuario = $_POST['id_usuario'];
+    $usuario_id = $_POST['usuario_id'];
     $total = $_POST['total'];
     $metodo_pagamento = $_POST['metodo_pagamento'];
     $cvc = $_POST['cvc'];
@@ -35,7 +35,7 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
 
     if ($stmt_pedido) {
         // Vincular os parâmetros da consulta
-        $stmt_pedido->bind_param("iss", $id_usuario, $endereco_cliente, $total);
+        $stmt_pedido->bind_param("iss", $usuario_id, $endereco_cliente, $total);
 
         // Executar a consulta
         $stmt_pedido->execute();

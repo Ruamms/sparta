@@ -92,7 +92,7 @@ if (!isset($_SESSION)) {
 
         // Verificar se o usuário está logado
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-            $id_usuario = $_SESSION['id_usuario'];
+            $usuario_id = $_SESSION['usuario_id'];
 
             // Processar informações do carrinho
             if (!empty($_SESSION['carrinho'])) {
@@ -133,7 +133,7 @@ if (!isset($_SESSION)) {
             $stmt_cliente = $conn->prepare($sql_cliente);
 
             if ($stmt_cliente) {
-                $stmt_cliente->bind_param("i", $id_usuario);
+                $stmt_cliente->bind_param("i", $usuario_id);
                 $stmt_cliente->execute();
                 $result_cliente = $stmt_cliente->get_result();
 
@@ -222,8 +222,8 @@ if (!isset($_SESSION)) {
 
 
                 <div class="form-group col d-none">
-                    <label class="font-weight-bold" for="id_usuario">ID do Usuário:</label>
-                    <input type="text" class="form-control" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required readonly>
+                    <label class="font-weight-bold" for="usuario_id">ID do Usuário:</label>
+                    <input type="text" class="form-control" id="usuario_id" name="usuario_id" value="<?php echo $usuario_id; ?>" required readonly>
                 </div>
                 <!-- Campos para mostrar informações da compra -->
                 <input type="hidden" name=" ids_produtos_comprados" value="<?php $ids_produtos_comprados; ?>">
