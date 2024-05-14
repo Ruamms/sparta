@@ -106,7 +106,7 @@
       </div>
       <div class="col">
         <h2 class="m-5 ">Seja Bem vindo,</h2>
-        <?php if ($_SESSION['logado'] === 2){ include 'usuario/id_usuario.php';} ?>
+        <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] === 2){ include 'usuario/id_usuario.php';} ?>
       </div>
       <div class="col">
         <img class="imagem-login" src="img/suplementos.png" alt="sparta" />
