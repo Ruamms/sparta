@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br">rio
 
 <head>
     <meta charset="UTF-8" />
@@ -109,6 +109,7 @@
                 <div class="form-group col-md-6">
                     <label for="cpf">CPF:</label>
                     <input type="text" class="form-control" id="cpf" name="cpf" required maxlength="14">
+                    <span id="cpf-invalido" style="color: red; display: none;">CPF inválido</span>
                 </div>
             </div>
             <div class="form-row">
@@ -187,6 +188,55 @@
                 reverse: true
             });
             $('#cep').mask('00000-000');
+
+            // Função para validar CPF
+            function validarCPF(cpf) {
+                cpf = cpf.replace(/[^\d]+/g, '');
+                if (cpf == '') return false;
+                // Elimina CPFs invalidos conhecidos
+                if (cpf.length != 11 ||
+                    cpf == "00000000000" ||
+                    cpf == "11111111111" ||
+                    cpf == "22222222222" ||
+                    cpf == "33333333333" ||
+                    cpf == "44444444444" ||
+                    cpf == "55555555555" ||
+                    cpf == "66666666666" ||
+                    cpf == "77777777777" ||
+                    cpf == "88888888888" ||
+                    cpf == "99999999999")
+                    return false;
+                // Valida 1o digito
+                add = 0;
+                for (i = 0; i < 9; i++)
+                    add += parseInt(cpf.charAt(i)) * (10 - i);
+                rev = 11 - (add % 11);
+                if (rev == 10 || rev == 11)
+                    rev = 0;
+                if (rev != parseInt(cpf.charAt(9)))
+                    return false;
+                // Valida 2o digito
+                add = 0;
+                for (i = 0; i < 10; i++)
+                    add += parseInt(cpf.charAt(i)) * (11 - i);
+                rev = 11 - (add % 11);
+                if (rev == 10 || rev == 11)
+                    rev = 0;
+                if (rev != parseInt(cpf.charAt(10)))
+                    return false;
+                return true;
+            }
+
+            // Evento de blur para validar CPF
+            $('#cpf').blur(function() {
+                var cpf = $(this).val();
+                if (!validarCPF(cpf)) {
+                    $('#cpf-invalido').show();
+                } else {
+                    $('#cpf-invalido').hide();
+                }
+            });
+
 
             // Evento blur para preencher o endereço usando a API ViaCEP
             $('#cep').blur(function() {
