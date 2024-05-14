@@ -5,11 +5,9 @@ if (!isset($_SESSION)) {
 
 // Verifique se o usuário está logado
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    // O usuário está logado, então exiba uma mensagem de boas-vindas com o nome
-    echo '<h3>'  . $_SESSION['nome'] . '</h3>';
 
     // Faça uma consulta para obter o ID do usuário com base no nome de usuário
-    $nome_usuario = $_SESSION['nome'];
+    $usuario_id = $_SESSION['usuario_id'];
 
     $host = 'localhost';
     $db = 'cadastro';
@@ -23,32 +21,35 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     }
 
     // Consulta SQL para obter o ID do usuário
-    $sql_id_usuario = "SELECT usuario_id FROM usuario WHERE nome = ?";
+    $sql = "SELECT nome, email FROM usuario WHERE usuario_id = ?";
 
     // Preparar a instrução SQL
-    $stmt_id_usuario = $conn->prepare($sql_id_usuario);
+    $stmt = $conn->prepare($sql);
 
-    if ($stmt_id_usuario) {
+    if ($stmt) {
         // Vincular o valor da variável à instrução
-        $stmt_id_usuario->bind_param("s", $nome_usuario);
+        $stmt->bind_param("s", $usuario_id);
 
         // Executar a consulta
-        $stmt_id_usuario->execute();
+        $stmt->execute();
 
         // Obter o resultado
-        $result_id_usuario = $stmt_id_usuario->get_result();
+        $result = $stmt->get_result();
 
-        if ($result_id_usuario->num_rows > 0) {
-            $row_id_usuario = $result_id_usuario->fetch_assoc();
-            $id_usuario = $row_id_usuario['usuario_id'];
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
 
             // Armazene o ID do usuário em uma variável de sessão
-            $_SESSION['id_usuario'] = $id_usuario;
+            $_SESSION['nome'] = $row['nome'];
+            $_SESSION['email'] = $row['email'];
 
             // Agora você tem o ID do usuário disponível em $_SESSION['id_usuario']
 
             // Fechar a instrução SQL
-            $stmt_id_usuario->close();
+            $stmt->close();
+
+            // O usuário está logado, então exiba uma mensagem de boas-vindas com o nome
+            echo '<h3>'  . $_SESSION['nome'] . '</h3>';
         } else {
             echo "ID de usuário não encontrado.";
         }

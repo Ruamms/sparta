@@ -28,7 +28,7 @@
 
         // Verificar se o email foi enviado via GET
         if (isset($_SESSION['perfil']) and ($_SESSION['perfil'] === 'cliente')) {
-            $email = $_SESSION['email'];
+            $usuario_id = $_SESSION['usuario_id'];
 
             $conn = new mysqli('localhost', 'root', '', 'cadastro');
 
@@ -37,8 +37,8 @@
             }
 
             // Verificar se o email existe na tabela de clientes
-            $verificarEmail = $conn->prepare("SELECT * FROM cliente WHERE email = ?");
-            $verificarEmail->bind_param("s", $email);
+            $verificarEmail = $conn->prepare("SELECT * FROM cliente WHERE usuario_id = ?");
+            $verificarEmail->bind_param("s", $usuario_id);
             $verificarEmail->execute();
             $resultEmail = $verificarEmail->get_result();
 
@@ -57,11 +57,11 @@
             $result = $conn->query($query);
             // Verifica se o cliente foi encontrado
             if ($result->num_rows > 0) {
-                $cliente = $result->fetch_assoc();
-                $email = $cliente['email'];
+                $cliente = $result->fetch_assoc();                
             }
         }
         // Preencher os campos do formulário com os dados do cliente
+        $email = $cliente['email'];
         $nome = $cliente['nome'];
         $telefone = $cliente['telefone'];
         $data_nasc = $cliente['data_nasc'];
