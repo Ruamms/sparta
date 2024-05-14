@@ -71,6 +71,36 @@
         $_SESSION['logado'] = 2;
 
         if ($perfil === 'cliente') {
+          $sql_cliente_info = "SELECT nome, email, endereco, telefone, data_nasc, cep, numero, cidade, estado, complemento FROM cliente WHERE usuario_id = ?";
+          $stmt_cliente_info = $conn->prepare($sql_cliente_info);
+
+          if ($stmt_cliente_info) {
+            // Vincular o valor da variável à instrução
+            $stmt_cliente_info->bind_param("i", $usuario_id);
+
+            // Executar a consulta
+            $stmt_cliente_info->execute();
+
+            // Obter o resultado
+            $result_cliente_info = $stmt_cliente_info->get_result();
+
+            if ($result_cliente_info->num_rows > 0) {
+              $row_cliente_info = $result_cliente_info->fetch_assoc();
+
+              // Armazenar as informações do cliente em variáveis de sessão
+              $_SESSION['endereco_usuario'] = $row_cliente_info['endereco'];
+              $_SESSION['telefone_usuario'] = $row_cliente_info['telefone'];
+              $_SESSION['data_nasc_usuario'] = $row_cliente_info['data_nasc'];
+              $_SESSION['cep_usuario'] = $row_cliente_info['cep'];
+              $_SESSION['numero_usuario'] = $row_cliente_info['numero'];
+              $_SESSION['cidade_usuario'] = $row_cliente_info['cidade'];
+              $_SESSION['estado_usuario'] = $row_cliente_info['estado'];
+              $_SESSION['complemento_usuario'] = $row_cliente_info['complemento'];
+
+              // Fechar a instrução e liberar recursos
+              $stmt_cliente_info->close();
+            }
+          }
           $_SESSION['logged_in'] = true;
           header('Location: ../index.php'); // Substitua com a página do cliente
 
