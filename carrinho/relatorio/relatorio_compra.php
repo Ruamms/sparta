@@ -192,6 +192,7 @@
                         <li class="list-group-item m-2">
                           <?php echo htmlspecialchars($row_detalhes['nome'], ENT_QUOTES, 'UTF-8'); ?> - Quantidade:
                           <?php echo htmlspecialchars($row_detalhes['quantidade'], ENT_QUOTES, 'UTF-8'); ?>
+                          
                         </li>
                       <?php } ?>
                     </ul>

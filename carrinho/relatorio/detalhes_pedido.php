@@ -20,7 +20,7 @@ if (isset($_GET['pedido_id'])) {
 
   // Consulta para obter detalhes dos itens do pedido com as imagens dos produtos
   $query_itens = "
-    SELECT dp.*, p.imagem, p.nome 
+    SELECT dp.*, p.imagem, p.nome ,p.preco
     FROM detalhes_pedido dp 
     JOIN produtos p ON dp.produto_id = p.produto_id 
     WHERE dp.pedido_id = $pedido_id";
@@ -177,6 +177,8 @@ if (isset($_GET['pedido_id'])) {
             <div>
               <p><?php echo htmlspecialchars($item['nome'], ENT_QUOTES, 'UTF-8'); ?> - Quantidade:
                 <?php echo htmlspecialchars($item['quantidade'], ENT_QUOTES, 'UTF-8'); ?>
+                - Preço: R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?>
+              
               </p>
             </div>
           </li>
