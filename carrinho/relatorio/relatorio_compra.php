@@ -159,35 +159,50 @@
               $result_detalhes_pedido = $stmt->get_result();
               ?>
 
-              <div class="mt-3 m-2">
-                <h5>Pedido realizado: <?php echo htmlspecialchars($data_pedido, ENT_QUOTES, 'UTF-8'); ?></h5>
-                <div class="m-3">
-                  <p>Número do pedido: <?php echo htmlspecialchars($pedido_id, ENT_QUOTES, 'UTF-8'); ?></p>
-                  <p>Valor Total: R$ <?php echo htmlspecialchars($valor_total, ENT_QUOTES, 'UTF-8'); ?></p>
-
-                  <h5 class="text-center">Status do Pedido</h5>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: <?php echo $percentual_conclusao; ?>%;"
-                      aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
-                      <?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?>
+              <div class="container mt-3 m-2">
+                <?php if (isset($pedido_id)) { ?>
+                  <div class="card mt-3">
+                    <div class="d-flex justify-content-between">
+                      <div class="m-3">
+                        <h5>Pedido realizado: <?php echo htmlspecialchars($data_pedido, ENT_QUOTES, 'UTF-8'); ?></h5>
+                        <div class="m-3">
+                          <p>Número do pedido: <?php echo htmlspecialchars($pedido_id, ENT_QUOTES, 'UTF-8'); ?></p>
+                          <p>Valor Total: R$ <?php echo htmlspecialchars($valor_total, ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                      </div>
+                      <div class="m-3">
+                        <h5 class="text-center">Status do Pedido</h5>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: <?php echo $percentual_conclusao; ?>%;"
+                            aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
+                           
+                          </div>
+                          
+                        </div>
+                        <p class="text-center"><?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <div class="text-center mt-5">
+                          <a href="detalhes_pedido.php?pedido_id=<?php echo urlencode($pedido_id); ?>" class="btn btn-warning">Ver
+                            Detalhes</a>
+                        </div>
+                      </div>
                     </div>
+                    <h5 class="text-center mt-3">Produtos adquiridos</h5>
+                    <ul class="list-group">
+                      <?php while ($row_detalhes = $result_detalhes_pedido->fetch_assoc()) { ?>
+                        <li class="list-group-item m-2">
+                          <?php echo htmlspecialchars($row_detalhes['nome'], ENT_QUOTES, 'UTF-8'); ?> - Quantidade:
+                          <?php echo htmlspecialchars($row_detalhes['quantidade'], ENT_QUOTES, 'UTF-8'); ?>
+                        </li>
+                      <?php } ?>
+                    </ul>
                   </div>
+                <?php } else { ?>
+                  <p>Nenhum pedido encontrado.</p>
+                <?php } ?>
+              </div>
 
-                  <h5 class="text-center mt-3">Produtos adquiridos</h5>
-                  <ul class="list-group">
-                    <?php while ($row_detalhes = $result_detalhes_pedido->fetch_assoc()) { ?>
-                      <li class="list-group-item">
-                        <?php echo htmlspecialchars($row_detalhes['nome'], ENT_QUOTES, 'UTF-8'); ?> -
-                        Quantidade: <?php echo htmlspecialchars($row_detalhes['quantidade'], ENT_QUOTES, 'UTF-8'); ?>
-                      </li>
-                    <?php } ?>
-                  </ul>
-                </div>
+            <?php } ?>
 
-                <?php
-            }
-            ?>
-            </div>
             <?php
         } else {
           ?>
