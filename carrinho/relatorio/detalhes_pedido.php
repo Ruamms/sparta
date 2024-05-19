@@ -129,6 +129,7 @@ if (isset($_GET['pedido_id'])) {
           } else {
             $diferenca_dias = $data_pedido_date->diff($data_atual_date)->days;
             $percentual_conclusao = min(100, ($diferenca_dias / 2) * 20); // Incrementa 20% a cada 2 dias
+
         
             if ($percentual_conclusao >= 100) {
               $status_pedido = 'Entregue';
@@ -150,12 +151,12 @@ if (isset($_GET['pedido_id'])) {
           }
           ?>
           <h5 class="text-center mt-5">Status do Pedido</h5>
-          <div class="progress vertical">
-            <div class="progress-bar" role="progressbar" style="height: <?php echo $percentual_conclusao; ?>%;"
-              aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
-              <span class="sr-only"><?php echo $percentual_conclusao; ?>% Completo</span>
-            </div>
-          </div>
+          <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: <?php echo $percentual_conclusao; ?>%;" aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
+    <span class="sr-only"><?php echo $percentual_conclusao; ?>% Completo</span>
+  </div>
+</div>
+
           <p class="text-center mt-2"><?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?></p>
           <p class="text-center mt-2">Data do status: <?php echo htmlspecialchars(date('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?>
           </p>

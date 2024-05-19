@@ -56,14 +56,14 @@ if (isset($_POST['gerar_pdf'])) {
     while ($row = mysqli_fetch_assoc($result)) {
         $pdf->Cell(60, 10, $row['nome'], 1, 0, 'L', $fill);
         $pdf->Cell(50, 10, $row['cpf'], 1, 0, 'C', $fill);
-        $pdf->Cell(50, 10, $row['total_comprado'], 1, 1, 'R', $fill);
+        $pdf->Cell(50, 10, 'R$ ' . number_format($row['total_comprado'], 2, ',', '.'), 1, 1, 'R', $fill);
         $total_comprado += $row['total_comprado']; // Adiciona o valor ao total
         $fill = !$fill; // Alterna a cor de fundo para cada linha
     }
     // Adiciona a linha com o total
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(110, 10, 'Total Geral', 1, 0, 'C', true);
-    $pdf->Cell(50, 10, number_format($total_comprado, 2, ',', '.'), 1, 1, 'R', true);
+    $pdf->Cell(50, 10,'R$ '. number_format($total_comprado, 2, ',', '.'), 1, 1, 'R', true);
 
     $pdf->Output();
 }
