@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../../public/style.css">
     <title>Produtos</title>
 </head>
+
 <body>
     <!-- menu-->
     <nav class="navbar navbar-expand-md navbar-light bg-dark p-2 box-shadow">
@@ -45,7 +46,7 @@
                         </p>
                     </li>
 
-                    
+
                     <!--Perfil-->
                     <li class="nav-item mr-5">
 
@@ -68,81 +69,84 @@
             </div>
         </div>
     </nav>
-<section class="text-center container">
-<?php
-include '../../usuario/conexao.php';
+    <section class="text-center container">
+        <?php
+        include '../../usuario/conexao.php';
 
-// Receber os dados do formulário
-$nome = $_POST['nome'];
-$matricula = $_POST['matricula'];
-$cpf = $_POST['cpf'];
-$cargo = $_POST['cargo'];
-$salario = $_POST['salario'];
-$data_contratacao = $_POST['data_contratacao'];
-$email = $_POST['email'];
-$endereco = $_POST['endereco'];
-$senha = $_POST['senha'];
-$cep = $_POST['cep'];
-$numero = $_POST['numero'];
-$cidade = $_POST['cidade'];
-$estado = $_POST['estado'];
-$complemento = $_POST['complemento'];
+        // Receber os dados do formulário
+        $nome = $_POST['nome'];
+        $matricula = $_POST['matricula'];
+        $cpf = $_POST['cpf'];
+        $cargo = $_POST['cargo'];
+        $salario = $_POST['salario'];
+        $data_contratacao = $_POST['data_contratacao'];
+        $email = $_POST['email'];
+        $endereco = $_POST['endereco'];
+        $senha = $_POST['senha'];
+        $cep = $_POST['cep'];
+        $numero = $_POST['numero'];
+        $cidade = $_POST['cidade'];
+        $estado = $_POST['estado'];
+        $complemento = $_POST['complemento'];
 
-// Verificar se o e-mail já existe na tabela de usuários
-$verificarEmail = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
-$verificarEmail->bind_param("s", $email);
-$verificarEmail->execute();
-$resultEmail = $verificarEmail->get_result();
+        // Verificar se o e-mail já existe na tabela de usuários
+        $verificarEmail = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
+        $verificarEmail->bind_param("s", $email);
+        $verificarEmail->execute();
+        $resultEmail = $verificarEmail->get_result();
 
-if ($resultEmail->num_rows > 0) {
-    // E-mail já existe na tabela
-    echo '<div class="alert alert-danger my-5">';
-    echo '<h3 class="text-center">E-mail já cadastrado. Por favor, escolha outro e-mail.</h3>';
-    echo '</div>';
-    echo ' <a class="btn text-center btn-warning mt-2" href="adicionar_funcionario.php">Voltar </a>';
-} else {
-    // Verificar se o CPF já existe na tabela de funcionarios
-    $verificarCpfFuncionario = $conn->prepare("SELECT cpf FROM funcionario WHERE cpf = ?");
-    $verificarCpfFuncionario->bind_param("s", $cpf);
-    $verificarCpfFuncionario->execute();
-    $resultCpfFuncionario = $verificarCpfFuncionario->get_result();
-
-    if ($resultCpfFuncionario->num_rows > 0) {
-        // CPF já existe na tabela de funcionarios
-        echo '<div class="alert alert-danger my-5">';
-        echo '<h3 class="text-center">Cpf ja existe.</h3>';
-        echo '</div>';
-    } else {
-        // Inserir dados na tabela "usuario" usando declarações preparadas
-        $sqlUsuario = "INSERT INTO usuario (nome, email, senha, perfil) 
-                       VALUES (?, ?, ?, 'funcionario')";
-        $stmtUsuario = $conn->prepare($sqlUsuario);
-        $stmtUsuario->bind_param("sss", $nome, $email, $senha);
-
-        if ($stmtUsuario->execute()) {
-            // Obter o ID do usuário recém-inserido
-            $usuario_id = $stmtUsuario->insert_id;
-
-            // Inserir dados na tabela "funcionario" usando declarações preparadas
-            $salario = str_replace(',', '.', $salario);
-            $sqlFuncionario = "INSERT INTO funcionario (usuario_id, nome, email, matricula, cpf, cargo, salario, endereco, data_contratacao, cep, numero, cidade, estado, complemento) 
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmtFuncionario = $conn->prepare($sqlFuncionario);
-            $stmtFuncionario->bind_param("isssdssss", $usuario_id, $nome, $email, $matricula, $cpf, $cargo, $salario, $endereco, $data_contratacao, $cep, $numero, $cidade, $estado, $complemento);
-
-            if ($stmtFuncionario->execute()) {
-                header('Location: usuarios.php');
-                exit();
-            } else {
-                echo "Erro ao inserir dados do funcionário: " . $stmtFuncionario->error;
-            }
+        if ($resultEmail->num_rows > 0) {
+            // E-mail já existe na tabela
+            echo '<div class="alert alert-danger my-5">';
+            echo '<h3 class="text-center">E-mail já cadastrado. Por favor, escolha outro e-mail.</h3>';
+            echo '</div>';
+            echo ' <a class="btn text-center btn-warning mt-2" href="adicionar_funcionario.php">Voltar </a>';
         } else {
-            echo "Erro ao inserir dados do usuário: " . $stmtUsuario->error;
-        }
-    }
-}
+            // Verificar se o CPF já existe na tabela de funcionarios
+            $verificarCpfFuncionario = $conn->prepare("SELECT cpf FROM funcionario WHERE cpf = ?");
+            $verificarCpfFuncionario->bind_param("s", $cpf);
+            $verificarCpfFuncionario->execute();
+            $resultCpfFuncionario = $verificarCpfFuncionario->get_result();
 
-// Fechar a conexão
-$conn->close();
-?></section>
+            if ($resultCpfFuncionario->num_rows > 0) {
+                // CPF já existe na tabela de funcionarios
+                echo '<div class="alert alert-danger my-5">';
+                echo '<h3 class="text-center">Cpf ja existe.</h3>';
+                echo '</div>';
+            } else {
+                // Inserir dados na tabela "usuario" usando declarações preparadas
+                $sqlUsuario = "INSERT INTO usuario (nome, email, senha, perfil) 
+                       VALUES (?, ?, ?, 'funcionario')";
+                $stmtUsuario = $conn->prepare($sqlUsuario);
+                $stmtUsuario->bind_param("sss", $nome, $email, $senha);
+
+                if ($stmtUsuario->execute()) {
+               
+                    $usuario_id = $stmtUsuario->insert_id;
+                
+                   
+                    $salario = str_replace(',', '.', $salario);
+                    $sqlFuncionario = "INSERT INTO funcionario (usuario_id, nome, email, matricula, cpf, cargo, salario, endereco, data_contratacao, cep, numero, cidade, estado, complemento) 
+                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    $stmtFuncionario = $conn->prepare($sqlFuncionario);
+                
+                    $stmtFuncionario->bind_param("isssssdsssssss", $usuario_id, $nome, $email, $matricula, $cpf, $cargo, $salario, $endereco, $data_contratacao, $cep, $numero, $cidade, $estado, $complemento);
+                
+                    if ($stmtFuncionario->execute()) {
+                        header('Location: usuarios.php');
+                        exit();
+                    } else {
+                        echo "Erro ao inserir dados do funcionário: " . $stmtFuncionario->error;
+                    }
+                } else {
+                    echo "Erro ao inserir dados do usuário: " . $stmtUsuario->error;
+                }
+                
+            }
+        }
+
+        // Fechar a conexão
+        $conn->close();
+        ?>
+    </section>
 </body>

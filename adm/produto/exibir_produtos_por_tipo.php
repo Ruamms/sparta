@@ -70,6 +70,21 @@
         </div>
     </nav>
     <section class="container ">
+    <form class="mt-3 text-center" action="exibir_produtos_por_tipo.php" method="GET">
+            <label for="tipo">Filtrar:</label>
+            <select name="tipo" id="tipo">
+                <option value="whey">Whey</option>
+                <option value="creatina">Creatina</option>
+                <option value="pretreino">Pré-treino</option>
+                <option value="bcaa">BCAA</option>
+                <option value="glutamina">Glutamina</option>
+                <option value="Kit">kit</option>
+                <option value="Vitamina">Vitamina</option>
+            </select>
+            <input class="btn btn-warning ml-3" type="submit" value="Visualizar">
+        </form>
+        <a class="btn btn-success mt-3" href="formulario.php"><i class="bi-box" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Produtos"></i><br> Adicionar Produto</a>
     <table class="table table-striped table-bordered mt-5">
             <tr class="thead-dark text-center">
                 <th>Imagem</th>
