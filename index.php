@@ -302,13 +302,13 @@
           <h4 class="h6">REDES SOCIAIS</h4>
           <ul class="list-unstyled">
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.facebook.com/" style="max-width: 140px">Facebook</a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" target="_blank" href="https://www.facebook.com/" style="max-width: 140px">Facebook</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://twitter.com" style="max-width: 140px">Twiter</a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" target="_blank" href="https://twitter.com" style="max-width: 140px">Twiter</a>
             </li>
             <li>
-              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" href="https://www.instagram.com/" style="max-width: 140px">Instagram</a>
+              <a class="btn btn-outline-warning btn-sm btn-block md-2 mt-1" target="_blank" href="https://www.instagram.com/" style="max-width: 140px">Instagram</a>
             </li>
           </ul>
         </div>

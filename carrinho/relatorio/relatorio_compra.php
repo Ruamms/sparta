@@ -134,13 +134,13 @@
               $diferenca_dias = $data_pedido_date->diff($data_atual_date)->days;
 
               // Determinar o status do pedido baseado nos dias decorridos
-              if ($diferenca_dias >= 5) {
+              if ($diferenca_dias >= 10) {
                 $status_pedido = 'Entregue';
                 $percentual_conclusao = 100;
-              } elseif ($diferenca_dias >= 3) {
+              } elseif ($diferenca_dias >= 6) {
                 $status_pedido = 'Enviado';
                 $percentual_conclusao = 75;
-              } elseif ($diferenca_dias >= 1) {
+              } elseif ($diferenca_dias >= 3) {
                 $status_pedido = 'Separando';
                 $percentual_conclusao = 50;
               } else {
