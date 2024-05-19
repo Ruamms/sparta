@@ -175,9 +175,9 @@
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" style="width: <?php echo $percentual_conclusao; ?>%;"
                             aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
-                           
+
                           </div>
-                          
+
                         </div>
                         <p class="text-center"><?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?></p>
                         <div class="text-center mt-5">

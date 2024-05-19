@@ -103,77 +103,69 @@ if (isset($_GET['pedido_id'])) {
       </div>
     </div>
   </nav>
-  <div class="container mt-5">
-    <h2>Detalhes do Pedido</h2>
-    <div class="container ">
-      <div class="class="container>
 
 
-        <div>
-          <?php if (isset($pedido) && $pedido) { ?>
-            <p>Pedido realizado:
-              <?php
-              $data_pedido = strtotime($pedido['data_pedido']);
-              echo htmlspecialchars(date('d/m/Y', $data_pedido), ENT_QUOTES, 'UTF-8');
-              ?>
-            </p>
-            <p>Número do pedido: <?php echo htmlspecialchars($pedido['pedido_id'], ENT_QUOTES, 'UTF-8'); ?></p>
-            <p>Valor Total: R$ <?php echo htmlspecialchars($pedido['valor_total'], ENT_QUOTES, 'UTF-8'); ?></p>
-          </div>
-
-
-          <div class="text-center mt-5">
-            <a href="../index.php" class="btn btn-warning">Comprar Novamente</a>
-          </div>
-
-
-          <div>
-            <?php
-            if (isset($pedido)) {
-
-              // Calcular a diferença de dias entre a data do pedido e a data atual
-              $data_pedido_date = DateTime::createFromFormat('Y-m-d', $pedido['data_pedido']);
-              $data_atual_date = new DateTime();
-              if ($data_pedido_date === false) {
-                echo "Erro ao interpretar a data do pedido: " . htmlspecialchars($pedido['data_pedido'], ENT_QUOTES, 'UTF-8');
-              } else {
-                $diferenca_dias = $data_pedido_date->diff($data_atual_date)->days;
-                $percentual_conclusao = min(100, ($diferenca_dias / 2) * 20); // Incrementa 20% a cada 2 dias
-          
-
-                // Determinar a mensagem de status do pedido
-                if ($percentual_conclusao >= 100) {
-                  $status_pedido = 'Entregue';
-                } elseif ($percentual_conclusao >= 80) {
-                  $status_pedido = 'Pedido em rota de entrega para seu endereço';
-                } elseif ($percentual_conclusao >= 70) {
-                  $status_pedido = 'Seu pedido chegou ao centro logistico';
-                } elseif ($percentual_conclusao >= 60) {
-                  $status_pedido = 'Em transporte';
-                } elseif ($percentual_conclusao >= 50) {
-                  $status_pedido = 'Seu pedido saiu do centro logístico';
-                } elseif ($percentual_conclusao >= 30) {
-                  $status_pedido = 'Separando para envio';
-                } elseif ($percentual_conclusao >= 20) {
-                  $status_pedido = 'Pedido processado';
-                } else {
-                  $status_pedido = 'Pedido recebido';
-                }
-              }
-              ?>
-
-              <h5 class="text-center mt-5">Status do Pedido</h5>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: <?php echo $percentual_conclusao; ?>%;"
-                  aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
-
-                </div>
-              </div>
-              <p class="text-center"> <?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?></p>
-            <?php } ?>
-          </div>
-        </div>
+  <div class="container mt-3">
+    <h3>Detalhes do Pedido</h3>
+    <div class="row">
+      <div class="col-md-6 mt-5 ">
+        <?php if (isset($pedido) && $pedido) { ?>
+          <p>Pedido realizado em:
+            <?php echo htmlspecialchars(date('d/m/Y', strtotime($pedido['data_pedido'])), ENT_QUOTES, 'UTF-8'); ?>
+          </p>
+          <p>Número do pedido: <?php echo htmlspecialchars($pedido['pedido_id'], ENT_QUOTES, 'UTF-8'); ?></p>
+          <p>Valor Total: R$ <?php echo htmlspecialchars($pedido['valor_total'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <?php } ?>
+        
       </div>
+      
+      <div class="col-md-6 ">
+        
+        <?php if (isset($pedido)) {
+          $data_pedido_date = DateTime::createFromFormat('Y-m-d', $pedido['data_pedido']);
+          $data_atual_date = new DateTime();
+          if ($data_pedido_date === false) {
+            echo "Erro ao interpretar a data do pedido: " . htmlspecialchars($pedido['data_pedido'], ENT_QUOTES, 'UTF-8');
+          } else {
+            $diferenca_dias = $data_pedido_date->diff($data_atual_date)->days;
+            $percentual_conclusao = min(100, ($diferenca_dias / 2) * 20); // Incrementa 20% a cada 2 dias
+        
+            if ($percentual_conclusao >= 100) {
+              $status_pedido = 'Entregue';
+            } elseif ($percentual_conclusao >= 80) {
+              $status_pedido = 'Pedido em rota de entrega para seu endereço';
+            } elseif ($percentual_conclusao >= 70) {
+              $status_pedido = 'Seu pedido chegou ao centro logistico';
+            } elseif ($percentual_conclusao >= 60) {
+              $status_pedido = 'Em transporte';
+            } elseif ($percentual_conclusao >= 50) {
+              $status_pedido = 'Seu pedido saiu do centro logístico';
+            } elseif ($percentual_conclusao >= 30) {
+              $status_pedido = 'Separando para envio';
+            } elseif ($percentual_conclusao >= 10) {
+              $status_pedido = 'Pedido processado';
+            } else {
+              $status_pedido = 'Pedido recebido';
+            }
+          }
+          ?>
+          <h5 class="text-center mt-5">Status do Pedido</h5>
+          <div class="progress vertical">
+            <div class="progress-bar" role="progressbar" style="height: <?php echo $percentual_conclusao; ?>%;"
+              aria-valuenow="<?php echo $percentual_conclusao; ?>" aria-valuemin="0" aria-valuemax="100">
+              <span class="sr-only"><?php echo $percentual_conclusao; ?>% Completo</span>
+            </div>
+          </div>
+          <p class="text-center mt-2"><?php echo htmlspecialchars($status_pedido, ENT_QUOTES, 'UTF-8'); ?></p>
+          <p class="text-center mt-2">Data do status: <?php echo htmlspecialchars(date('d/m/Y'), ENT_QUOTES, 'UTF-8'); ?>
+          </p>
+        <?php } ?>
+      </div>
+      <a class="btn btn-warning m-2" href="../index.php">Comprar novamente</a>
+    </div>
+    <div>
+
+
       <h5 class="mt-4">Produtos adquiridos</h5>
       <ul class="list-group mt-2">
         <?php while ($item = $result_itens->fetch_assoc()) { ?>
@@ -189,11 +181,11 @@ if (isset($_GET['pedido_id'])) {
           </li>
         <?php } ?>
       </ul>
-    <?php } else { ?>
-      <p>Pedido não encontrado.</p>
-    <?php } ?>
+    </div>
 
 
+
+  </div>
   </div>
 </body>
 
