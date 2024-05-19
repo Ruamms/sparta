@@ -167,7 +167,7 @@ if (isset($_POST['deletar'])) {
                 </div>
                 <div class="form-group col-md-6">
                     <label class="font-weight-bold" for="estoque">Estoque:</label>
-                    <input class="form-control" type="number" name="estoque" value="<?php echo $estoque; ?>" step="0.01"
+                    <input class="form-control" type="number" name="estoque" value="<?php echo $estoque; ?>" step="0"
                         required>
                 </div>
             </div>
