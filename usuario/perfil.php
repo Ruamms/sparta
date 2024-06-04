@@ -185,7 +185,7 @@
                     <input type="text" class="form-control" id="nome" name="nome" placeholder="<?php echo $nome; ?>">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="numero_cartao">Número do Cartão de Crédito:</label>
+                    <label for="numero_cartao">Número do Cartão :</label>
                     <input type="text" class="form-control " id="numero_cartao" name="numero_cartao" placeholder="<?php echo $numero_cartao; ?>" pattern="\d{4}.\d{4}.\d{4}.\d{4}" title="Digite o número do cartão no formato 0000.0000.0000.0000">
                 </div>
             </div>
