@@ -127,7 +127,10 @@ if (isset($_GET['tipo'])) {
             echo '<td class="align-middle">' . $row["estoque"] . '</td>';
             echo '<td class="align-middle">Tipo: ' . $row["tipo"] . '</td>';
             echo '<td class=" align-middle">Preço: R$ ' . number_format($row["preco"], 2, ',', '.') . '</td>';
-            echo '<td> <a class="mt-4 btn btn-success h-25   "href="editar_produto.php?id=' . $row["produto_id"] . '">Editar</a></td>';
+            echo'<td class=" align-middle" >';
+            echo '<a class="m-1 btn btn-success "   "href="editar_produto.php?id=' . $row["produto_id"] . '">Editar</a>';
+            echo '<a class="btn btn-danger m-1" href="deletar_produto.php?id=' . $row["produto_id"] . '" ?>Excluir</a></td>';
+            echo '</td>';
             echo '</tr>';
         }
     } else {
