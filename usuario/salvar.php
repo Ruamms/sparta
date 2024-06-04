@@ -42,7 +42,7 @@
     $data_nasc = $_POST['data_nasc'];
     $cpf = $_POST['cpf'];
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $senha = password_hash($_POST['senha'],PASSWORD_DEFAULT);
     $cep = $_POST['cep'];
     $numero = $_POST['numero'];
     $cidade = $_POST['cidade'];
