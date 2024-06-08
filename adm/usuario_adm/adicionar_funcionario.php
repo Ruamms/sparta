@@ -148,10 +148,12 @@
                 <div class="form-group col-md-6">
                     <label for="cargo">Cargo:</label>
                     <select class="form-control" id="cargo" name="cargo" required>
-                        <option value="gerente">Gerente</option>
-                        <option value="coordenador">Coordenador</option>
-                        <option value="analista">Analista</option>
-                        <option value="assistente">Assistente</option>
+                        <option value="Assistente-de-Pedidos">Assistente de Pedidos</option>
+                        <option value="Auxiliar-de-Estoque">Auxiliar de Estoque</option>
+                        <option value="Assistente-de-Produtos">Assistente de Produtos</option>
+                        <option value="Atendente-de-Atendimentos-ao-Cliente">Atendente de Atendimentos ao Cliente</option>
+                        <option value="Auxiliar-de-Marketing">Auxiliar de Marketing</option>
+                        <option value="Analista-ti">Analista TI</option>
                     </select>
                 </div>
             </div>
