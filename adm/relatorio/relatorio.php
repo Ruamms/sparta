@@ -75,7 +75,7 @@
         <div class="d-flex container aling-center">
 
             <div class="m-5 text-center ">
-                <h3>Relatorio de ganhos</h3>
+                <h3>RELATORIO DE GANHOS</h3>
                 <form action="relatorio_valor.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="dataInicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="dataInicial" required><br>
@@ -89,7 +89,7 @@
 
             </div>
             <div class="m-5 text-center ">
-                <h3>Ranking de clientes</h3>
+                <h3>RANKING DE CLIENTES</h3>
                 <form action="relatorio_cliente.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" id="data_inicial" name="data_inicial" required><br>
@@ -100,7 +100,7 @@
                 </form>
             </div>
             <div class="m-5 text-center ">
-                <h3>Ranking de produto</h3>
+                <h3>RANKING DE PRODUTOS</h3>
                 <form action="relatorio_Produto.php" method="post" target="_blank">
                     <label class="font-weight-bold  m-3" for="data_inicial">Data Inicial:</label><br>
                     <input class="w-75" type="date" name="data_inicial" required><br>
