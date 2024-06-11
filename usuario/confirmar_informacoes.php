@@ -44,111 +44,188 @@
 
     <h2 style="margin-top:50px; text-align: center;">Recuperar senha</h2>
     <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    // Conectar ao banco de dados
-    $host = 'localhost';
-    $db = 'cadastro';
-    $user = 'root'; // Substitua pelo usuário do seu banco de dados
-    $pass = ''; // Substitua pela senha do seu banco de dados
+// Conectar ao banco de dados
+$host = 'localhost';
+$db = 'cadastro';
+$user = 'root'; // Substitua pelo usuário do seu banco de dados
+$pass = ''; // Substitua pela senha do seu banco de dados
 
-    $conn = new mysqli($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $db);
 
-    if ($conn->connect_error) {
-        die('Erro na conexão: ' . $conn->connect_error);
-    }
+if ($conn->connect_error) {
+    die('Erro na conexão: ' . $conn->connect_error);
+}
 
-    // Verificar se o formulário foi enviado
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Verificar se todos os campos foram preenchidos
-        if (isset($_POST['data_selecionada']) && isset($_POST['telefone_selecionado']) && isset($_POST['cpf'])) {
-            // Obter os dados do formulário
-            $data_selecionada = $_POST['data_selecionada'];
-            $telefone_selecionado = $_POST['telefone_selecionado'];
-            $cpf = $_POST['cpf'];
+// Verificar se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar se todos os campos foram preenchidos
+    if (isset($_POST['data_selecionada']) && isset($_POST['telefone_selecionado']) && isset($_POST['cpf'])) {
+        // Obter os dados do formulário
+        $data_selecionada = $_POST['data_selecionada'];
+        $telefone_selecionado = $_POST['telefone_selecionado'];
+        $cpf = $_POST['cpf'];
 
-            // Consultar o banco de dados para verificar se as informações estão corretas
-            $sql_cliente = "SELECT * FROM cliente WHERE cpf = ? AND data_nasc = ? AND (telefone = ? OR telefone = ? OR telefone = ?)";
-            $stmt_cliente = $conn->prepare($sql_cliente);
+        // Consultar o banco de dados para verificar se as informações do cliente estão corretas
+        $sql_cliente = "SELECT * FROM cliente WHERE cpf = ? AND data_nasc = ? AND telefone = ?";
+        $stmt_cliente = $conn->prepare($sql_cliente);
 
-            if ($stmt_cliente) {
-                // Vincular os parâmetros da consulta do cliente
-                $stmt_cliente->bind_param("sssss", $cpf, $data_selecionada, $telefone_selecionado, $telefone_selecionado, $telefone_selecionado);
+        if ($stmt_cliente) {
+            // Vincular os parâmetros da consulta do cliente
+            $stmt_cliente->bind_param("sss", $cpf, $data_selecionada, $telefone_selecionado);
 
-                // Executar a consulta do cliente
-                $stmt_cliente->execute();
+            // Executar a consulta do cliente
+            $stmt_cliente->execute();
 
-                // Obter o resultado do cliente
-                $result_cliente = $stmt_cliente->get_result();
+            // Obter o resultado do cliente
+            $result_cliente = $stmt_cliente->get_result();
 
-                // Verificar se a consulta do cliente retornou algum resultado
-                if ($result_cliente->num_rows > 0) {
-                    // Obter os detalhes do cliente
-                    $cliente = $result_cliente->fetch_assoc();
-                    $usuario_id = $cliente['usuario_id'];
+            // Verificar se a consulta do cliente retornou algum resultado
+            if ($result_cliente->num_rows > 0) {
+                // Obter os detalhes do cliente
+                $cliente = $result_cliente->fetch_assoc();
+                $usuario_id = $cliente['usuario_id'];
 
-                    // Consultar a tabela de usuários para obter o e-mail e senha
-                    $sql_usuario = "SELECT email, senha FROM usuario WHERE usuario_id = ?";
-                    $stmt_usuario = $conn->prepare($sql_usuario);
+                // Consultar a tabela de usuários para obter o e-mail
+                $sql_usuario = "SELECT email FROM usuario WHERE usuario_id = ?";
+                $stmt_usuario = $conn->prepare($sql_usuario);
 
-                    if ($stmt_usuario) {
-                        // Vincular os parâmetros da consulta do usuário
-                        $stmt_usuario->bind_param("i", $usuario_id);
+                if ($stmt_usuario) {
+                    // Vincular os parâmetros da consulta do usuário
+                    $stmt_usuario->bind_param("i", $usuario_id);
 
-                        // Executar a consulta do usuário
-                        $stmt_usuario->execute();
+                    // Executar a consulta do usuário
+                    $stmt_usuario->execute();
 
-                        // Obter o resultado do usuário
-                        $result_usuario = $stmt_usuario->get_result();
+                    // Obter o resultado do usuário
+                    $result_usuario = $stmt_usuario->get_result();
 
-                        // Verificar se a consulta do usuário retornou algum resultado
-                        if ($result_usuario->num_rows > 0) {
-                            // Exibir mensagem de sucesso e mostrar e-mail e senha
-                            $usuario = $result_usuario->fetch_assoc();
-                            echo '<div class="alert alert-success container text-center mt-5" role="alert">';
-                            echo "Cliente encontrado. Email: " . $usuario['email'];
-                            echo '</div>';
-                        } else {
-                            // Exibir mensagem de erro se não encontrar o usuário
-                            echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
-                            echo "Erro ao encontrar o usuário.";
-                            echo '</div>';
-                        }
+                    // Verificar se a consulta do usuário retornou algum resultado
+                    if ($result_usuario->num_rows > 0) {
+                        // Obter o e-mail do usuário
+                        $usuario = $result_usuario->fetch_assoc();
+                        $email = $usuario['email'];
 
-                        // Fechar a instrução do usuário
-                        $stmt_usuario->close();
+                        // Exibir formulário para seleção de matrícula e nova senha
+                        echo "<form method='post' class='container text-center mt-2' action=''>
+                            <p>Por favor, selecione sua matrícula correta e insira a nova senha:</p>
+                            <input type='radio' name='matricula_selecionada' value='$matricula1'> $matricula1_modificada<br>
+                            <input type='radio' name='matricula_selecionada' value='$matricula2'> $matricula2_modificada<br>
+                            <input type='radio' name='matricula_selecionada' value='$matricula3'> $matricula3_modificada<br>
+                            <input type='hidden' name='email' value='$email'>
+                            <input type='hidden' name='cpf' value='$cpf'>
+                            <input type='password' name='nova_senha' placeholder='Nova Senha'><br>
+                            <input class='btn btn-warning m-2' type='submit' value='Atualizar Senha'>
+                        </form>";
                     } else {
-                        echo "Erro ao preparar a consulta do usuário: " . $conn->error;
+                        // Exibir mensagem de erro se não encontrar o usuário
+                        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                        echo "Erro ao encontrar o usuário.";
+                        echo '</div>';
                     }
-                } else {
-                    // Exibir mensagem de erro se as informações do cliente não correspondem
-                    echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
-                    echo "As informações fornecidas não correspondem aos dados do cliente.";
-                    echo '</div>';
-                    echo '<div class="text-center mt-3">';
-                    echo '<a class="btn  btn-warning " href="login.php""> Tentar novamente</a>';
-                    echo '</div>';
-                }
 
-                // Fechar a instrução do cliente
-                $stmt_cliente->close();
+                    // Fechar a instrução do usuário
+                    $stmt_usuario->close();
+                } else {
+                    echo "Erro ao preparar a consulta do usuário: " . $conn->error;
+                }
             } else {
-                echo "Erro ao preparar a consulta do cliente: " . $conn->error;
+                // Exibir mensagem de erro se as informações do cliente não corresponderem
+                echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                echo "As informações fornecidas não correspondem aos dados do cliente.";
+                echo '</div>';
+                echo '<div class="text-center mt-3">';
+                echo '<a class="btn btn-warning" href="login.php">Tentar novamente</a>';
+                echo '</div>';
             }
+
+            // Fechar a instrução do cliente
+            $stmt_cliente->close();
         } else {
-            // Exibir mensagem de erro se algum campo estiver faltando
-            echo "Por favor, preencha todos os campos.";
+            echo "Erro ao preparar a consulta do cliente: " . $conn->error;
+        }
+    } elseif (isset($_POST['matricula_selecionada']) && isset($_POST['nova_senha']) && isset($_POST['email']) && isset($_POST['cpf'])) {
+        // Obter os dados do formulário para atualização da senha
+        $matricula_selecionada = $_POST['matricula_selecionada'];
+        $nova_senha = $_POST['nova_senha'];
+        $email = $_POST['email'];
+        $cpf = $_POST['cpf'];
+
+        // Consultar a tabela funcionario para verificar a matrícula e obter o e-mail correspondente
+        $sql_funcionario = "SELECT email FROM funcionario WHERE matricula = ? AND cpf = ?";
+        $stmt_funcionario = $conn->prepare($sql_funcionario);
+
+        if ($stmt_funcionario) {
+            // Vincular os parâmetros da consulta do funcionário
+            $stmt_funcionario->bind_param("ss", $matricula_selecionada, $cpf);
+
+            // Executar a consulta do funcionário
+            $stmt_funcionario->execute();
+
+            // Obter o resultado do funcionário
+            $result_funcionario = $stmt_funcionario->get_result();
+
+            // Verificar se a consulta do funcionário retornou algum resultado
+            if ($result_funcionario->num_rows > 0) {
+                // Atualizar a senha na tabela usuario
+                $sql_usuario = "UPDATE usuario SET senha = ? WHERE email = ?";
+                $stmt_usuario = $conn->prepare($sql_usuario);
+
+                if ($stmt_usuario) {
+                    // Vincular os parâmetros da consulta de atualização do usuário
+                    $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT); // Hash da nova senha
+                    $stmt_usuario->bind_param("ss", $nova_senha_hash, $email);
+
+                    // Executar a consulta de atualização do usuário
+                    if ($stmt_usuario->execute()) {
+                        // Exibir mensagem de sucesso
+                        echo '<div class="alert alert-success container text-center mt-5" role="alert">';
+                        echo "Senha atualizada com sucesso.";
+                        echo '</div>';
+                    } else {
+                        // Exibir mensagem de erro se a atualização falhar
+                        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                        echo "Erro ao atualizar a senha.";
+                        echo '</div>';
+                    }
+
+                    // Fechar a instrução do usuário
+                    $stmt_usuario->close();
+                } else {
+                    echo "Erro ao preparar a consulta de atualização do usuário: " . $conn->error;
+                }
+            } else {
+                // Exibir mensagem de erro se a matrícula ou CPF não corresponderem
+                echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                echo "Matrícula ou CPF inválido.";
+                echo '</div>';
+            }
+
+            // Fechar a instrução do funcionário
+            $stmt_funcionario->close();
+        } else {
+            echo "Erro ao preparar a consulta do funcionário: " . $conn->error;
         }
     } else {
-        // Exibir mensagem de erro se o formulário não foi submetido
-        echo "Erro: O formulário não foi submetido.";
+        // Exibir mensagem de erro se algum campo estiver faltando
+        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+        echo "Por favor, preencha todos os campos.";
+        echo '</div>';
     }
+} else {
+    // Exibir mensagem de erro se o formulário não foi submetido
+    echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+    echo "Erro: O formulário não foi submetido.";
+    echo '</div>';
+}
 
-    // Fechar a conexão com o banco de dados
-    $conn->close();
-    ?>
+// Fechar a conexão com o banco de dados
+$conn->close();
+?>
+
 
 
 
