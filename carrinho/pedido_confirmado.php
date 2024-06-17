@@ -1,3 +1,16 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Inicia a sessão somente se não estiver ativa
+}
+
+// Verificar se o pedido_id está na sessão
+if (!isset($_SESSION['pedido_id'])) {
+    die("Número do pedido não encontrado na sessão.");
+}
+
+// Obter o pedido_id da sessão
+$pedido_id = $_SESSION['pedido_id'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -77,20 +90,17 @@
     </div>
 
     <div class="alert alert-success my-5">
-
       O seu pedido foi concluído com sucesso!
       O número do pedido é:
       <h3 class="m-3">
-        <?php echo uniqid(); ?>
+        <?php echo htmlspecialchars($pedido_id); ?>
       </h3>
-
     </div>
 
-    <p class="m-3">Agradecemos por comprar conosco.<br>
-
-    </p>
+    <p class="m-3">Agradecemos por comprar conosco.<br></p>
 
     <a href="../index.php" class="m-3 btn btn-warning">Voltar para a Página Inicial</a>
+
     <?php
     // Processo de finalização da compra
 

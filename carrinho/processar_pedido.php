@@ -44,7 +44,12 @@ if (isset($_POST['nome_cliente'], $_POST['endereco_cliente'], $_POST['numero_car
         if ($stmt_pedido->affected_rows > 0) {
             // Obter o ID do pedido inserido
             $pedido_id = $stmt_pedido->insert_id;
+            // Obter o ID do pedido recém-criado
+           
 
+            // Iniciar sessão e armazenar o pedido_id na sessão
+            session_start();
+            $_SESSION['pedido_id'] = $pedido_id;
 
 
             // Dividir a string $detalhes_carrinho para obter detalhes de cada produto
