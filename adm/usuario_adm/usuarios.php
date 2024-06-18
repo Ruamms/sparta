@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../usuario/conexao.php';
 
 $query = "SELECT * FROM usuario";
@@ -12,10 +13,17 @@ $result = $conn->query($query);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Sparta</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <!--  ícones do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -30,7 +38,8 @@ $result = $conn->query($query);
             <a href="#" class="navbar-brand">
                 <img class="imagem-login" src="../../img/Sparta Suplementos - Logo.png" alt="sparta" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,21 +47,24 @@ $result = $conn->query($query);
                     <li class="nav-item mr-5">
                         <p class="text-center">
                             <a class="nav-link text-warning" href="../produto/lista_produtos.php">
-                                <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
+                                <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Produtos"></i><br>
                                 Produtos</a>
                         </p>
                     </li>
                     <!--Perfil-->
                     <li class="nav-item mr-5">
                         <p class="text-center"> <a class="nav-link text-warning" href="../relatorio/relatorio.php">
-                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="relatorio"></i><br>
                                 Relatorio</a></p>
                     </li>
 
                     <!-- sair-->
                     <li class="nav-item mr-5">
                         <p class="text-center"><a class="nav-link text-warning" href="../../index.php?logout=1">
-                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Sair"></i><br>
                                 Sair</a></p>
                     </li>
                 </ul>
@@ -68,15 +80,45 @@ $result = $conn->query($query);
         <h3 class=" m-3">Usuarios Cadastrados</h3>
         <div class="d-flex">
             <div class="m-2">
-                <p><a class="btn btn-success mt-3 m-1 w-100" href="../../usuario/adicionar.php"><i class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top" title="Cliente"></i><br>
+                <p><a class="btn btn-success mt-3 m-1 w-100" href="../../usuario/adicionar.php"><i
+                            class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Cliente"></i><br>
                         Adicionar Cliente</a></p>
             </div>
             <div class="m-2">
 
-                <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_funcionario.php"><i class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top" title="Funcionario"></i><br>
+                <p><a class="btn btn-success mt-3 m-1 w-100" href="adicionar_funcionario.php"><i
+                            class="bi bi-person-fill-add" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Funcionario"></i><br>
                         Adicionar Funcionario</a></p>
             </div>
         </div>
+
+        <?php
+        function isLoggedInAdmin($conn, $logged_in_user_id)
+        {
+            $admin_query = "SELECT administrador FROM funcionario WHERE usuario_id = ?";
+            $stmt = $conn->prepare($admin_query);
+            $stmt->bind_param('i', $logged_in_user_id);
+            $stmt->execute();
+            $admin_result = $stmt->get_result();
+            $funcionario = $admin_result->fetch_assoc();
+            return $funcionario ? $funcionario['administrador'] == 1 : false;
+        }
+
+        // Verificar se o ID do usuário logado está definido na sessão
+        if (isset($_SESSION['usuario_id'])) {
+            $logged_in_user_id = $_SESSION['usuario_id'];
+            $is_logged_in_admin = isLoggedInAdmin($conn, $logged_in_user_id);
+        } else {
+            // Caso o ID do usuário logado não esteja definido, definir como não administrador
+            $is_logged_in_admin = false;
+        }
+
+        // Supondo que $result é o resultado de uma consulta prévia que obtém todos os usuários
+        $query = "SELECT * FROM usuario"; // Altere esta consulta conforme necessário
+        $result = $conn->query($query);
+        ?>
         <table class="table mt-3 m-1 table-striped table-hover table-bordered text-center ">
             <tr class="thead-dark ">
                 <th>ID</th>
@@ -85,9 +127,12 @@ $result = $conn->query($query);
 
                 <th>Perfil</th>
 
-                <th>Ações</th>
+                <?php if ($is_logged_in_admin): ?>
+                    <th>Ações</th>
+                <?php endif; ?>
             </tr>
-            <?php while ($row = $result->fetch_assoc()) : ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+
                 <tr>
                     <td class="align-middle">
                         <?php echo $row['usuario_id']; ?>
@@ -101,27 +146,31 @@ $result = $conn->query($query);
                     <td class="align-middle">
                         <?php echo ucfirst($row['perfil']); ?>
                     </td>
-                    <td>
-                        <?php if ($row['bloqueado'] == 0) : ?>
-
-                            <a class="btn w-75 btn-danger mt-1" href="bloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Bloquear</a>
-
+                    <?php if ($is_logged_in_admin): ?>
+                        <td>
                             <?php
-                            if ($row['perfil'] == 'cliente') {
-                                echo '<a class="btn w-75 btn-success mt-1" href="../../usuario/perfil.php?usuario_id=' . $row['usuario_id'] . '">Editar</a>';
-                            } elseif ($row['perfil'] == 'funcionario') {
-                                echo '<a class="btn w-75 btn-success mt-1" href="editar_funcionario.php?usuario_id=' . $row['usuario_id'] . '">Editar</a>';
-                            }
-                            ?>
+                            if ($row['bloqueado'] == 0): ?>
+                                <a class="btn w-75 btn-danger mt-1"
+                                    href="bloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Bloquear</a>
+                                <?php
+                                if ($row['perfil'] == 'cliente') {
+                                    echo '<a class="btn w-75 btn-success mt-1" href="../../usuario/perfil.php?usuario_id=' . $row['usuario_id'] . '">Editar</a>';
+                                } elseif ($row['perfil'] == 'funcionario') {
+                                    echo '<a class="btn w-75 btn-success mt-1" href="editar_funcionario.php?usuario_id=' . $row['usuario_id'] . '">Editar</a>';
+                                }
+                                ?>
+                            <?php else: ?>
+                                <a class="btn w-75 btn-warning mt-1"
+                                    href="desbloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Desbloquear</a>
+                            <?php endif; ?>
 
-                        <?php else : ?>
-
-                            <a class="btn w-75 btn-warning mt-1" href="desbloquear.php?usuario_id=<?php echo $row['usuario_id']; ?>">Desbloquear</a>
-                        <?php endif; ?>
-
-                    </td>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endwhile; ?>
+
+
+
 
 
         </table>
