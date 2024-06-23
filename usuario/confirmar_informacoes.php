@@ -62,7 +62,6 @@ if ($conn->connect_error) {
 
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar se todos os campos foram preenchidos
     if (isset($_POST['data_selecionada']) && isset($_POST['telefone_selecionado']) && isset($_POST['cpf'])) {
         // Obter os dados do formulário
         $data_selecionada = $_POST['data_selecionada'];
@@ -109,17 +108,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $usuario = $result_usuario->fetch_assoc();
                         $email = $usuario['email'];
 
-                        // Exibir formulário para seleção de matrícula e nova senha
-                        echo "<form method='post' class='container text-center mt-2' action=''>
-                            <p>Por favor, selecione sua matrícula correta e insira a nova senha:</p>
-                            <input type='radio' name='matricula_selecionada' value='$matricula1'> $matricula1_modificada<br>
-                            <input type='radio' name='matricula_selecionada' value='$matricula2'> $matricula2_modificada<br>
-                            <input type='radio' name='matricula_selecionada' value='$matricula3'> $matricula3_modificada<br>
-                            <input type='hidden' name='email' value='$email'>
-                            <input type='hidden' name='cpf' value='$cpf'>
-                            <input type='password' name='nova_senha' placeholder='Nova Senha'><br>
-                            <input class='btn btn-warning m-2' type='submit' value='Atualizar Senha'>
-                        </form>";
+                        // Exibir formulário para inserir a nova senha
+                        echo '<form class="container mt-4" style="max-width: 20rem;" method="post" action="atualizando-senha.php">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="' . htmlspecialchars($email) . '" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nova_senha">Nova Senha:</label>
+                            <input type="password" class="form-control" id="nova_senha" name="nova_senha" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning w-100 mt-3">Alterar Senha</button>
+                        </div>
+                      </form>';
                     } else {
                         // Exibir mensagem de erro se não encontrar o usuário
                         echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
@@ -147,73 +149,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Erro ao preparar a consulta do cliente: " . $conn->error;
         }
-    } elseif (isset($_POST['matricula_selecionada']) && isset($_POST['nova_senha']) && isset($_POST['email']) && isset($_POST['cpf'])) {
+    } elseif (isset($_POST['nova_senha']) && isset($_POST['email']) && isset($_POST['cpf'])) {
         // Obter os dados do formulário para atualização da senha
-        $matricula_selecionada = $_POST['matricula_selecionada'];
         $nova_senha = $_POST['nova_senha'];
         $email = $_POST['email'];
         $cpf = $_POST['cpf'];
 
-        // Consultar a tabela funcionario para verificar a matrícula e obter o e-mail correspondente
-        $sql_funcionario = "SELECT email FROM funcionario WHERE matricula = ? AND cpf = ?";
-        $stmt_funcionario = $conn->prepare($sql_funcionario);
+        // Atualizar a senha na tabela usuario
+        $sql_usuario = "UPDATE usuario SET senha = ? WHERE email = ?";
+        $stmt_usuario = $conn->prepare($sql_usuario);
 
-        if ($stmt_funcionario) {
-            // Vincular os parâmetros da consulta do funcionário
-            $stmt_funcionario->bind_param("ss", $matricula_selecionada, $cpf);
+        if ($stmt_usuario) {
+            // Vincular os parâmetros da consulta de atualização do usuário
+            $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT); // Hash da nova senha
+            $stmt_usuario->bind_param("ss", $nova_senha_hash, $email);
 
-            // Executar a consulta do funcionário
-            $stmt_funcionario->execute();
-
-            // Obter o resultado do funcionário
-            $result_funcionario = $stmt_funcionario->get_result();
-
-            // Verificar se a consulta do funcionário retornou algum resultado
-            if ($result_funcionario->num_rows > 0) {
-                // Atualizar a senha na tabela usuario
-                $sql_usuario = "UPDATE usuario SET senha = ? WHERE email = ?";
-                $stmt_usuario = $conn->prepare($sql_usuario);
-
-                if ($stmt_usuario) {
-                    // Vincular os parâmetros da consulta de atualização do usuário
-                    $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT); // Hash da nova senha
-                    $stmt_usuario->bind_param("ss", $nova_senha_hash, $email);
-
-                    // Executar a consulta de atualização do usuário
-                    if ($stmt_usuario->execute()) {
-                        // Exibir mensagem de sucesso
-                        echo '<div class="alert alert-success container text-center mt-5" role="alert">';
-                        echo "Senha atualizada com sucesso.";
-                        echo '</div>';
-                    } else {
-                        // Exibir mensagem de erro se a atualização falhar
-                        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
-                        echo "Erro ao atualizar a senha.";
-                        echo '</div>';
-                    }
-
-                    // Fechar a instrução do usuário
-                    $stmt_usuario->close();
-                } else {
-                    echo "Erro ao preparar a consulta de atualização do usuário: " . $conn->error;
-                }
+            // Executar a consulta de atualização do usuário
+            if ($stmt_usuario->execute()) {
+                // Exibir mensagem de sucesso
+                echo '<div class="alert alert-success container text-center mt-5" role="alert">';
+                echo "Senha atualizada com sucesso.";
+                
+                echo '</div>';
             } else {
-                // Exibir mensagem de erro se a matrícula ou CPF não corresponderem
+                // Exibir mensagem de erro se a atualização falhar
                 echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
-                echo "Matrícula ou CPF inválido.";
+                echo "Erro ao atualizar a senha.";
                 echo '</div>';
             }
 
-            // Fechar a instrução do funcionário
-            $stmt_funcionario->close();
+            // Fechar a instrução do usuário
+            $stmt_usuario->close();
         } else {
-            echo "Erro ao preparar a consulta do funcionário: " . $conn->error;
+            echo "Erro ao preparar a consulta de atualização do usuário: " . $conn->error;
         }
     } else {
-        // Exibir mensagem de erro se algum campo estiver faltando
-        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
-        echo "Por favor, preencha todos os campos.";
-        echo '</div>';
+        
     }
 } else {
     // Exibir mensagem de erro se o formulário não foi submetido
@@ -222,32 +193,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo '</div>';
 }
 
+
+// FUNCIONARIO
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['matricula_selecionada']) && isset($_POST['cpf'])) {
+        $matricula_selecionada = $_POST['matricula_selecionada'];
+        $cpf = $_POST['cpf'];
+
+       
+        // Verificar a matrícula na tabela funcionario
+        $sql_funcionario = "SELECT email FROM funcionario WHERE matricula = ? AND cpf = ?";
+        $stmt_funcionario = $conn->prepare($sql_funcionario);
+
+        if ($stmt_funcionario) {
+            $stmt_funcionario->bind_param("ss", $matricula_selecionada, $cpf);
+            $stmt_funcionario->execute();
+            $result_funcionario = $stmt_funcionario->get_result();
+
+            if ($result_funcionario->num_rows > 0) {
+                $funcionario = $result_funcionario->fetch_assoc();
+                $email = $funcionario['email'];
+
+                // Exibir formulário para inserir a nova senha
+                echo '<form class="container mt-4" style="max-width: 20rem;" method="post" action="atualizando-senha.php">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="' . htmlspecialchars($email) . '" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nova_senha">Nova Senha:</label>
+                            <input type="password" class="form-control" id="nova_senha" name="nova_senha" required>
+                        </div>
+                        <input type="hidden" name="cpf" value="' . htmlspecialchars($cpf) . '">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning w-100 mt-3">Alterar Senha</button>
+                        </div>
+                      </form>';
+            } else {
+                echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                echo "Matrícula ou CPF inválido.";
+                echo '</div>';
+            }
+
+            $stmt_funcionario->close();
+        } else {
+            echo "Erro ao preparar a consulta do funcionário: " . $conn->error;
+        }
+    } else {
+        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+        echo "Por favor, selecione uma matrícula.";
+        echo '</div>';
+    }
+} else {
+    echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+    echo "Erro: O formulário não foi submetido.";
+    echo '</div>';
+}
+
 // Fechar a conexão com o banco de dados
 $conn->close();
 ?>
+?>
 
-
-
-
-    <div class="container">
-
-        <form class="container mt-4" style="max-width: 20rem;" method="post" action="atualizando-senha.php">
-            <div class="form-group ">
-                <div class="form-group ">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" readonly>
-                </div>
-                <div class="form-group ">
-                    <label for="nova_senha">Nova Senha:</label>
-                    <input type="password" class="form-control" id="nova_senha" name="nova_senha" required>
-                </div>
-                <div class="text-center ">
-                    <button type="submit" class="btn btn-warning w-100 mt-3">Alterar Senha</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
 
 </body>
 

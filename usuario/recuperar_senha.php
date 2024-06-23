@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<input type='radio' name='telefone_selecionado' value='$telefone2'>$telefone2_modificado<br>";
             echo "<input type='radio' name='telefone_selecionado' value='$telefone3'>$telefone3_modificado<br>";
             echo "<input type='hidden' name='cpf' value='$cpf'>";
-            echo "<input class='btn btn-warning m-2' type='submit' value='Confirmar'>";
+            echo "<input class='btn btn-warning m-4' type='submit' value='Confirmar'>";
             echo "</form>";
         } else {
             // Verificar se o CPF existe na tabela funcionario

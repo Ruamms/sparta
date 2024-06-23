@@ -103,9 +103,7 @@
                             // Executar a atualização
                             if ($stmt_update->execute()) {
                                 // Senha atualizada com sucesso
-                                echo '<div class="alert alert-success container text-center mt-5" role="alert">';
-                                echo "<h3>Senha atualizada com sucesso.</h3";
-                                echo '</div>';
+                                header('Location:login.php');
                             } else {
                                 // Exibir mensagem de erro se a atualização falhar
                                 echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
@@ -138,6 +136,52 @@
             echo "Por favor, preencha todos os campos.";
         }
     }
+
+
+
+    // FUNCIONARIO
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['nova_senha']) && isset($_POST['email']) && isset($_POST['cpf'])) {
+        $nova_senha = $_POST['nova_senha'];
+        $email = $_POST['email'];
+        $cpf = $_POST['cpf'];
+
+        // Atualizar a senha na tabela usuario
+        $sql_usuario = "UPDATE usuario SET senha = ? WHERE email = ?";
+        $stmt_usuario = $conn->prepare($sql_usuario);
+
+        if ($stmt_usuario) {
+            $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT); // Hash da nova senha
+            $stmt_usuario->bind_param("ss", $nova_senha_hash, $email);
+
+            if ($stmt_usuario->execute()) {
+                echo '<div class="alert alert-success container text-center mt-5" role="alert">';
+                echo "Senha atualizada com sucesso.";
+                echo '</div>';
+            } else {
+                echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+                echo "Erro ao atualizar a senha.";
+                echo '</div>';
+            }
+
+            $stmt_usuario->close();
+        } else {
+            echo "Erro ao preparar a consulta de atualização do usuário: " . $conn->error;
+        }
+    } else {
+        echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+        echo "Por favor, preencha todos os campos.";
+        echo '</div>';
+    }
+} else {
+    echo '<div class="alert alert-danger container text-center mt-5" role="alert">';
+    echo "Erro: O formulário não foi submetido.";
+    echo '</div>';
+}
+
+$conn->close();
+?>
     ?>
 
 
