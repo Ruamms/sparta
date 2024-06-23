@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="pt-br">rio
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
@@ -19,84 +21,98 @@
 </head>
 
 <body>
-    <!-- menu-->
-    <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'cliente') {
-    ?>
-        <div class="bg-warning text-center py-1">
-            <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
-        </div>
-        <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-warning" href="../index.php"><i class="bi bi-house" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio"></i><br>Inicio</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    <?php
-    } elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'funcionario') {
-    ?>
-        <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
-            <div class="container">
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
+function exibirMenuFuncionario() {
+    ?>
+    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">
                 <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-
-                        <li class="nav-item mr-5">
-                            <p class="text-center">
-                                <a class="nav-link text-warning" href="../adm/produto/lista_produtos.php">
-                                    <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
-                                    Produtos</a>
-                            </p>
-                        </li>
-                        <!--Perfil-->
-                        <li class="nav-item mr-5">
-
-                            <p class="text-center"> <a class="nav-link text-warning" href="../adm/relatorio/relatorio.php">
-
-                                    <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="relatorio"></i><br>
-                                    Relatorio</a></p>
-
-                        </li>
-                        <li class="nav-item mr-5">
-                            <p class="text-center">
-                                <a class="nav-link text-warning" href="../adm/usuario_adm/usuarios.php">
-                                    <i class="bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Usuarios"></i><br>
-                                    Usuarios</a>
-                            </p>
-                        </li>
-                        <!-- sair-->
-                        <li class="nav-item mr-5">
-                            <p class="text-center"><a class="nav-link text-warning" href="../index.php?logout=1">
-                                    <i class="bi bi-box-arrow-right " data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
-                                    Sair</a></p>
-                        </li>
-                    </ul>
-                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../adm/produto/lista_produtos.php">
+                                <i class="bi-box" data-bs-toggle="tooltip" data-bs-placement="top" title="Produtos"></i><br>
+                                Produtos
+                            </a>
+                        </p>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../adm/relatorio/relatorio.php">
+                                <i class="bi bi-clipboard2-data" data-bs-toggle="tooltip" data-bs-placement="top" title="Relatorio"></i><br>
+                                Relatorio
+                            </a>
+                        </p>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../adm/usuario_adm/usuarios.php">
+                                <i class="bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Usuarios"></i><br>
+                                Usuarios
+                            </a>
+                        </p>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <p class="text-center">
+                            <a class="nav-link text-warning" href="../index.php?logout=1">
+                                <i class="bi bi-box-arrow-right" data-bs-toggle="tooltip" data-bs-placement="top" title="Sair"></i><br>
+                                Sair
+                            </a>
+                        </p>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        </nav>
+        </div>
+    </nav>
     <?php
-    }
+}
+
+function exibirMenuGenerico() {
     ?>
+    <div class="bg-warning text-center py-1">
+        <p>FRETE GRÁTIS para todo o BRASIL em compras a partir de R$149,90. Prazo de entrega de 2 a 10 dias úteis.</p>
+    </div>
+    <nav class="sticky-top navbar navbar-expand-md navbar-light bg-dark py-1 box-shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img class="imagem-login" src="../img/Sparta Suplementos - Logo.png" alt="sparta" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir Navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="../index.php">
+                            <i class="bi bi-house" data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio"></i><br>
+                            Inicio
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <?php
+}
+
+if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'funcionario') {
+    exibirMenuFuncionario();
+} else {
+    exibirMenuGenerico();
+}
+?>
+
+
     <h2 class="mt-3 text-center">Cadastro</h2>
 
     <section class="container mt-3">
